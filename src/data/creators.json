@@ -1,0 +1,92 @@
+[
+  {
+    "id": "creator-ohdough",
+    "name": "OhDough",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@OhDough",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=12",
+    "credibilityScore": 95
+  },
+  {
+    "id": "creator-moxsy",
+    "name": "Moxsy",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@Moxsy",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=22",
+    "credibilityScore": 94
+  },
+  {
+    "id": "creator-lazydata",
+    "name": "LazyData",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@LazyData",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=33",
+    "credibilityScore": 96
+  },
+  {
+    "id": "creator-nicktew",
+    "name": "NickTew",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@NickTew",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=44",
+    "credibilityScore": 93
+  },
+  {
+    "id": "creator-ancientrune",
+    "name": "AncientRune",
+    "platform": "website",
+    "channelUrl": "https://mobalytics.gg/",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=55",
+    "credibilityScore": 95
+  },
+  {
+    "id": "creator-ratore",
+    "name": "Ratore",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@Ratore",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=66",
+    "credibilityScore": 91
+  },
+  {
+    "id": "creator-gamerant-community",
+    "name": "GameRant Community",
+    "platform": "website",
+    "channelUrl": "https://gamerant.com/",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=67",
+    "credibilityScore": 88
+  },
+  {
+    "id": "creator-steam-consensus",
+    "name": "Steam Consensus",
+    "platform": "community",
+    "channelUrl": "https://steamcommunity.com/",
+    "verified": false,
+    "avatar": "https://i.pravatar.cc/150?img=68",
+    "credibilityScore": 80
+  },
+  {
+    "id": "creator-fandomwire",
+    "name": "FandomWire",
+    "platform": "website",
+    "channelUrl": "https://fandomwire.com/",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=69",
+    "credibilityScore": 86
+  },
+  {
+    "id": "creator-community-meta",
+    "name": "Community Meta Council",
+    "platform": "community",
+    "channelUrl": "https://www.reddit.com/r/Helldivers/",
+    "verified": false,
+    "avatar": "https://i.pravatar.cc/150?img=70",
+    "credibilityScore": 82
+  }
+]

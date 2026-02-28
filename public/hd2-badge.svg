@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" fill="none">
+  <rect width="480" height="280" rx="24" fill="#0F172A"/>
+  <rect x="18" y="18" width="444" height="244" rx="16" fill="url(#g)"/>
+  <path d="M132 204L170 84H214L252 204H216L209 177H174L167 204H132ZM180 150H202L191 111L180 150Z" fill="#E2E8F0"/>
+  <path d="M268 204V84H306C333 84 350 98 350 120C350 136 341 147 326 152L356 204H318L293 158H301V204H268ZM301 133H306C314 133 319 129 319 122C319 115 314 111 306 111H301V133Z" fill="#E2E8F0"/>
+  <text x="36" y="52" fill="#93C5FD" font-family="Arial, sans-serif" font-size="22" font-weight="700">HELLDIVERS 2</text>
+  <defs>
+    <linearGradient id="g" x1="18" y1="18" x2="462" y2="262" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>

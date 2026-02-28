@@ -1,0 +1,488 @@
+[
+  {
+    "id": "bl4-lazydata-kill-skill-variant",
+    "name": "LazyData's Kill Skill Variant",
+    "description": "Vex endgame setup that keeps kill skills active without action-skill micromanagement.",
+    "creator": {
+      "id": "creator-lazydata",
+      "name": "LazyData",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@LazyData",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=33",
+      "credibilityScore": 96
+    },
+    "createdAt": "2026-01-11T10:00:00Z",
+    "lastUpdated": "2026-02-26T08:00:00Z",
+    "patchVersion": "1.030",
+    "class": "vex",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Dead Ringer",
+      "keySkills": ["Kill Skill Cascade", "Critical Reservoir", "Passive Surge"],
+      "capstone": "Terminal Flow",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": ["High-crit AR", "High-crit Pistol", "Burst SMG"],
+      "shield": "UVH Barrier Matrix",
+      "grenadeMod": "Critical Flux Core",
+      "classMod": "Kill Skill Engine",
+      "artifact": "Momentum Loop"
+    },
+    "whyThisWorks": [
+      "Kill skills remain active through combat flow without strict action timing.",
+      "Patch 1.030 critical hit fixes improve consistency at UVH6.",
+      "Simple execution keeps DPS stable under pressure."
+    ],
+    "strategicContext": "This is the most broadly adopted Vex progression-to-endgame bridge because it minimizes execution tax while preserving top-tier scaling.",
+    "whenToUse": ["UVH6 progression", "Solo endgame farming", "Low-error consistency play"],
+    "whenToAvoid": ["Niche action-skill burst showcases"],
+    "advancedTactics": [
+      "Prioritize crit windows over overextending for one extra kill chain.",
+      "Refresh kill-skill stacks before arena transition waves."
+    ],
+    "tags": ["damage", "endgame", "versatile"],
+    "metaTier": "S",
+    "teamCoordination": "low",
+    "rating": 4.9,
+    "successRate": 95,
+    "views": 74200,
+    "communityValidation": 1450,
+    "sourceUrl": "https://www.youtube.com/@LazyData",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-mantrarmy-gun-specialist",
+    "name": "MANTRARMY Gun Specialist",
+    "description": "Weapon-agnostic Vex setup tuned for true UVH6 adaptability.",
+    "creator": {
+      "id": "creator-ratore",
+      "name": "Ratore",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Ratore",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=66",
+      "credibilityScore": 91
+    },
+    "createdAt": "2026-01-18T12:00:00Z",
+    "lastUpdated": "2026-02-21T19:00:00Z",
+    "patchVersion": "1.030",
+    "class": "vex",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Mantra Shift",
+      "keySkills": ["Weapon Adaptive Core", "Trigger Harmony", "Kinetic Loop"],
+      "capstone": "Meta Convergence",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": ["Any Legendary AR", "Any Legendary SMG", "Any Legendary Pistol"],
+      "shield": "Adaptive Bastion",
+      "grenadeMod": "Multi-Trigger Node",
+      "classMod": "Mantra Driver",
+      "artifact": "Universal Coupler"
+    },
+    "whyThisWorks": [
+      "Scales with weapon archetypes instead of one required drop.",
+      "Remains UVH6 viable under imperfect loot conditions.",
+      "Low lock-in makes iterative optimization practical."
+    ],
+    "strategicContext": "The post-1.030 weapon pool rewards builds that adapt to strong rolls quickly. This setup keeps that flexibility without sacrificing endgame floor.",
+    "whenToUse": ["Loot-dependent endgame progression", "Frequent weapon swaps"],
+    "whenToAvoid": ["Dedicated speed-clear records with fixed loadout"],
+    "advancedTactics": [
+      "Re-tune one passive node each time your core weapon archetype changes.",
+      "Use shield uptime as your damage tempo indicator."
+    ],
+    "tags": ["damage", "versatile", "endgame"],
+    "metaTier": "S",
+    "teamCoordination": "low",
+    "rating": 4.7,
+    "successRate": 92,
+    "views": 51600,
+    "communityValidation": 980,
+    "sourceUrl": "https://www.youtube.com/@Ratore",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-ricochet-cannon-endgame",
+    "name": "Ricochet Cannon Endgame",
+    "description": "Rafa ricochet core build with top-tier mob clear and high consistency.",
+    "creator": {
+      "id": "creator-nicktew",
+      "name": "NickTew",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@NickTew",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=44",
+      "credibilityScore": 93
+    },
+    "createdAt": "2026-01-20T09:00:00Z",
+    "lastUpdated": "2026-02-25T14:00:00Z",
+    "patchVersion": "1.030",
+    "class": "rafa",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Peacebreaker Cannons",
+      "keySkills": ["Lateral Plinking", "Ricochet Engine", "Chain Stability"],
+      "capstone": "Overbounce",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": ["Double-Ought Autoshot", "Elemental Sidearm", "Crit Rifle"],
+      "shield": "Deflection Grid",
+      "grenadeMod": "Bounce Catalyst",
+      "classMod": "Ricochet Circuit",
+      "artifact": "Shatterline Sigil"
+    },
+    "whyThisWorks": [
+      "Ricochet chains transform mob density into bonus damage throughput.",
+      "Cannons stabilize single-target pressure while ricochet handles packs.",
+      "Patch 1.030 made ricochet interactions more reliable."
+    ],
+    "strategicContext": "Rafa excels when ricochet uptime is maximized and cannon cadence covers elite windows. This build is the current reference implementation.",
+    "whenToUse": ["Mob-heavy UVH content", "Arena density farming"],
+    "whenToAvoid": ["Pure single-target burst races"],
+    "advancedTactics": [
+      "Maintain Lateral Plinking before entering new density pockets.",
+      "Angle opening shots off geometry for immediate multi-hit chains."
+    ],
+    "tags": ["damage", "speed", "endgame"],
+    "metaTier": "S",
+    "teamCoordination": "medium",
+    "rating": 4.8,
+    "successRate": 91,
+    "views": 60150,
+    "communityValidation": 1120,
+    "sourceUrl": "https://www.youtube.com/@NickTew",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-splash-and-dash",
+    "name": "Splash and Dash",
+    "description": "High mobility Rafa variant mixing splash bursts with route tempo control.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2026-01-22T16:00:00Z",
+    "lastUpdated": "2026-02-24T17:00:00Z",
+    "patchVersion": "1.030",
+    "class": "rafa",
+    "buildType": "farming",
+    "difficulty": "uvh",
+    "skillTree": {
+      "actionSkill": "Dash Barrage",
+      "keySkills": ["Splash Mobility", "Slide Reload", "Momentum Burn"],
+      "capstone": "Rushed Payload",
+      "skillPoints": 64
+    },
+    "gear": {
+      "weapons": ["Splash SMG", "Rocket Pistol", "Fast Shotgun"],
+      "shield": "Velocity Guard",
+      "grenadeMod": "Splash Bloom",
+      "classMod": "Dash Injector",
+      "artifact": "Route Tempo Relic"
+    },
+    "whyThisWorks": [
+      "High movement uptime reduces incoming damage and clears routes faster.",
+      "Splash package smooths inconsistent aim moments in farm loops.",
+      "Flexible weapons allow quick adaptation to map-specific spawns."
+    ],
+    "strategicContext": "Farm efficiency is mostly movement and reset speed; this build optimizes both while preserving safe clear thresholds.",
+    "whenToUse": ["Loot farming", "Mid-UVH route loops"],
+    "whenToAvoid": ["Stationary boss phases"],
+    "advancedTactics": [
+      "Chain dash windows with reload cancels between combat pockets.",
+      "Use splash pre-fire around corners to maintain route momentum."
+    ],
+    "tags": ["speed", "damage", "farming"],
+    "metaTier": "A",
+    "teamCoordination": "low",
+    "rating": 4.4,
+    "successRate": 85,
+    "views": 35810,
+    "communityValidation": 670,
+    "sourceUrl": "https://www.youtube.com/@Moxsy",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-horba-heavy-ordnance-ricochet-bananza",
+    "name": "HORBA - Heavy Ordnance Ricochet Bananza",
+    "description": "AncientRune's flagship Amon endgame build built around heavy ordnance sustain and double-dipping DOT scaling.",
+    "creator": {
+      "id": "creator-ancientrune",
+      "name": "AncientRune",
+      "platform": "website",
+      "channelUrl": "https://mobalytics.gg/",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=55",
+      "credibilityScore": 95
+    },
+    "createdAt": "2026-01-09T08:00:00Z",
+    "lastUpdated": "2026-02-26T11:00:00Z",
+    "patchVersion": "1.030",
+    "class": "amon",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Scourge",
+      "keySkills": ["Tail of the Comet", "Blackout", "Primal Surge", "Scorched Kairos"],
+      "capstone": "Potential Overrun",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": ["Honey Bunches", "Watts 4 Dinner", "Secondary utility launcher"],
+      "shield": "Super Soldier",
+      "grenadeMod": "Shock Charge Matrix",
+      "classMod": "Icebringer",
+      "artifact": "Ordnance Echo Relic"
+    },
+    "whyThisWorks": [
+      "Primal Surge plus Super Soldier creates near-infinite heavy-ordnance uptime.",
+      "Tail of the Comet and Blackout double-dip status scaling for massive DOT output.",
+      "Scourge and Firewall keep survivability and multiplicative damage online."
+    ],
+    "strategicContext": "HORBA is the benchmark Amon package for true UVH6 because it combines sustainable ammo economy with top-end scaling interactions.",
+    "whenToUse": ["True UVH6 pushes", "Coordinated endgame arena clears"],
+    "whenToAvoid": ["Early leveling", "Low-gear accounts"],
+    "advancedTactics": [
+      "Trigger status stacks before ordnance burst windows for peak double-dip value.",
+      "Switch to Onslaught variant for mobbing maps with long travel segments."
+    ],
+    "tags": ["tank", "damage", "endgame", "boss"],
+    "metaTier": "S+",
+    "teamCoordination": "medium",
+    "rating": 5,
+    "successRate": 95,
+    "views": 80340,
+    "communityValidation": 1590,
+    "sourceUrl": "https://mobalytics.gg/",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-nuclear-winter-harlowe",
+    "name": "Nuclear Winter Harlowe",
+    "description": "Flux Generator battlefield-control build with high support value and strong DOT layering.",
+    "creator": {
+      "id": "creator-nicktew",
+      "name": "NickTew",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@NickTew",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=44",
+      "credibilityScore": 93
+    },
+    "createdAt": "2026-01-25T11:00:00Z",
+    "lastUpdated": "2026-02-24T12:00:00Z",
+    "patchVersion": "1.030",
+    "class": "harlowe",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Flux Generator",
+      "keySkills": ["Group Study", "Control Group", "Sustained Reaction", "Potential Transference"],
+      "capstone": "Potential Transference",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": ["Cryo AR", "DOT SMG", "Support Pistol"],
+      "shield": "Overshield Conductor",
+      "grenadeMod": "Cryo Pulse Emitter",
+      "classMod": "Field Architect",
+      "artifact": "Generator Core"
+    },
+    "whyThisWorks": [
+      "Flux field gives control, ally shielding, and sustained DOT pressure.",
+      "Group Study stacking converts uptime into escalating gun damage.",
+      "Teleport capstone allows tactical field relocation and revives."
+    ],
+    "strategicContext": "Harlowe's strongest identity in 1.030 is persistent battlefield advantage rather than burst. This build maximizes that identity.",
+    "whenToUse": ["Team-endgame pushes", "Sustained objective arenas"],
+    "whenToAvoid": ["Pure speedruns where setup time is costly"],
+    "advancedTactics": [
+      "Maintain 4-6 Group Study stacks before elite spawn triggers.",
+      "Relocate field proactively to next objective lane."
+    ],
+    "tags": ["support", "endgame", "tank"],
+    "metaTier": "S",
+    "teamCoordination": "high",
+    "rating": 4.8,
+    "successRate": 92,
+    "views": 56440,
+    "communityValidation": 1010,
+    "sourceUrl": "https://www.youtube.com/@NickTew",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-kinetic-crit-phamiliar-vex",
+    "name": "Kinetic Crit Phamiliar Vex",
+    "description": "Top leveling Vex progression path leveraging companion pressure and critical scaling.",
+    "creator": {
+      "id": "creator-community-meta",
+      "name": "Community Meta Council",
+      "platform": "community",
+      "channelUrl": "https://www.reddit.com/r/Borderlands/",
+      "verified": false,
+      "avatar": "https://i.pravatar.cc/150?img=70",
+      "credibilityScore": 82
+    },
+    "createdAt": "2026-01-27T10:00:00Z",
+    "lastUpdated": "2026-02-22T15:00:00Z",
+    "patchVersion": "1.030",
+    "class": "vex",
+    "buildType": "leveling",
+    "difficulty": "normal",
+    "skillTree": {
+      "actionSkill": "Phase Phamiliar",
+      "keySkills": ["Companion Damage", "Kinetic Crit Boost", "Sustain Node"],
+      "capstone": "Symbiotic Apex",
+      "skillPoints": 45
+    },
+    "gear": {
+      "weapons": ["Any high-crit rifle", "SMG", "Pistol"],
+      "shield": "Progression Guard",
+      "grenadeMod": "Starter Shock Pod",
+      "classMod": "Companion Trainer",
+      "artifact": "Crit Starter Sigil"
+    },
+    "whyThisWorks": [
+      "Companion handling reduces mechanical load for fast progression.",
+      "Crit scaling transitions cleanly into endgame-focused Vex paths.",
+      "Low gear dependency keeps pace consistent from 1-65."
+    ],
+    "strategicContext": "This is the safest Vex leveling route for players who want smooth pathing into competitive endgame builds.",
+    "whenToUse": ["Fresh characters", "Campaign-to-endgame transition"],
+    "whenToAvoid": ["Players specifically training action-skill execution"],
+    "advancedTactics": [
+      "Keep companion in frontline while you angle crit farming lanes.",
+      "Prioritize survivability nodes until mid-campaign gear stabilizes."
+    ],
+    "tags": ["support", "leveling", "damage"],
+    "metaTier": "S",
+    "teamCoordination": "low",
+    "rating": 4.6,
+    "successRate": 95,
+    "views": 34300,
+    "communityValidation": 620,
+    "sourceUrl": "https://www.reddit.com/r/Borderlands/",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-chroma-accelerator-harlowe",
+    "name": "CHROMA Accelerator Harlowe",
+    "description": "Leveling-focused Harlowe route centered on cryo AOE and simple mid-range control.",
+    "creator": {
+      "id": "creator-community-meta",
+      "name": "Community Meta Council",
+      "platform": "community",
+      "channelUrl": "https://www.reddit.com/r/Borderlands/",
+      "verified": false,
+      "avatar": "https://i.pravatar.cc/150?img=70",
+      "credibilityScore": 82
+    },
+    "createdAt": "2026-01-26T08:00:00Z",
+    "lastUpdated": "2026-02-23T13:20:00Z",
+    "patchVersion": "1.030",
+    "class": "harlowe",
+    "buildType": "leveling",
+    "difficulty": "normal",
+    "skillTree": {
+      "actionSkill": "CHROMA Accelerator",
+      "keySkills": ["Cryo Expansion", "Field Uptime", "Midline Control"],
+      "capstone": "Accelerator Core",
+      "skillPoints": 44
+    },
+    "gear": {
+      "weapons": ["Cryo AR", "Cryo SMG", "Reliable sidearm"],
+      "shield": "Starter Flux Barrier",
+      "grenadeMod": "Cryo Pocket Nuke",
+      "classMod": "Accelerator Tuner",
+      "artifact": "Cold Loop Charm"
+    },
+    "whyThisWorks": [
+      "CHROMA AOE clears leveling packs with low execution complexity.",
+      "Cryo slows reduce incoming pressure during weak-gear phases.",
+      "Simple action loop makes campaign pacing efficient."
+    ],
+    "strategicContext": "For new Harlowe progression, action-skill consistency matters more than theoretical DPS peaks.",
+    "whenToUse": ["Early campaign", "Solo progression"],
+    "whenToAvoid": ["UVH6 endgame testing"],
+    "advancedTactics": [
+      "Drop CHROMA at choke entries and pull groups through it.",
+      "Reserve cooldown for elite waves rather than single targets."
+    ],
+    "tags": ["support", "leveling", "versatile"],
+    "metaTier": "A",
+    "teamCoordination": "low",
+    "rating": 4.3,
+    "successRate": 89,
+    "views": 27150,
+    "communityValidation": 500,
+    "sourceUrl": "https://www.reddit.com/r/Borderlands/",
+    "patchCompatible": true
+  },
+  {
+    "id": "bl4-heavy-ordnance-leveling-amon",
+    "name": "Heavy Ordnance Leveling Amon",
+    "description": "Higher-skill Amon leveling route that sets up direct transition into HORBA-style endgame.",
+    "creator": {
+      "id": "creator-community-meta",
+      "name": "Community Meta Council",
+      "platform": "community",
+      "channelUrl": "https://www.reddit.com/r/Borderlands/",
+      "verified": false,
+      "avatar": "https://i.pravatar.cc/150?img=70",
+      "credibilityScore": 82
+    },
+    "createdAt": "2026-01-24T09:00:00Z",
+    "lastUpdated": "2026-02-20T18:10:00Z",
+    "patchVersion": "1.030",
+    "class": "amon",
+    "buildType": "leveling",
+    "difficulty": "uvh",
+    "skillTree": {
+      "actionSkill": "Ordnance Surge",
+      "keySkills": ["Heavy Prep", "Ammo Return", "Blast Sustain"],
+      "capstone": "Foundry Pulse",
+      "skillPoints": 52
+    },
+    "gear": {
+      "weapons": ["Any launcher", "Splash rifle", "Backup pistol"],
+      "shield": "Blast Absorb Plate",
+      "grenadeMod": "Cluster Burst",
+      "classMod": "Ordnance Initiate",
+      "artifact": "Payload Harness"
+    },
+    "whyThisWorks": [
+      "Progressive ordnance scaling builds foundation for endgame Amon archetypes.",
+      "Ammo sustain skills reduce hard stalls in long leveling routes.",
+      "High damage rewards positioning discipline early."
+    ],
+    "strategicContext": "Not the easiest leveling route, but best for players committed to high-end Amon ordnance play later.",
+    "whenToUse": ["Experienced players", "Amon mains targeting HORBA"],
+    "whenToAvoid": ["Brand new players", "Low-gear safety runs"],
+    "advancedTactics": [
+      "Use terrain to offset self-damage risk while leveling launchers.",
+      "Prioritize ammo economy nodes before pure damage nodes."
+    ],
+    "tags": ["tank", "damage", "leveling"],
+    "metaTier": "B",
+    "teamCoordination": "medium",
+    "rating": 3.9,
+    "successRate": 82,
+    "views": 18940,
+    "communityValidation": 360,
+    "sourceUrl": "https://www.reddit.com/r/Borderlands/",
+    "patchCompatible": true
+  }
+]

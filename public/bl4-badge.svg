@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" fill="none">
+  <rect width="480" height="280" rx="24" fill="#0F172A"/>
+  <rect x="18" y="18" width="444" height="244" rx="16" fill="url(#g)"/>
+  <path d="M124 204V84H180C212 84 231 100 231 126C231 153 212 170 180 170H159V204H124ZM159 142H177C190 142 197 137 197 126C197 115 190 111 177 111H159V142Z" fill="#E2E8F0"/>
+  <path d="M245 204V84H303C333 84 350 97 350 119C350 133 342 142 331 147C347 152 356 163 356 178C356 196 340 204 313 204H245ZM278 132H300C311 132 316 128 316 121C316 114 311 111 300 111H278V132ZM278 177H306C318 177 323 173 323 165C323 158 318 154 306 154H278V177Z" fill="#E2E8F0"/>
+  <text x="36" y="52" fill="#A5B4FC" font-family="Arial, sans-serif" font-size="22" font-weight="700">BORDERLANDS 4</text>
+  <defs>
+    <linearGradient id="g" x1="18" y1="18" x2="462" y2="262" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F46E5" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>
