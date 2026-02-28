@@ -1,0 +1,138 @@
+version: '3.8'
+
+services:
+  # Frontend - Next.js application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - metaforge-network
+
+  # AI Backend API - FastAPI
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://metaforge:password@postgres:5432/metaforge_gaming
+      - REDIS_URL=redis://redis:6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./ai-backend:/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - metaforge-network
+
+  # Background worker for AI processing
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    command: celery -A worker.celery worker --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://metaforge:password@postgres:5432/metaforge_gaming
+      - REDIS_URL=redis://redis:6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./ai-backend:/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - metaforge-network
+
+  # Scheduler for periodic tasks
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    command: celery -A worker.celery beat --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://metaforge:password@postgres:5432/metaforge_gaming
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./ai-backend:/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - metaforge-network
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=metaforge
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=metaforge_gaming
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - metaforge-network
+
+  # Redis for caching and job queue
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - metaforge-network
+
+  # pgAdmin for database management (development only)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@metaforge.tools
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - metaforge-network
+    profiles:
+      - dev
+
+  # Redis Commander for Redis management (development only)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - metaforge-network
+    profiles:
+      - dev
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  metaforge-network:
+    driver: bridge
