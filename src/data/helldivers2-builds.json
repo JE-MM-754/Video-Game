@@ -63,7 +63,12 @@
     "views": 68420,
     "communityValidation": 1200,
     "sourceUrl": "https://www.youtube.com/@OhDough",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "secure-area",
+      "launch-icbm"
+    ]
   },
   {
     "id": "hd2-bile-titan-hunter",
@@ -127,7 +132,11 @@
     "views": 45110,
     "communityValidation": 870,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "eliminate-chargers"
+    ]
   },
   {
     "id": "hd2-the-exterminator",
@@ -190,7 +199,11 @@
     "views": 39880,
     "communityValidation": 760,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "secure-area",
+      "evacuate-high-value-assets"
+    ]
   },
   {
     "id": "hd2-bot-breaker",
@@ -253,7 +266,12 @@
     "views": 71990,
     "communityValidation": 1380,
     "sourceUrl": "https://steamcommunity.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "secure-area",
+      "launch-icbm"
+    ]
   },
   {
     "id": "hd2-walking-barrage-specialist",
@@ -317,7 +335,11 @@
     "views": 30110,
     "communityValidation": 610,
     "sourceUrl": "https://steamcommunity.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "secure-area",
+      "evacuate-high-value-assets"
+    ]
   },
   {
     "id": "hd2-purifier-anti-shield",
@@ -380,7 +402,12 @@
     "views": 52880,
     "communityValidation": 940,
     "sourceUrl": "https://gamerant.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "secure-area",
+      "launch-icbm"
+    ]
   },
   {
     "id": "hd2-eruptor-shield-breaker",
@@ -443,7 +470,11 @@
     "views": 33220,
     "communityValidation": 590,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "eliminate-chargers"
+    ]
   },
   {
     "id": "hd2-coyote-universal-illuminate",
@@ -506,7 +537,12 @@
     "views": 26140,
     "communityValidation": 520,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "secure-area",
+      "launch-icbm"
+    ]
   },
   {
     "id": "hd2-incendiary-fortress",
@@ -570,7 +606,11 @@
     "views": 47890,
     "communityValidation": 820,
     "sourceUrl": "https://fandomwire.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "secure-area",
+      "evacuate-high-value-assets"
+    ]
   },
   {
     "id": "hd2-glass-cannon-solo",
@@ -634,7 +674,11 @@
     "views": 28970,
     "communityValidation": 510,
     "sourceUrl": "https://fandomwire.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "eliminate-chargers"
+    ]
   },
   {
     "id": "hd2-speed-extraction-specialist",
@@ -699,7 +743,11 @@
     "views": 41780,
     "communityValidation": 730,
     "sourceUrl": "https://steamcommunity.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "launch-icbm",
+      "retrieve-essential-personnel"
+    ]
   },
   {
     "id": "hd2-commando-infiltrator",
@@ -763,7 +811,11 @@
     "views": 27640,
     "communityValidation": 490,
     "sourceUrl": "https://fandomwire.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "launch-icbm",
+      "retrieve-essential-personnel"
+    ]
   },
   {
     "id": "hd2-combined-arms-squadron",
@@ -827,7 +879,11 @@
     "views": 34410,
     "communityValidation": 560,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "secure-area",
+      "evacuate-high-value-assets"
+    ]
   },
   {
     "id": "hd2-specialist-roles-meta",
@@ -890,7 +946,12 @@
     "views": 25430,
     "communityValidation": 470,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "spread-democracy",
+      "secure-area",
+      "launch-icbm"
+    ]
   },
   {
     "id": "hd2-tank-commander-squadron",
@@ -954,7 +1015,11 @@
     "views": 28720,
     "communityValidation": 430,
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "secure-area",
+      "evacuate-high-value-assets"
+    ]
   },
   {
     "id": "hd2-tank-support-specialist",
@@ -1017,7 +1082,11 @@
     "views": 19360,
     "communityValidation": 340,
     "sourceUrl": "https://steamcommunity.com/",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "missionFocus": [
+      "secure-area",
+      "evacuate-high-value-assets"
+    ]
   },
   {
     "id": "hd2-hive-breaker-2026",
@@ -1102,7 +1171,12 @@
       "february2026": 95,
       "trending": "up",
       "lastUpdated": "2026-02-28"
-    }
+    },
+    "missionFocus": [
+      "eliminate-chargers",
+      "spread-democracy",
+      "secure-area"
+    ]
   },
   {
     "id": "hd2-swarm-controller-2026",
@@ -1187,7 +1261,12 @@
       "february2026": 93,
       "trending": "up",
       "lastUpdated": "2026-02-28"
-    }
+    },
+    "missionFocus": [
+      "eliminate-chargers",
+      "spread-democracy",
+      "secure-area"
+    ]
   },
   {
     "id": "hd2-pyromaniac-pro-2026",
@@ -1272,7 +1351,12 @@
       "february2026": 89,
       "trending": "up",
       "lastUpdated": "2026-02-28"
-    }
+    },
+    "missionFocus": [
+      "eliminate-chargers",
+      "spread-democracy",
+      "secure-area"
+    ]
   },
   {
     "id": "hd2-community-validator-2026",
@@ -1358,6 +1442,11 @@
       "february2026": 91,
       "trending": "up",
       "lastUpdated": "2026-02-28"
-    }
+    },
+    "missionFocus": [
+      "eliminate-chargers",
+      "spread-democracy",
+      "secure-area"
+    ]
   }
 ]

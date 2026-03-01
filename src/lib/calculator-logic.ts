@@ -1,11 +1,10 @@
-import { BL4Build, BL4CalculatorInput, HD2Build, HD2CalculatorInput } from "./types";
+import { BL4Build, BL4CalculatorInput, HD2Build, HD2CalculatorInput, HD2MissionName } from "./types";
 
 export const CURRENT_HD2_PATCH = "6.0.3";
 export const CURRENT_BL4_PATCH = "1.030";
 
 type HD2RecommendationOptions = {
-  bossMode?: boolean;
-  selectedBoss?: "hive-lord" | "bile-titan" | null;
+  hiveLordMode?: boolean;
 };
 
 const creatorWeights: Record<string, number> = {
@@ -32,6 +31,12 @@ function normalizeHD2Playstyle(inputPlaystyle: HD2CalculatorInput["playstyle"]):
   return inputPlaystyle === "balanced" ? "versatile" : inputPlaystyle;
 }
 
+function missionTypeFromMissionName(missionName: HD2MissionName): HD2Build["missionType"] {
+  if (missionName === "spread-democracy" || missionName === "eliminate-chargers") return "elimination";
+  if (missionName === "secure-area" || missionName === "evacuate-high-value-assets") return "defense";
+  return "extraction";
+}
+
 function matchesHD2Team(buildTeamSize: HD2Build["teamSize"], inputTeamSize: HD2CalculatorInput["teamSize"]) {
   if (inputTeamSize === "randoms") {
     return buildTeamSize === "solo" || buildTeamSize === "duo" || buildTeamSize === "any";
@@ -42,8 +47,9 @@ function matchesHD2Team(buildTeamSize: HD2Build["teamSize"], inputTeamSize: HD2C
 
 export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInput, options?: HD2RecommendationOptions): number {
   if (!build.patchCompatible || build.patchVersion !== CURRENT_HD2_PATCH) return 0;
+  const derivedMissionType = missionTypeFromMissionName(input.missionName);
   if (!(build.faction === input.faction || build.faction === "universal")) return 0;
-  if (!(build.missionType === input.missionType || build.missionType === "universal")) return 0;
+  if (!(build.missionType === derivedMissionType || build.missionType === "universal")) return 0;
   if (!matchesHD2Team(build.teamSize, input.teamSize)) return 0;
 
   const normalizedDifficulty = normalizeHD2Difficulty(input.difficulty);
@@ -55,8 +61,13 @@ export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInpu
     score += 100;
   }
 
-  if (build.missionType === input.missionType || build.missionType === "universal") {
+  if (build.missionType === derivedMissionType || build.missionType === "universal") {
     score += 50;
+  }
+  if (build.missionFocus?.includes(input.missionName)) {
+    score += 40;
+  } else if (Array.isArray(build.missionFocus) && build.missionFocus.length > 0) {
+    score -= 25;
   }
 
   if (input.teamSize === "randoms") {
@@ -83,7 +94,7 @@ export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInpu
   score += creatorCredibilityBonus(build.creator.credibilityScore, build.creator.verified);
   score += build.metaTier.startsWith("S") ? 12 : build.metaTier === "A" ? 6 : 0;
 
-  if (options?.bossMode && options.selectedBoss === "hive-lord") {
+  if (options?.hiveLordMode) {
     if (build.tags.some((tag) => ["boss-fight", "hive-lord", "heavy-armor"].includes(tag.toLowerCase()))) {
       score += 70;
     }
@@ -133,7 +144,7 @@ export function getHD2Recommendations(input: HD2CalculatorInput, builds: HD2Buil
       build,
       score: calculateHD2BuildScore(build, input, options),
     }))
-    .filter((item) => item.score > (options?.bossMode ? 110 : 120))
+    .filter((item) => item.score > (options?.hiveLordMode ? 110 : 120))
     .sort((a, b) => b.score - a.score)
     .slice(0, 5)
     .map((item) => item.build);

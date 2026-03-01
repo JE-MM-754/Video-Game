@@ -60,6 +60,7 @@ export interface HD2Build extends StrategicIntel {
   sourceUrl?: string;
   patchCompatible: boolean;
   category?: "hive-lord-specialist" | "general";
+  missionFocus?: HD2MissionName[];
   effectiveness?: {
     hivelord?: number;
     chargers?: number;
@@ -72,6 +73,14 @@ export interface HD2Build extends StrategicIntel {
     lastUpdated?: string;
   };
 }
+
+export type HD2MissionName =
+  | "spread-democracy"
+  | "secure-area"
+  | "evacuate-high-value-assets"
+  | "launch-icbm"
+  | "retrieve-essential-personnel"
+  | "eliminate-chargers";
 
 export interface BL4Build extends StrategicIntel {
   id: string;
@@ -119,11 +128,12 @@ export interface BL4Build extends StrategicIntel {
 }
 
 export interface HD2CalculatorInput {
-  missionType: "extraction" | "defense" | "elimination";
+  missionName: HD2MissionName;
   faction: "terminids" | "automatons" | "illuminate";
   difficulty: "easy" | "medium" | "hard" | "expert" | "nightmare";
   teamSize: "solo" | "duo" | "squad" | "randoms";
   playstyle: "balanced" | "aggressive" | "support" | "stealth";
+  hiveLord?: boolean;
 }
 
 export interface BL4CalculatorInput {

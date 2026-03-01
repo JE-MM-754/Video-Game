@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import type { BL4Build, HD2Build } from "@/lib/types";
+import type { BL4Build, HD2Build, HD2MissionName } from "@/lib/types";
 
 import BuildCard from "@/components/BuildCard";
 import BuildFilter from "@/components/BuildFilter";
@@ -56,10 +56,12 @@ export default function BuildBrowser(props: BuildBrowserProps) {
         ] as Option[],
         secondaryOptions: [
           { value: "all", label: "All" },
-          { value: "extraction", label: "Extraction" },
-          { value: "defense", label: "Defense" },
-          { value: "elimination", label: "Elimination" },
-          { value: "universal", label: "Universal" },
+          { value: "spread-democracy", label: "Spread Democracy" },
+          { value: "secure-area", label: "Secure Area" },
+          { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets" },
+          { value: "launch-icbm", label: "Launch ICBM" },
+          { value: "retrieve-essential-personnel", label: "Retrieve Essential Personnel" },
+          { value: "eliminate-chargers", label: "Eliminate Chargers" },
         ] as Option[],
         difficultyOptions: [
           { value: "all", label: "All" },
@@ -116,7 +118,7 @@ export default function BuildBrowser(props: BuildBrowserProps) {
       const matchesSecondary =
         secondaryValue === "all" ||
         (props.gameType === "helldivers2"
-          ? (build as HD2Build).missionType === secondaryValue
+          ? (build as HD2Build).missionFocus?.includes(secondaryValue as HD2MissionName)
           : (build as BL4Build).buildType === secondaryValue);
 
       const matchesDifficulty = difficultyValue === "all" || build.difficulty === difficultyValue;
@@ -205,7 +207,9 @@ export default function BuildBrowser(props: BuildBrowserProps) {
                 <p className="mt-2 text-xs text-slate-300">Rating: {build.rating.toFixed(1)} • Success: {build.successRate}%</p>
                 <p className="text-xs text-slate-300">Patch: {build.patchVersion} • Team coordination: {build.teamCoordination}</p>
                 {isHD2Build(build) ? (
-                  <p className="text-xs text-slate-300">Faction: {build.faction} • Mission: {build.missionType}</p>
+                  <p className="text-xs text-slate-300">
+                    Faction: {build.faction} • Mission: {(build.missionFocus ?? []).slice(0, 2).join(", ") || build.missionType}
+                  </p>
                 ) : (
                   <p className="text-xs text-slate-300">Class: {build.class} • Type: {build.buildType}</p>
                 )}

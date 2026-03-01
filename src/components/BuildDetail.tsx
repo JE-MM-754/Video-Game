@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import type { BL4Build, HD2Build } from "@/lib/types";
 
@@ -10,6 +11,15 @@ type BuildDetailProps = {
   open: boolean;
   onClose: () => void;
   fromCalculator?: boolean;
+};
+
+type SpeechRecognitionLike = {
+  lang: string;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onresult: ((event: { results?: ArrayLike<ArrayLike<{ transcript?: string }>> }) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
 };
 
 function isHD2Build(build: HD2Build | BL4Build): build is HD2Build {
@@ -71,8 +81,13 @@ function buildCopyText(build: HD2Build | BL4Build) {
 }
 
 export default function BuildDetail({ build, gameType, open, onClose, fromCalculator = false }: BuildDetailProps) {
+  const searchParams = useSearchParams();
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
   const creatorBadges = useMemo(() => getCreatorBadges(build), [build]);
+  const [feedbackRating, setFeedbackRating] = useState<1 | 2 | 3 | 4 | 5>(4);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackSaved, setFeedbackSaved] = useState(false);
+  const [voiceState, setVoiceState] = useState<"idle" | "listening" | "unsupported">("idle");
 
   useEffect(() => {
     if (!open) return;
@@ -98,6 +113,49 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
     } catch {
       setCopyState("idle");
     }
+  };
+
+  const onSaveFeedback = () => {
+    if (!isHD2Build(build)) return;
+    const missionName = searchParams.get("mission") ?? "unknown-mission";
+    const payload = {
+      buildId: build.id,
+      missionName,
+      enemyType: build.faction,
+      performance: feedbackRating,
+      textFeedback: feedbackText.trim(),
+      timestamp: new Date().toISOString(),
+    };
+    const key = "metaforge-mission-feedback";
+    const existing = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
+    const rows = existing ? (JSON.parse(existing) as typeof payload[]) : [];
+    rows.push(payload);
+    window.localStorage.setItem(key, JSON.stringify(rows));
+    setFeedbackSaved(true);
+    setTimeout(() => setFeedbackSaved(false), 1600);
+  };
+
+  const onVoiceInput = () => {
+    if (typeof window === "undefined") return;
+    const SpeechRecognitionCtor =
+      (window as Window & { SpeechRecognition?: new () => SpeechRecognitionLike; webkitSpeechRecognition?: new () => SpeechRecognitionLike })
+        .SpeechRecognition ??
+      (window as Window & { webkitSpeechRecognition?: new () => SpeechRecognitionLike }).webkitSpeechRecognition;
+    if (!SpeechRecognitionCtor) {
+      setVoiceState("unsupported");
+      return;
+    }
+    const recognition = new SpeechRecognitionCtor();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    setVoiceState("listening");
+    recognition.onresult = (event: { results?: ArrayLike<ArrayLike<{ transcript?: string }>> }) => {
+      const transcript = event.results?.[0]?.[0]?.transcript ?? "";
+      setFeedbackText((prev) => `${prev}${prev ? " " : ""}${transcript}`.trim());
+    };
+    recognition.onend = () => setVoiceState("idle");
+    recognition.start();
   };
 
   if (!open) return null;
@@ -301,6 +359,53 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
             {gameType === "helldivers2" ? "Helldivers 2" : "Borderlands 4"} • {build.metaTier}-Tier
           </span>
         </div>
+
+        {isHD2Build(build) && (
+          <section className="mt-4 rounded-xl border border-slate-700 bg-slate-950/60 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">Post-Mission Feedback</p>
+            <p className="mt-1 text-sm text-slate-300">
+              Rate this build after your mission. Feedback is stored locally for future recommendation tuning.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[1, 2, 3, 4, 5].map((rating) => (
+                <button
+                  key={`${build.id}-feedback-${rating}`}
+                  type="button"
+                  onClick={() => setFeedbackRating(rating as 1 | 2 | 3 | 4 | 5)}
+                  className={`h-9 w-9 rounded-lg border text-sm font-semibold ${
+                    feedbackRating >= rating ? "border-blue-400 bg-blue-500/20 text-blue-100" : "border-slate-700 text-slate-300"
+                  }`}
+                >
+                  {rating}
+                </button>
+              ))}
+            </div>
+            <textarea
+              value={feedbackText}
+              onChange={(event) => setFeedbackText(event.target.value)}
+              rows={3}
+              placeholder="How did this build perform on your mission?"
+              className="mt-3 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+            />
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={onVoiceInput}
+                className="inline-flex min-h-10 items-center rounded-lg border border-slate-600 px-3 py-2 text-xs font-semibold text-slate-100 hover:border-blue-400"
+              >
+                {voiceState === "listening" ? "Listening..." : "Add Voice Note"}
+              </button>
+              <button
+                type="button"
+                onClick={onSaveFeedback}
+                className="inline-flex min-h-10 items-center rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-500"
+              >
+                {feedbackSaved ? "Feedback Saved" : "Save Feedback"}
+              </button>
+              {voiceState === "unsupported" && <span className="text-xs text-rose-300">Voice input not supported on this browser.</span>}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

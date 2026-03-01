@@ -38,8 +38,6 @@ type Recommendation<T> = {
   reasons: string[];
 };
 
-type BossType = "hive-lord" | "bile-titan";
-
 const hd2DifficultyLevels: { value: HD2CalculatorInput["difficulty"]; label: string; subtitle: string }[] = [
   { value: "easy", label: "Easy", subtitle: "Quickplay warm-up" },
   { value: "medium", label: "Medium", subtitle: "Steady pressure" },
@@ -50,7 +48,14 @@ const hd2DifficultyLevels: { value: HD2CalculatorInput["difficulty"]; label: str
 
 const hd2Keys = {
   faction: ["terminids", "automatons", "illuminate"] as const,
-  missionType: ["extraction", "defense", "elimination"] as const,
+  missionName: [
+    "spread-democracy",
+    "secure-area",
+    "evacuate-high-value-assets",
+    "launch-icbm",
+    "retrieve-essential-personnel",
+    "eliminate-chargers",
+  ] as const,
   difficulty: ["easy", "medium", "hard", "expert", "nightmare"] as const,
   teamSize: ["solo", "duo", "squad", "randoms"] as const,
   playstyle: ["balanced", "aggressive", "support", "stealth"] as const,
@@ -116,7 +121,7 @@ function getProgress(total: number, selected: number) {
 }
 
 function isCompleteHD2(input: HD2FormState): input is HD2CalculatorInput {
-  return Boolean(input.missionType && input.faction && input.difficulty && input.teamSize && input.playstyle);
+  return Boolean(input.missionName && input.faction && input.difficulty && input.teamSize && input.playstyle);
 }
 
 function isCompleteBL4(input: BL4FormState): input is BL4CalculatorInput {
@@ -131,13 +136,28 @@ function normalizeHD2Playstyle(playstyle: HD2CalculatorInput["playstyle"]) {
   return playstyle === "balanced" ? "versatile" : playstyle;
 }
 
-function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput, bossMode: boolean, selectedBoss: BossType | null): string[] {
+function prettyMissionName(missionName: HD2CalculatorInput["missionName"]) {
+  const labels: Record<HD2CalculatorInput["missionName"], string> = {
+    "spread-democracy": "Spread Democracy",
+    "secure-area": "Secure Area",
+    "evacuate-high-value-assets": "Evacuate High-Value Assets",
+    "launch-icbm": "Launch ICBM",
+    "retrieve-essential-personnel": "Retrieve Essential Personnel",
+    "eliminate-chargers": "Eliminate Chargers",
+  };
+  return labels[missionName];
+}
+
+function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput, hiveLordMode: boolean): string[] {
   const reasons: string[] = [];
   const normalizedDifficulty = normalizeHD2Difficulty(input.difficulty);
   const normalizedPlaystyle = normalizeHD2Playstyle(input.playstyle);
 
   reasons.push(`Faction fit: ${build.faction === input.faction ? "exact" : "universal fallback"}.`);
-  reasons.push(`Mission fit: ${build.missionType === input.missionType ? "exact" : "universal fallback"}.`);
+  reasons.push(`Mission fit: optimized for ${prettyMissionName(input.missionName)} objectives.`);
+  if (build.missionFocus?.includes(input.missionName)) {
+    reasons.push(`Exact mission profile match for ${prettyMissionName(input.missionName)}.`);
+  }
 
   if (input.teamSize === "randoms") {
     reasons.push("YOLO mode compatibility: self-sufficient without strict premade coordination.");
@@ -153,7 +173,7 @@ function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput, bossMode: b
     reasons.push(`Playstyle match on ${input.playstyle} priority.`);
   }
 
-  if (bossMode && selectedBoss === "hive-lord") {
+  if (hiveLordMode) {
     if (build.effectiveness?.hivelord) {
       reasons.push(`Hive Lord effectiveness: ${build.effectiveness.hivelord}/100 with phase-ready tools.`);
     }
@@ -209,8 +229,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
   const [bl4Input, setBl4Input] = useState<BL4FormState>({});
   const [selectedBuildId, setSelectedBuildId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [bossMode, setBossMode] = useState(false);
-  const [selectedBoss, setSelectedBoss] = useState<BossType | null>(null);
+  const [hiveLordMode, setHiveLordMode] = useState(false);
   const initializedRef = useRef(false);
   const skipNextUrlSyncRef = useRef(false);
 
@@ -237,24 +256,20 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       const next: HD2FormState = {};
 
       const faction = searchParams.get("faction");
-      const missionType = searchParams.get("mission");
+      const missionName = searchParams.get("mission");
       const difficulty = searchParams.get("difficulty");
       const teamSize = searchParams.get("team");
       const playstyle = searchParams.get("style");
-      const bossModeFromQuery = searchParams.get("bossMode");
-      const bossFromQuery = searchParams.get("boss");
+      const hiveLordFromQuery = searchParams.get("hiveLord");
 
       if (isAllowed(faction, hd2Keys.faction)) next.faction = faction;
-      if (isAllowed(missionType, hd2Keys.missionType)) next.missionType = missionType;
+      if (isAllowed(missionName, hd2Keys.missionName)) next.missionName = missionName;
       if (isAllowed(difficulty, hd2Keys.difficulty)) next.difficulty = difficulty;
       if (isAllowed(teamSize, hd2Keys.teamSize)) next.teamSize = teamSize;
       if (isAllowed(playstyle, hd2Keys.playstyle)) next.playstyle = playstyle;
 
       setHd2Input(next);
-      setBossMode(bossModeFromQuery === "1");
-      if (bossFromQuery === "hive-lord" || bossFromQuery === "bile-titan") {
-        setSelectedBoss(bossFromQuery);
-      }
+      setHiveLordMode(hiveLordFromQuery === "1");
     } else {
       const next: BL4FormState = {};
 
@@ -290,7 +305,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       if (hd2Input.faction) params.set("faction", hd2Input.faction);
       else params.delete("faction");
 
-      if (hd2Input.missionType) params.set("mission", hd2Input.missionType);
+      if (hd2Input.missionName) params.set("mission", hd2Input.missionName);
       else params.delete("mission");
 
       if (hd2Input.difficulty) params.set("difficulty", hd2Input.difficulty);
@@ -302,11 +317,8 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       if (hd2Input.playstyle) params.set("style", hd2Input.playstyle);
       else params.delete("style");
 
-      if (bossMode) params.set("bossMode", "1");
-      else params.delete("bossMode");
-
-      if (selectedBoss) params.set("boss", selectedBoss);
-      else params.delete("boss");
+      if (hiveLordMode) params.set("hiveLord", "1");
+      else params.delete("hiveLord");
     } else {
       if (bl4Input.class) params.set("class", bl4Input.class);
       else params.delete("class");
@@ -333,18 +345,17 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     bl4Input.playstyle,
     hd2Input.difficulty,
     hd2Input.faction,
-    hd2Input.missionType,
+    hd2Input.missionName,
     hd2Input.playstyle,
     hd2Input.teamSize,
-    bossMode,
-    selectedBoss,
+    hiveLordMode,
     pathname,
     props.gameType,
     router,
     selectedBuildId,
   ]);
 
-  const hd2Selections = [hd2Input.faction, hd2Input.missionType, hd2Input.difficulty, hd2Input.teamSize, hd2Input.playstyle].filter(Boolean)
+  const hd2Selections = [hd2Input.faction, hd2Input.missionName, hd2Input.difficulty, hd2Input.teamSize, hd2Input.playstyle].filter(Boolean)
     .length;
   const bl4Selections = [bl4Input.class, bl4Input.buildType, bl4Input.difficulty, bl4Input.playstyle].filter(Boolean).length;
 
@@ -357,11 +368,11 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     if (props.gameType === "helldivers2") {
       if (!isCompleteHD2(hd2Input)) return [] as Recommendation<HD2Build>[];
 
-      const topBuilds = getHD2Recommendations(hd2Input, props.builds, { bossMode, selectedBoss });
+      const topBuilds = getHD2Recommendations(hd2Input, props.builds, { hiveLordMode });
       return topBuilds.map((build) => ({
         build,
-        score: calculateHD2BuildScore(build, hd2Input, { bossMode, selectedBoss }),
-        reasons: buildHD2Reasons(build, hd2Input, bossMode, selectedBoss),
+        score: calculateHD2BuildScore(build, hd2Input, { hiveLordMode }),
+        reasons: buildHD2Reasons(build, hd2Input, hiveLordMode),
       }));
     }
 
@@ -373,7 +384,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       score: calculateBL4BuildScore(build, bl4Input),
       reasons: buildBL4Reasons(build, bl4Input),
     }));
-  }, [bossMode, bl4Input, hd2Input, props, selectedBoss]);
+  }, [bl4Input, hd2Input, hiveLordMode, props]);
 
   const activeBuild = useMemo(
     () => (selectedBuildId ? props.builds.find((build) => build.id === selectedBuildId) ?? null : null),
@@ -430,20 +441,22 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
 
           <OptionChips
             label="Step 2"
-            description="Choose the mission objective you need to optimize."
+            description="Choose the exact mission objective you are running."
             options={[
-              { value: "extraction", label: "Extraction", help: "Get in, complete objective, get out alive." },
-              { value: "defense", label: "Defense", help: "Hold ground and survive wave pressure." },
-              { value: "elimination", label: "Elimination", help: "Delete priority targets quickly." },
+              { value: "spread-democracy", label: "Spread Democracy", help: "Flag/objective pressure with rolling waves." },
+              { value: "secure-area", label: "Secure Area", help: "Hold zone and stabilize reinforcement lanes." },
+              { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets", help: "Escort and protect priority evac targets." },
+              { value: "launch-icbm", label: "Launch ICBM", help: "Multi-step objective with heavy defense windows." },
+              { value: "retrieve-essential-personnel", label: "Retrieve Essential Personnel", help: "Fast extractions under sustained pressure." },
+              { value: "eliminate-chargers", label: "Eliminate Chargers", help: "Heavy-target deletion and anti-armor uptime." },
             ]}
-            value={hd2Input.missionType}
-            onChange={(missionType) =>
-              setHd2Input((prev) => ({ ...prev, missionType: missionType as HD2CalculatorInput["missionType"] }))
+            value={hd2Input.missionName}
+            onChange={(missionName) =>
+              setHd2Input((prev) => ({ ...prev, missionName: missionName as HD2CalculatorInput["missionName"] }))
             }
-            disabled={!hd2Input.faction}
           />
 
-          <section className={`rounded-2xl border p-4 sm:p-5 ${!hd2Input.missionType ? "border-slate-800/60 bg-slate-900/30" : "border-slate-800 bg-slate-900/70"}`}>
+          <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">Step 3</p>
             <p className="mt-1 text-base text-slate-200">Set difficulty from Easy to Nightmare (maps to Helldive tiers behind the scenes).</p>
             <input
@@ -451,7 +464,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               min={0}
               max={4}
               step={1}
-              disabled={!hd2Input.missionType}
               value={hd2DifficultyIndex}
               onChange={(event) => {
                 const idx = Number(event.target.value);
@@ -468,7 +480,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
                   <button
                     key={level.value}
                     type="button"
-                    disabled={!hd2Input.missionType}
                     onClick={() => setHd2Input((prev) => ({ ...prev, difficulty: level.value }))}
                     className={`min-h-14 rounded-lg border px-2 py-2 text-left ${
                       active
@@ -499,7 +510,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             ]}
             value={hd2Input.teamSize}
             onChange={(teamSize) => setHd2Input((prev) => ({ ...prev, teamSize: teamSize as HD2CalculatorInput["teamSize"] }))}
-            disabled={!hd2Input.difficulty}
           />
 
           <OptionChips
@@ -515,54 +525,20 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             onChange={(playstyle) =>
               setHd2Input((prev) => ({ ...prev, playstyle: playstyle as HD2CalculatorInput["playstyle"] }))
             }
-            disabled={!hd2Input.teamSize}
           />
 
           <section className="rounded-2xl border border-red-500/30 bg-red-900/20 p-4 sm:p-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-200">Boss Fight Mode</p>
-            <p className="mt-1 text-base text-red-100">Enable boss-specific optimization with phase guidance and creator-validated specialist builds.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-200">Hive Lord Check</p>
+            <p className="mt-1 text-base text-red-100">Turn this on when the mission includes a Hive Lord encounter.</p>
             <label className="mt-3 flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border border-red-400/30 bg-slate-950/40 px-3 py-2 text-sm text-slate-100">
               <input
                 type="checkbox"
-                checked={bossMode}
-                onChange={(event) => {
-                  const nextMode = event.target.checked;
-                  setBossMode(nextMode);
-                  if (!nextMode) setSelectedBoss(null);
-                }}
+                checked={hiveLordMode}
+                onChange={(event) => setHiveLordMode(event.target.checked)}
                 className="h-4 w-4 accent-red-500"
               />
-              Enable boss-specific recommendations
+              Fighting Hive Lord?
             </label>
-
-            {bossMode && (
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                <button
-                  type="button"
-                  onClick={() => setSelectedBoss("hive-lord")}
-                  className={`min-h-12 rounded-lg border px-3 py-2 text-left text-sm ${
-                    selectedBoss === "hive-lord"
-                      ? "border-red-300 bg-red-500/20 text-red-100"
-                      : "border-slate-700 bg-slate-950 text-slate-200 hover:border-slate-500"
-                  }`}
-                >
-                  <span className="block font-semibold">Hive Lord</span>
-                  <span className="text-xs text-slate-300">Heavy armor + swarm pressure, phase-based engagements</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedBoss("bile-titan")}
-                  className={`min-h-12 rounded-lg border px-3 py-2 text-left text-sm ${
-                    selectedBoss === "bile-titan"
-                      ? "border-red-300 bg-red-500/20 text-red-100"
-                      : "border-slate-700 bg-slate-950 text-slate-200 hover:border-slate-500"
-                  }`}
-                >
-                  <span className="block font-semibold">Bile Titan</span>
-                  <span className="text-xs text-slate-300">Massive target optimization and anti-heavy cycling</span>
-                </button>
-              </div>
-            )}
           </section>
         </div>
       ) : (

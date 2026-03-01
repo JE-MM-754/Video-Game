@@ -62,6 +62,13 @@ function isHD2Build(build: HD2Build | BL4Build): build is HD2Build {
   return "faction" in build;
 }
 
+function formatMissionLabel(mission: string) {
+  return mission
+    .split("-")
+    .map((chunk) => chunk.charAt(0).toUpperCase() + chunk.slice(1))
+    .join(" ");
+}
+
 function getCreatorBadges(build: HD2Build | BL4Build) {
   const badges: { label: string; className: string }[] = [];
   const creator = build.creator.name;
@@ -133,7 +140,7 @@ export default function BuildCard({ build, gameType, isCompared, onToggleCompare
               {build.faction}
             </span>
             <span className="rounded-full border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200">
-              {build.missionType}
+              {formatMissionLabel(build.missionFocus?.[0] ?? build.missionType)}
             </span>
             <span className="rounded-full border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200">
               {build.difficulty}
