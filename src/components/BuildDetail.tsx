@@ -104,6 +104,7 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const [feedbackResult, setFeedbackResult] = useState<RLFeedbackMissionResult>("complete_success");
   const [feedbackSaved, setFeedbackSaved] = useState(false);
   const [voiceState, setVoiceState] = useState<"idle" | "listening" | "unsupported">("idle");
+  const [showAdvancedContext, setShowAdvancedContext] = useState(false);
   const [objectivesCompleted, setObjectivesCompleted] = useState(1);
   const [totalObjectives, setTotalObjectives] = useState(1);
   const [timeToComplete, setTimeToComplete] = useState("");
@@ -528,76 +529,6 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
                 />
               </label>
             </div>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              <label className="text-xs text-slate-300">
-                Time to Complete (min)
-                <input
-                  type="number"
-                  min={0}
-                  value={timeToComplete}
-                  onChange={(event) => setTimeToComplete(event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
-                />
-              </label>
-              <label className="text-xs text-slate-300">
-                Casualties
-                <input
-                  type="number"
-                  min={0}
-                  value={casualties}
-                  onChange={(event) => setCasualties(event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
-                />
-              </label>
-            </div>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              <label className="text-xs text-slate-300">
-                Skill Level
-                <select
-                  value={userSkillLevel}
-                  onChange={(event) => setUserSkillLevel(event.target.value as UserSkillLevel | "")}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
-                >
-                  <option value="">Not Specified</option>
-                  <option value="beginner">Beginner</option>
-                  <option value="intermediate">Intermediate</option>
-                  <option value="advanced">Advanced</option>
-                  <option value="expert">Expert</option>
-                </select>
-              </label>
-              <label className="text-xs text-slate-300">
-                Missions Played
-                <input
-                  type="number"
-                  min={0}
-                  value={missionsPlayed}
-                  onChange={(event) => setMissionsPlayed(event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
-                />
-              </label>
-            </div>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              <label className="text-xs text-slate-300">
-                Map Type
-                <input
-                  type="text"
-                  value={mapType}
-                  onChange={(event) => setMapType(event.target.value)}
-                  placeholder="Optional"
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
-                />
-              </label>
-              <label className="text-xs text-slate-300">
-                Weather Conditions
-                <input
-                  type="text"
-                  value={weatherConditions}
-                  onChange={(event) => setWeatherConditions(event.target.value)}
-                  placeholder="Optional"
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
-                />
-              </label>
-            </div>
             <div className="mt-3">
               <p className="text-xs text-slate-300">Issues Encountered</p>
               <div className="mt-1 flex flex-wrap gap-2">
@@ -643,6 +574,92 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
               placeholder="Detailed notes for RL training: what worked, what failed, and mission-specific factors."
               className="mt-3 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
             />
+            <section className="mt-3 rounded-lg border border-slate-700 bg-slate-900/40 p-3">
+              <button
+                type="button"
+                onClick={() => setShowAdvancedContext((prev) => !prev)}
+                className="flex w-full items-center justify-between text-left text-xs font-semibold uppercase tracking-wide text-slate-300"
+                aria-expanded={showAdvancedContext}
+                aria-controls={`${build.id}-advanced-context`}
+              >
+                <span>Advanced Context (Optional)</span>
+                <span>{showAdvancedContext ? "Hide" : "Show"}</span>
+              </button>
+              {showAdvancedContext && (
+                <div id={`${build.id}-advanced-context`} className="mt-3 space-y-3">
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    <label className="text-xs text-slate-300">
+                      Time to Complete (min)
+                      <input
+                        type="number"
+                        min={0}
+                        value={timeToComplete}
+                        onChange={(event) => setTimeToComplete(event.target.value)}
+                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                      />
+                    </label>
+                    <label className="text-xs text-slate-300">
+                      Casualties
+                      <input
+                        type="number"
+                        min={0}
+                        value={casualties}
+                        onChange={(event) => setCasualties(event.target.value)}
+                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    <label className="text-xs text-slate-300">
+                      Skill Level
+                      <select
+                        value={userSkillLevel}
+                        onChange={(event) => setUserSkillLevel(event.target.value as UserSkillLevel | "")}
+                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                      >
+                        <option value="">Not Specified</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="expert">Expert</option>
+                      </select>
+                    </label>
+                    <label className="text-xs text-slate-300">
+                      Missions Played
+                      <input
+                        type="number"
+                        min={0}
+                        value={missionsPlayed}
+                        onChange={(event) => setMissionsPlayed(event.target.value)}
+                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                      />
+                    </label>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    <label className="text-xs text-slate-300">
+                      Map Type
+                      <input
+                        type="text"
+                        value={mapType}
+                        onChange={(event) => setMapType(event.target.value)}
+                        placeholder="Optional"
+                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                      />
+                    </label>
+                    <label className="text-xs text-slate-300">
+                      Weather Conditions
+                      <input
+                        type="text"
+                        value={weatherConditions}
+                        onChange={(event) => setWeatherConditions(event.target.value)}
+                        placeholder="Optional"
+                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+            </section>
             <div className="mt-2 flex flex-wrap gap-2">
               <button
                 type="button"
