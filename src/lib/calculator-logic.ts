@@ -8,6 +8,15 @@ type HD2RecommendationOptions = {
   hiveLordMode?: boolean;
 };
 
+type MissionArchetype =
+  | "wave-defense"
+  | "speed-run"
+  | "boss-hunt"
+  | "escort"
+  | "multi-step"
+  | "recon"
+  | "destroy-structures";
+
 const creatorWeights: Record<string, number> = {
   OhDough: 1.2,
   "Sovereign Gene": 1.15,
@@ -33,31 +42,141 @@ function normalizeHD2Playstyle(inputPlaystyle: HD2CalculatorInput["playstyle"]):
 }
 
 function missionTypeFromMissionName(missionName: HD2MissionName): HD2Build["missionType"] {
-  if (
-    missionName === "spread-democracy" ||
-    missionName === "destroy-hive-lords" ||
-    missionName === "eliminate-chargers" ||
-    missionName === "eliminate-devastators"
-  ) {
-    return "elimination";
+  const map: Record<HD2MissionName, HD2Build["missionType"]> = {
+    "eradicate-terminid-swarm": "defense",
+    "eradicate-automaton-forces": "defense",
+    "eradicate-illuminate-forces": "defense",
+    "repel-invasion-fleet": "defense",
+    "blitz-search-destroy-terminids": "elimination",
+    "blitz-search-destroy-automatons": "elimination",
+    "eliminate-bile-titan": "elimination",
+    "eliminate-charger": "elimination",
+    "eliminate-brood-commander": "elimination",
+    "eliminate-hulk": "elimination",
+    "eliminate-devastator": "elimination",
+    "emergency-evacuation": "extraction",
+    "evacuate-high-value-assets": "defense",
+    "launch-icbm": "defense",
+    "pump-fuel-to-icbm": "defense",
+    "activate-e-710-pumps": "defense",
+    "enable-e-710-extraction": "extraction",
+    "sabotage-supply-bases": "elimination",
+    "destroy-command-bunkers": "elimination",
+    "sabotage-air-base": "elimination",
+    "destroy-transmission-network": "elimination",
+    "destroy-warp-ships": "elimination",
+    "conduct-geological-survey": "extraction",
+    "retrieve-valuable-data": "extraction",
+    "upload-escape-pod-data": "extraction",
+    "terminate-illegal-broadcast": "elimination",
+    "spread-democracy": "elimination",
+    "purge-hatcheries": "elimination",
+  };
+  return map[missionName];
+}
+
+function missionArchetypeFromMissionName(missionName: HD2MissionName): MissionArchetype {
+  const map: Record<HD2MissionName, MissionArchetype> = {
+    "eradicate-terminid-swarm": "wave-defense",
+    "eradicate-automaton-forces": "wave-defense",
+    "eradicate-illuminate-forces": "wave-defense",
+    "repel-invasion-fleet": "wave-defense",
+    "blitz-search-destroy-terminids": "speed-run",
+    "blitz-search-destroy-automatons": "speed-run",
+    "eliminate-bile-titan": "boss-hunt",
+    "eliminate-charger": "boss-hunt",
+    "eliminate-brood-commander": "boss-hunt",
+    "eliminate-hulk": "boss-hunt",
+    "eliminate-devastator": "boss-hunt",
+    "emergency-evacuation": "escort",
+    "evacuate-high-value-assets": "escort",
+    "launch-icbm": "multi-step",
+    "pump-fuel-to-icbm": "multi-step",
+    "activate-e-710-pumps": "multi-step",
+    "enable-e-710-extraction": "multi-step",
+    "sabotage-supply-bases": "multi-step",
+    "destroy-command-bunkers": "multi-step",
+    "sabotage-air-base": "multi-step",
+    "destroy-transmission-network": "multi-step",
+    "destroy-warp-ships": "multi-step",
+    "conduct-geological-survey": "recon",
+    "retrieve-valuable-data": "recon",
+    "upload-escape-pod-data": "recon",
+    "terminate-illegal-broadcast": "recon",
+    "spread-democracy": "recon",
+    "purge-hatcheries": "destroy-structures",
+  };
+  return map[missionName];
+}
+
+function includesAny(source: string[], needles: string[]) {
+  return needles.some((needle) => source.some((item) => item.includes(needle)));
+}
+
+function missionArchetypeScore(build: HD2Build, input: HD2CalculatorInput) {
+  const archetype = missionArchetypeFromMissionName(input.missionName);
+  const stratagems = build.loadout.stratagems.map((s) => s.toLowerCase());
+  const loadout = [
+    build.loadout.primary.toLowerCase(),
+    build.loadout.secondary.toLowerCase(),
+    build.loadout.grenade.toLowerCase(),
+    build.loadout.armor.toLowerCase(),
+    ...stratagems,
+    ...build.tags.map((tag) => tag.toLowerCase()),
+    ...build.whyThisWorks.map((line) => line.toLowerCase()),
+    ...build.whenToUse.map((line) => line.toLowerCase()),
+    build.strategicContext.toLowerCase(),
+  ];
+
+  let score = 0;
+
+  if (archetype === "wave-defense") {
+    if (includesAny(stratagems, ["sentry"])) score += 30;
+    if (includesAny(loadout, ["stamina enhancement"])) score += 18;
+    if (input.faction === "terminids" && includesAny(loadout, ["flamethrower"])) score += 22;
+    if (input.faction === "automatons" && includesAny(loadout, ["railgun"])) score += 22;
+    if (includesAny(loadout, ["orbital gas strike"])) score += 20;
   }
 
-  if (
-    missionName === "secure-area" ||
-    missionName === "secure-civilian-assets" ||
-    missionName === "evacuate-high-value-assets" ||
-    missionName === "disable-bot-factories" ||
-    missionName === "sabotage-supply-lines" ||
-    missionName === "geological-survey"
-  ) {
-    return "defense";
+  if (archetype === "speed-run") {
+    if (includesAny(loadout, ["jump pack", "lift-850"])) score += 28;
+    if (includesAny(loadout, ["eagle airstrike"])) score += 22;
+    if (includesAny(loadout, ["grenade pistol", "gp-31"])) score += 20;
+    if (includesAny(loadout, ["skip enemies", "run objectives"])) score += 12;
   }
 
-  if (missionName === "retrieve-valuable-data") {
-    return "extraction";
+  if (archetype === "boss-hunt") {
+    if (includesAny(loadout, ["quasar cannon", "railgun"])) score += 28;
+    if (includesAny(loadout, ["orbital precision strike"])) score += 22;
+    if (includesAny(loadout, ["shield generator pack"])) score += 20;
+    if (includesAny(loadout, ["eagle 500kg"])) score += 20;
   }
 
-  return "extraction";
+  if (archetype === "escort") {
+    if (includesAny(loadout, ["shield generator pack"])) score += 25;
+    if (includesAny(stratagems, ["sentry"])) score += 20;
+    if (includesAny(loadout, ["orbital gas strike"])) score += 18;
+    if (includesAny(loadout, ["supply pack"])) score += 20;
+  }
+
+  if (archetype === "multi-step") {
+    if (includesAny(loadout, ["ems mortar"])) score += 26;
+    if (includesAny(loadout, ["autocannon"])) score += 24;
+    if (includesAny(loadout, ["guard dog rover"])) score += 20;
+    if (includesAny(loadout, ["stamina enhancement"])) score += 18;
+  }
+
+  if (archetype === "recon") {
+    if (includesAny(loadout, ["jump pack", "mobility", "trailblazer"])) score += 22;
+    if (includesAny(loadout, ["objective", "efficiency", "fast"])) score += 16;
+  }
+
+  if (archetype === "destroy-structures") {
+    if (includesAny(loadout, ["eagle airstrike", "500kg", "orbital laser", "explosive", "demolition"])) score += 30;
+    if (includesAny(loadout, ["aoe", "area"])) score += 14;
+  }
+
+  return score;
 }
 
 function matchesHD2Team(buildTeamSize: HD2Build["teamSize"], inputTeamSize: HD2CalculatorInput["teamSize"]) {
@@ -89,8 +208,8 @@ export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInpu
   }
   if (build.missionFocus?.includes(input.missionName)) {
     score += 40;
-  } else if (Array.isArray(build.missionFocus) && build.missionFocus.length > 0) {
-    score -= 25;
+  } else if (build.missionType === derivedMissionType || build.missionType === "universal") {
+    score += 10;
   }
 
   if (input.teamSize === "randoms") {
@@ -126,6 +245,8 @@ export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInpu
     if (build.category === "hive-lord-specialist") score += 35;
     if (build.strategyPhases) score += 20;
   }
+
+  score += missionArchetypeScore(build, input);
 
   score *= creatorValidationMultiplier(build.creator.name);
 

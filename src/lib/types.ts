@@ -75,22 +75,34 @@ export interface HD2Build extends StrategicIntel {
 }
 
 export type HD2MissionName =
-  | "spread-democracy"
-  | "destroy-hive-lords"
-  | "secure-area"
-  | "secure-civilian-assets"
-  | "extract-classified-data"
-  | "retrieve-valuable-data"
+  | "eradicate-terminid-swarm"
+  | "eradicate-automaton-forces"
+  | "eradicate-illuminate-forces"
+  | "repel-invasion-fleet"
+  | "blitz-search-destroy-terminids"
+  | "blitz-search-destroy-automatons"
+  | "eliminate-bile-titan"
+  | "eliminate-charger"
+  | "eliminate-brood-commander"
+  | "eliminate-hulk"
+  | "eliminate-devastator"
+  | "emergency-evacuation"
   | "evacuate-high-value-assets"
   | "launch-icbm"
-  | "retrieve-essential-personnel"
-  | "eliminate-chargers"
-  | "disable-bot-factories"
-  | "eliminate-devastators"
-  | "sabotage-supply-lines"
-  | "extract-strategic-assets"
-  | "emergency-evacuation"
-  | "geological-survey";
+  | "pump-fuel-to-icbm"
+  | "activate-e-710-pumps"
+  | "enable-e-710-extraction"
+  | "sabotage-supply-bases"
+  | "destroy-command-bunkers"
+  | "sabotage-air-base"
+  | "destroy-transmission-network"
+  | "destroy-warp-ships"
+  | "conduct-geological-survey"
+  | "retrieve-valuable-data"
+  | "upload-escape-pod-data"
+  | "terminate-illegal-broadcast"
+  | "spread-democracy"
+  | "purge-hatcheries";
 
 export interface BL4Build extends StrategicIntel {
   id: string;

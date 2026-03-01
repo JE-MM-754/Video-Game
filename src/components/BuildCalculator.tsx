@@ -44,22 +44,34 @@ const hd2DifficultyLevels: { value: HD2CalculatorInput["difficulty"]; label: str
 const hd2Keys = {
   faction: ["terminids", "automatons", "illuminate"] as const,
   missionName: [
-    "spread-democracy",
-    "destroy-hive-lords",
-    "secure-area",
-    "secure-civilian-assets",
-    "extract-classified-data",
-    "retrieve-valuable-data",
+    "eradicate-terminid-swarm",
+    "eradicate-automaton-forces",
+    "eradicate-illuminate-forces",
+    "repel-invasion-fleet",
+    "blitz-search-destroy-terminids",
+    "blitz-search-destroy-automatons",
+    "eliminate-bile-titan",
+    "eliminate-charger",
+    "eliminate-brood-commander",
+    "eliminate-hulk",
+    "eliminate-devastator",
+    "emergency-evacuation",
     "evacuate-high-value-assets",
     "launch-icbm",
-    "retrieve-essential-personnel",
-    "eliminate-chargers",
-    "disable-bot-factories",
-    "eliminate-devastators",
-    "sabotage-supply-lines",
-    "extract-strategic-assets",
-    "emergency-evacuation",
-    "geological-survey",
+    "pump-fuel-to-icbm",
+    "activate-e-710-pumps",
+    "enable-e-710-extraction",
+    "sabotage-supply-bases",
+    "destroy-command-bunkers",
+    "sabotage-air-base",
+    "destroy-transmission-network",
+    "destroy-warp-ships",
+    "conduct-geological-survey",
+    "retrieve-valuable-data",
+    "upload-escape-pod-data",
+    "terminate-illegal-broadcast",
+    "spread-democracy",
+    "purge-hatcheries",
   ] as const,
   difficulty: ["easy", "medium", "hard", "expert", "nightmare"] as const,
   teamSize: ["solo", "duo", "squad", "randoms"] as const,
@@ -143,22 +155,34 @@ function normalizeHD2Playstyle(playstyle: HD2CalculatorInput["playstyle"]) {
 
 function prettyMissionName(missionName: HD2CalculatorInput["missionName"]) {
   const labels: Record<HD2CalculatorInput["missionName"], string> = {
-    "spread-democracy": "Spread Democracy",
-    "destroy-hive-lords": "Destroy Hive Lords",
-    "secure-area": "Secure Area",
-    "secure-civilian-assets": "Secure Civilian Assets",
-    "extract-classified-data": "Extract Classified Data",
-    "retrieve-valuable-data": "Retrieve Valuable Data",
+    "eradicate-terminid-swarm": "Eradicate Terminid Swarm",
+    "eradicate-automaton-forces": "Eradicate Automaton Forces",
+    "eradicate-illuminate-forces": "Eradicate Illuminate Forces",
+    "repel-invasion-fleet": "Repel Invasion Fleet",
+    "blitz-search-destroy-terminids": "Blitz: Search & Destroy (Terminids)",
+    "blitz-search-destroy-automatons": "Blitz: Search & Destroy (Automatons)",
+    "eliminate-bile-titan": "Eliminate Bile Titan",
+    "eliminate-charger": "Eliminate Charger",
+    "eliminate-brood-commander": "Eliminate Brood Commander",
+    "eliminate-hulk": "Eliminate Hulk",
+    "eliminate-devastator": "Eliminate Devastator",
+    "emergency-evacuation": "Emergency Evacuation",
     "evacuate-high-value-assets": "Evacuate High-Value Assets",
     "launch-icbm": "Launch ICBM",
-    "retrieve-essential-personnel": "Retrieve Essential Personnel",
-    "eliminate-chargers": "Eliminate Chargers",
-    "disable-bot-factories": "Disable Bot Factories",
-    "eliminate-devastators": "Eliminate Devastators",
-    "sabotage-supply-lines": "Sabotage Supply Lines",
-    "extract-strategic-assets": "Extract Strategic Assets",
-    "emergency-evacuation": "Emergency Evacuation",
-    "geological-survey": "Geological Survey",
+    "pump-fuel-to-icbm": "Pump Fuel to ICBM",
+    "activate-e-710-pumps": "Activate E-710 Pumps",
+    "enable-e-710-extraction": "Enable E-710 Extraction",
+    "sabotage-supply-bases": "Sabotage Supply Bases",
+    "destroy-command-bunkers": "Destroy Command Bunkers",
+    "sabotage-air-base": "Sabotage Air Base",
+    "destroy-transmission-network": "Destroy Transmission Network",
+    "destroy-warp-ships": "Destroy Warp Ships (Illuminate)",
+    "conduct-geological-survey": "Conduct Geological Survey",
+    "retrieve-valuable-data": "Retrieve Valuable Data",
+    "upload-escape-pod-data": "Upload Escape Pod Data",
+    "terminate-illegal-broadcast": "Terminate Illegal Broadcast",
+    "spread-democracy": "Spread Democracy",
+    "purge-hatcheries": "Purge Hatcheries",
   };
   return labels[missionName];
 }
@@ -457,6 +481,10 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">Guided Calculator</p>
             <h2 className="mt-1 text-3xl font-black text-slate-100">Find The Exact Build For This Mission</h2>
+            <p className="mt-2 text-sm text-slate-300">
+              Meta updated for Patch 6.0.3. Post-Jan 2026 meta favors anti-heavy tools, crowd control, and mobility backpacks over raw DPS.
+              New: Bastion Tank available. Illuminate now a full 3rd faction.
+            </p>
           </div>
           <p className="text-base text-slate-200">Step completion: {selectedCount}/{totalSteps}</p>
         </div>
@@ -479,30 +507,102 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             onChange={(faction) => setHD2Field("faction", faction as HD2CalculatorInput["faction"])}
           />
 
-          <OptionChips
-            label="Step 2"
-            description="Choose the exact mission objective you are running."
-            options={[
-              { value: "spread-democracy", label: "Spread Democracy", help: "Flag/objective pressure with rolling waves." },
-              { value: "destroy-hive-lords", label: "Destroy Hive Lords", help: "Direct boss removal with heavy anti-armor focus." },
-              { value: "secure-area", label: "Secure Area", help: "Hold zone and stabilize reinforcement lanes." },
-              { value: "secure-civilian-assets", label: "Secure Civilian Assets", help: "Defensive objective with layered crowd control needs." },
-              { value: "extract-classified-data", label: "Extract Classified Data", help: "Objective carry and safe extraction tempo." },
-              { value: "retrieve-valuable-data", label: "Retrieve Valuable Data", help: "High-mobility data retrieval under pressure." },
-              { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets", help: "Escort and protect priority evac targets." },
-              { value: "launch-icbm", label: "Launch ICBM", help: "Multi-step objective with heavy defense windows." },
-              { value: "retrieve-essential-personnel", label: "Retrieve Essential Personnel", help: "Fast extractions under sustained pressure." },
-              { value: "eliminate-chargers", label: "Eliminate Chargers", help: "Heavy-target deletion and anti-armor uptime." },
-              { value: "disable-bot-factories", label: "Disable Bot Factories", help: "Automaton structure suppression and demolition routing." },
-              { value: "eliminate-devastators", label: "Eliminate Devastators", help: "Priority armored target hunting and lane denial." },
-              { value: "sabotage-supply-lines", label: "Sabotage Supply Lines", help: "High-mobility objective chaining with disruption." },
-              { value: "extract-strategic-assets", label: "Extract Strategic Assets", help: "High-value extraction with defensive fallback." },
-              { value: "emergency-evacuation", label: "Emergency Evacuation", help: "Survival-first evac routing under pressure." },
-              { value: "geological-survey", label: "Geological Survey", help: "Objective scan pacing with wave containment." },
-            ]}
-            value={hd2Input.missionName}
-            onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
-          />
+          <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">Step 2</p>
+            <p className="mt-1 text-base text-slate-200">Choose your mission objective.</p>
+            <div className="mt-3 space-y-4">
+              <OptionChips
+                label="Wave Defense"
+                description="You are locked in while waves keep coming. Archetype: crowd control + sentries build."
+                options={[
+                  { value: "eradicate-terminid-swarm", label: "Eradicate Terminid Swarm", help: "Bug wave suppression with area denial." },
+                  { value: "eradicate-automaton-forces", label: "Eradicate Automaton Forces", help: "Heavy bot lanes with sustained sentry cover." },
+                  { value: "eradicate-illuminate-forces", label: "Eradicate Illuminate Forces", help: "Shield break plus crowd clear under pressure." },
+                  { value: "repel-invasion-fleet", label: "Repel Invasion Fleet", help: "Illuminate wave defense with anti-ship pressure." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+
+              <OptionChips
+                label="Speed Run"
+                description="12-minute objective races. Archetype: mobility + AoE build."
+                options={[
+                  { value: "blitz-search-destroy-terminids", label: "Blitz: Search & Destroy (Terminids)", help: "Close bug holes fast and keep moving." },
+                  { value: "blitz-search-destroy-automatons", label: "Blitz: Search & Destroy (Automatons)", help: "Destroy fabricators without overfighting patrols." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+
+              <OptionChips
+                label="Boss Hunt"
+                description="Eliminate a priority target. Archetype: anti-heavy + precision build."
+                options={[
+                  { value: "eliminate-bile-titan", label: "Eliminate Bile Titan", help: "Heavy anti-armor and weak-point deletes." },
+                  { value: "eliminate-charger", label: "Eliminate Charger", help: "Burst anti-heavy tools with backup control." },
+                  { value: "eliminate-brood-commander", label: "Eliminate Brood Commander", help: "Priority target removal with swarm handling." },
+                  { value: "eliminate-hulk", label: "Eliminate Hulk", help: "Bot heavy killer with precision support." },
+                  { value: "eliminate-devastator", label: "Eliminate Devastator", help: "Strip armor and disable ranged pressure." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+
+              <OptionChips
+                label="Escort / Evacuation"
+                description="Protect moving targets. Archetype: shield + sustained fire build."
+                options={[
+                  { value: "emergency-evacuation", label: "Emergency Evacuation", help: "Stabilize lanes and protect evac routes." },
+                  { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets", help: "Shielded convoy defense under pressure." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+
+              <OptionChips
+                label="Multi-Step Objective"
+                description="Terminals, valves, and hold points. Archetype: versatile + stun build."
+                options={[
+                  { value: "launch-icbm", label: "Launch ICBM", help: "Progressive terminals with defense windows." },
+                  { value: "pump-fuel-to-icbm", label: "Pump Fuel to ICBM", help: "Route fuel points while controlling waves." },
+                  { value: "activate-e-710-pumps", label: "Activate E-710 Pumps", help: "Rapid site clears with terminal uptime." },
+                  { value: "enable-e-710-extraction", label: "Enable E-710 Extraction", help: "Pressure management across activation points." },
+                  { value: "sabotage-supply-bases", label: "Sabotage Supply Bases", help: "Objective chaining under active resistance." },
+                  { value: "destroy-command-bunkers", label: "Destroy Command Bunkers", help: "Bunker breach with controlled rotations." },
+                  { value: "sabotage-air-base", label: "Sabotage Air Base", help: "Disable base systems while holding lanes." },
+                  { value: "destroy-transmission-network", label: "Destroy Transmission Network", help: "Fast terminal-to-terminal objective control." },
+                  { value: "destroy-warp-ships", label: "Destroy Warp Ships (Illuminate)", help: "Explosive anti-ship runs with shield survival." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+
+              <OptionChips
+                label="Recon / Data"
+                description="Run between points and call strategems. Archetype: mobility + efficiency build."
+                options={[
+                  { value: "conduct-geological-survey", label: "Conduct Geological Survey", help: "Point-to-point objective tempo and scans." },
+                  { value: "retrieve-valuable-data", label: "Retrieve Valuable Data", help: "Fast data retrieval with objective-first pacing." },
+                  { value: "upload-escape-pod-data", label: "Upload Escape Pod Data", help: "Uplink windows that demand lane control." },
+                  { value: "terminate-illegal-broadcast", label: "Terminate Illegal Broadcast", help: "High-mobility objective disruption." },
+                  { value: "spread-democracy", label: "Spread Democracy", help: "Objective progression with rotating pressure." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+
+              <OptionChips
+                label="Destroy Structures"
+                description="Demolish hard objectives quickly. Archetype: explosive + AoE build."
+                options={[
+                  { value: "purge-hatcheries", label: "Purge Hatcheries", help: "Explosive structure deletion with swarm containment." },
+                ]}
+                value={hd2Input.missionName}
+                onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
+              />
+            </div>
+          </section>
 
           <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">Step 3</p>

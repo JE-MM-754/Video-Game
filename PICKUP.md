@@ -1,9 +1,9 @@
-# 🔄 DEVELOPMENT PICKUP - 2026-02-28 01:45 EST
+# 🔄 DEVELOPMENT PICKUP - 2026-03-01 17:45 EST
 
 ## 🎯 CURRENT STATE
-- **Last worked by:** MoneyMachine (OpenClaw Assistant)
+- **Last worked by:** Codex
 - **Branch:** main  
-- **Status:** Working prototype with critical UX issues
+- **Status:** Mission-specific HD2 calculator update complete, build/deploy ready
 
 ## 🏗️ WHAT'S WORKING
 - Next.js 15 application with TypeScript and Tailwind
@@ -13,19 +13,36 @@
 - Dark gaming theme optimized for mobile
 - Current patch compatibility (HD2 6.0.3, BL4 1.030)
 
-## 🚨 WHAT'S BROKEN (CRITICAL)
-- **Calculator state persistence:** User selections not preserved during navigation
-- **Build detail navigation:** Clicking "View Details" goes to wrong page
-- **Performance jittering:** Input lag on calculator selections  
-- **Typography:** Hard to read at 100% browser zoom
-- **Filter logic:** Recommendations don't match user inputs (shows bot builds when user selected bugs)
+## ✅ COMPLETED IN THIS UPDATE
+- Replaced HD2 calculator Step 2 with grouped real mission objectives:
+  - Wave Defense, Speed Run, Boss Hunt, Escort/Evacuation, Multi-Step Objective, Recon/Data, Destroy Structures
+- Added mission archetype mapping in recommendation logic:
+  - Wave Defense => crowd control + sentries
+  - Speed Run => mobility + AoE
+  - Boss Hunt => anti-heavy + precision
+  - Escort => shield + sustained fire
+  - Multi-Step => versatile + stun
+  - Recon => mobility + efficiency
+  - Destroy Structures => explosive + AoE
+- Added mission-aware scoring rules for required tools (sentries, Jump Pack, Eagle Airstrike, Quasar/Railgun, EMS Mortar, Guard Dog Rover, etc.)
+- Added/expanded Illuminate intelligence in `src/data/helldivers2-builds.json`:
+  - Full enemy context (Voteless, Fleshmobs, Watchers, Overseers)
+  - Shield-break guidance (explosive/arc priority)
+  - Illuminate mission coverage in database:
+    - Repel Invasion Fleet
+    - Eradicate Illuminate Forces
+    - Destroy Warp Ships
+    - Evacuate High-Value Assets
+  - Added new Illuminate build: `hd2-blitzer-fleet-control-603`
+- Added in-app meta note:
+  - Patch 6.0.3 update note with Bastion Tank and meta shift guidance
+- Confirmed production build passes: `npm run build`
 
 ## 🎯 NEXT PRIORITY TASKS
-1. **Fix calculator state persistence** (CRITICAL - users lose selections)
-2. **Redesign build detail views** (CRITICAL - current views unusable) 
-3. **Fix recommendation filtering** (CRITICAL - logic broken)
-4. **Improve typography/readability** (HIGH - UX issue)
-5. **Performance optimization** (HIGH - eliminate jittering)
+1. Apply same mission taxonomy to HD2 build browser filters for full consistency
+2. Add explicit UI display of matched mission archetype in recommendation cards
+3. Add targeted tests for mission-to-archetype mapping and score weighting
+4. Validate recommendations with extended live playtest data
 
 ## 📝 TECHNICAL CONTEXT
 - **Stack:** Next.js 15, TypeScript, Tailwind CSS, React
@@ -50,11 +67,13 @@
 
 ## 🎮 TESTING INSTRUCTIONS
 1. Run `npm run dev`
-2. Navigate to Helldivers 2 calculator
-3. Select: Terminids, Defense, Balanced playstyle
-4. Click on recommended build - should go directly to build details
-5. **Expected:** Build details for selected build
-6. **Actual:** Wrong page or loses user context
+2. Navigate to `/helldivers2/calculator`
+3. Verify Step 2 mission groups and options render (including Illuminate missions)
+4. Select same faction/difficulty/team/playstyle and switch mission between:
+   - `Repel Invasion Fleet`
+   - `Purge Hatcheries`
+5. Confirm recommendation ordering changes by mission archetype
+6. Run `npm run build` and confirm no TypeScript errors
 
 ## 📞 HANDOFF NOTES FOR NEXT AI
 - **Critical path:** Fix state persistence first - nothing else matters if users lose selections

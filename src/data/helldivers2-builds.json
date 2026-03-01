@@ -65,7 +65,6 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "secure-area",
       "launch-icbm"
     ]
   },
@@ -134,7 +133,7 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "eliminate-chargers"
+      "eliminate-charger"
     ]
   },
   {
@@ -200,7 +199,7 @@
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
     "patchCompatible": true,
     "missionFocus": [
-      "secure-area",
+      "launch-icbm",
       "evacuate-high-value-assets"
     ]
   },
@@ -268,7 +267,6 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "secure-area",
       "launch-icbm"
     ]
   },
@@ -336,7 +334,7 @@
     "sourceUrl": "https://steamcommunity.com/",
     "patchCompatible": true,
     "missionFocus": [
-      "secure-area",
+      "launch-icbm",
       "evacuate-high-value-assets"
     ]
   },
@@ -375,15 +373,23 @@
     "whyThisWorks": [
       "Purifier charged shots collapse Illuminate shields quickly.",
       "Grenade Pistol shuts down spawn ships before snowball phases.",
-      "Gas plus sentry controls Voteless flow during objective windows."
+      "Gas plus sentry controls Voteless flow during objective windows.",
+      "Illuminate shields require explosive or arc pressure before sustained DPS lands.",
+      "Watchers call reinforcements quickly, so Orbital Laser and Mortar timing are priority.",
+      "Voteless swarms demand layered crowd clear while Fleshmobs need anti-heavy focus."
     ],
-    "strategicContext": "Illuminate success depends on reinforcement denial and shield break efficiency, not raw burst. This setup optimizes that sequence.",
+    "strategicContext": "Patch 6.0.3 Illuminate intel: Voteless (melee hordes), Fleshmobs (tanky), Watchers (shield drones), and Overseers (ranged commanders). Break shields first with explosive or arc tools, then collapse priority targets.",
     "whenToUse": [
       "Illuminate fronts",
-      "Any mission with high spawn-ship pressure"
+      "Any mission with high spawn-ship pressure",
+      "Repel Invasion Fleet",
+      "Eradicate Illuminate Forces",
+      "Destroy Warp Ships",
+      "Evacuate High-Value Assets"
     ],
     "whenToAvoid": [
-      "Pure bot anti-armor routes"
+      "Pure bot anti-armor routes",
+      "Low-mobility anti-light-only loadouts"
     ],
     "advancedTactics": [
       "Ship priority: spawn ships first, then overseers, then cleanup.",
@@ -392,7 +398,9 @@
     "tags": [
       "support",
       "versatile",
-      "energy-counter"
+      "energy-counter",
+      "shield-break",
+      "anti-illuminate"
     ],
     "metaTier": "S",
     "teamCoordination": "medium",
@@ -404,8 +412,11 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "secure-area",
-      "launch-icbm"
+      "launch-icbm",
+      "repel-invasion-fleet",
+      "eradicate-illuminate-forces",
+      "destroy-warp-ships",
+      "evacuate-high-value-assets"
     ]
   },
   {
@@ -443,15 +454,23 @@
     "whyThisWorks": [
       "Eruptor strips landed ship shielding and chunks grouped Voteless waves.",
       "Thermite and orbital laser secure heavy breakpoints.",
-      "Supply pack offsets eruptor ammo strain in prolonged fights."
+      "Supply pack offsets eruptor ammo strain in prolonged fights.",
+      "Illuminate shields require explosive or arc pressure before sustained DPS lands.",
+      "Watchers call reinforcements quickly, so Orbital Laser and Mortar timing are priority.",
+      "Voteless swarms demand layered crowd clear while Fleshmobs need anti-heavy focus."
     ],
-    "strategicContext": "Explosive multi-purpose pressure is especially effective against grouped Illuminate formations and objective infrastructure.",
+    "strategicContext": "Patch 6.0.3 Illuminate intel: Voteless (melee hordes), Fleshmobs (tanky), Watchers (shield drones), and Overseers (ranged commanders). Break shields first with explosive or arc tools, then collapse priority targets.",
     "whenToUse": [
       "Difficulty 8-10 Illuminate missions",
-      "Duo eliminations"
+      "Duo eliminations",
+      "Repel Invasion Fleet",
+      "Eradicate Illuminate Forces",
+      "Destroy Warp Ships",
+      "Evacuate High-Value Assets"
     ],
     "whenToAvoid": [
-      "Ammo-starved public groups without supply support"
+      "Ammo-starved public groups without supply support",
+      "Low-mobility anti-light-only loadouts"
     ],
     "advancedTactics": [
       "Use Eruptor splash to stagger harvesters before laser follow-up.",
@@ -460,7 +479,9 @@
     "tags": [
       "aggressive",
       "anti-armor",
-      "objective"
+      "objective",
+      "shield-break",
+      "anti-illuminate"
     ],
     "metaTier": "A",
     "teamCoordination": "medium",
@@ -472,7 +493,11 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "eliminate-chargers"
+      "eliminate-charger",
+      "repel-invasion-fleet",
+      "eradicate-illuminate-forces",
+      "destroy-warp-ships",
+      "evacuate-high-value-assets"
     ]
   },
   {
@@ -510,15 +535,23 @@
     "whyThisWorks": [
       "Coyote explosive profile performs consistently into mixed Illuminate targets.",
       "Jump Pack enables objective-first repositioning against energy pressure.",
-      "Autocannon keeps anti-heavy coverage while remaining flexible."
+      "Autocannon keeps anti-heavy coverage while remaining flexible.",
+      "Illuminate shields require explosive or arc pressure before sustained DPS lands.",
+      "Watchers call reinforcements quickly, so Orbital Laser and Mortar timing are priority.",
+      "Voteless swarms demand layered crowd clear while Fleshmobs need anti-heavy focus."
     ],
-    "strategicContext": "This is the adaptable Illuminate option for players who need consistency over strict specialization.",
+    "strategicContext": "Patch 6.0.3 Illuminate intel: Voteless (melee hordes), Fleshmobs (tanky), Watchers (shield drones), and Overseers (ranged commanders). Break shields first with explosive or arc tools, then collapse priority targets.",
     "whenToUse": [
       "General Illuminate contracts",
-      "Mixed team experience"
+      "Mixed team experience",
+      "Repel Invasion Fleet",
+      "Eradicate Illuminate Forces",
+      "Destroy Warp Ships",
+      "Evacuate High-Value Assets"
     ],
     "whenToAvoid": [
-      "Pure heavy boss chains"
+      "Pure heavy boss chains",
+      "Low-mobility anti-light-only loadouts"
     ],
     "advancedTactics": [
       "Use jump resets to avoid long energy beam commits.",
@@ -527,7 +560,9 @@
     "tags": [
       "versatile",
       "speed",
-      "support"
+      "support",
+      "shield-break",
+      "anti-illuminate"
     ],
     "metaTier": "A",
     "teamCoordination": "low",
@@ -539,8 +574,11 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "secure-area",
-      "launch-icbm"
+      "launch-icbm",
+      "repel-invasion-fleet",
+      "eradicate-illuminate-forces",
+      "destroy-warp-ships",
+      "evacuate-high-value-assets"
     ]
   },
   {
@@ -607,7 +645,7 @@
     "sourceUrl": "https://fandomwire.com/",
     "patchCompatible": true,
     "missionFocus": [
-      "secure-area",
+      "launch-icbm",
       "evacuate-high-value-assets"
     ]
   },
@@ -676,7 +714,7 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "eliminate-chargers"
+      "eliminate-charger"
     ]
   },
   {
@@ -745,7 +783,7 @@
     "patchCompatible": true,
     "missionFocus": [
       "launch-icbm",
-      "retrieve-essential-personnel"
+      "emergency-evacuation"
     ]
   },
   {
@@ -813,7 +851,7 @@
     "patchCompatible": true,
     "missionFocus": [
       "launch-icbm",
-      "retrieve-essential-personnel"
+      "emergency-evacuation"
     ]
   },
   {
@@ -880,7 +918,7 @@
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
     "patchCompatible": true,
     "missionFocus": [
-      "secure-area",
+      "launch-icbm",
       "evacuate-high-value-assets"
     ]
   },
@@ -948,7 +986,6 @@
     "patchCompatible": true,
     "missionFocus": [
       "spread-democracy",
-      "secure-area",
       "launch-icbm"
     ]
   },
@@ -1016,7 +1053,7 @@
     "sourceUrl": "https://www.reddit.com/r/Helldivers/",
     "patchCompatible": true,
     "missionFocus": [
-      "secure-area",
+      "launch-icbm",
       "evacuate-high-value-assets"
     ]
   },
@@ -1083,7 +1120,7 @@
     "sourceUrl": "https://steamcommunity.com/",
     "patchCompatible": true,
     "missionFocus": [
-      "secure-area",
+      "launch-icbm",
       "evacuate-high-value-assets"
     ]
   },
@@ -1172,9 +1209,9 @@
       "lastUpdated": "2026-02-28"
     },
     "missionFocus": [
-      "eliminate-chargers",
+      "eliminate-charger",
       "spread-democracy",
-      "secure-area"
+      "launch-icbm"
     ]
   },
   {
@@ -1262,9 +1299,9 @@
       "lastUpdated": "2026-02-28"
     },
     "missionFocus": [
-      "eliminate-chargers",
+      "eliminate-charger",
       "spread-democracy",
-      "secure-area"
+      "launch-icbm"
     ]
   },
   {
@@ -1352,9 +1389,9 @@
       "lastUpdated": "2026-02-28"
     },
     "missionFocus": [
-      "eliminate-chargers",
+      "eliminate-charger",
       "spread-democracy",
-      "secure-area"
+      "launch-icbm"
     ]
   },
   {
@@ -1443,9 +1480,9 @@
       "lastUpdated": "2026-02-28"
     },
     "missionFocus": [
-      "eliminate-chargers",
+      "eliminate-charger",
       "spread-democracy",
-      "secure-area"
+      "launch-icbm"
     ]
   },
   {
@@ -1623,8 +1660,8 @@
       "lastUpdated": "2026-02-28"
     },
     "missionFocus": [
-      "secure-area",
-      "secure-civilian-assets"
+      "launch-icbm",
+      "evacuate-high-value-assets"
     ]
   },
   {
@@ -1700,8 +1737,7 @@
     "patchCompatible": true,
     "missionFocus": [
       "retrieve-valuable-data",
-      "extract-classified-data",
-      "extract-strategic-assets"
+      "enable-e-710-extraction"
     ],
     "effectiveness": {
       "hivelord": 60,
@@ -1714,5 +1750,78 @@
       "trending": "up",
       "lastUpdated": "2026-02-28"
     }
+  },
+  {
+    "id": "hd2-blitzer-fleet-control-603",
+    "name": "Blitzer Fleet Control",
+    "description": "Mission-optimized Illuminate defense build for Repel Invasion Fleet and Eradicate Illuminate Forces using arc stun + sustained sentry control.",
+    "creator": {
+      "id": "creator-claysthetics",
+      "name": "Claysthetics",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Claysthetics",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=32",
+      "credibilityScore": 92
+    },
+    "createdAt": "2026-02-14T15:00:00Z",
+    "lastUpdated": "2026-02-27T19:00:00Z",
+    "patchVersion": "6.0.3",
+    "faction": "illuminate",
+    "difficulty": "all",
+    "missionType": "defense",
+    "teamSize": "any",
+    "loadout": {
+      "primary": "ARC-12 Blitzer",
+      "secondary": "GP-31 Grenade Pistol",
+      "grenade": "Impact Grenade",
+      "stratagems": [
+        "Mortar Sentry",
+        "Orbital Laser",
+        "Shield Generator Pack",
+        "Eagle 500kg Bomb"
+      ],
+      "armor": "CE-07 Demolition Specialist",
+      "cape": "Aegis of Super Earth"
+    },
+    "whyThisWorks": [
+      "ARC-12 Blitzer stuns clustered Voteless and exposes shield windows for follow-up damage.",
+      "Orbital Laser auto-tracks Watchers while Mortar Sentry cleans reinforcement lanes.",
+      "500kg backup handles Warp Ship objectives and high-threat Fleshmob spikes."
+    ],
+    "strategicContext": "Patch 6.0.3 meta versus Illuminate favors shield break and control over raw DPS. This layout front-loads arc disruption and explosive finishers for fleet defense reliability.",
+    "whenToUse": [
+      "Repel Invasion Fleet",
+      "Eradicate Illuminate Forces",
+      "Destroy Warp Ships",
+      "Evacuate High-Value Assets"
+    ],
+    "whenToAvoid": [
+      "Stealth-only objective routes with minimal combat pressure"
+    ],
+    "advancedTactics": [
+      "Drop Mortar behind hard cover, then rotate Orbital Laser onto Watchers before committing 500kg to Warp Ship spawns."
+    ],
+    "tags": [
+      "support",
+      "versatile",
+      "shield-break",
+      "anti-illuminate",
+      "area-control"
+    ],
+    "metaTier": "S",
+    "teamCoordination": "medium",
+    "rating": 4.7,
+    "successRate": 88,
+    "views": 28410,
+    "communityValidation": 940,
+    "sourceUrl": "https://www.youtube.com/@Claysthetics",
+    "patchCompatible": true,
+    "missionFocus": [
+      "repel-invasion-fleet",
+      "eradicate-illuminate-forces",
+      "destroy-warp-ships",
+      "evacuate-high-value-assets"
+    ]
   }
 ]
