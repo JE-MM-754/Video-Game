@@ -96,6 +96,7 @@ export type RLTrainingData = {
 };
 
 const MASTER_KEY = "metaforge-rl-feedback";
+const EXPORT_KEY_PATTERNS = ["metaforge", "feedback", "rl-"];
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -118,6 +119,52 @@ function getSessionId() {
   const next = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   window.sessionStorage.setItem(key, next);
   return next;
+}
+
+export function exportFeedbackData(): ComprehensiveRLFeedback[] {
+  if (typeof window === "undefined") return [];
+
+  const keys = Object.keys(window.localStorage).filter((key) => EXPORT_KEY_PATTERNS.some((pattern) => key.includes(pattern)));
+  const rows: ComprehensiveRLFeedback[] = [];
+
+  for (const key of keys) {
+    const raw = window.localStorage.getItem(key);
+    if (!raw) continue;
+    try {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        for (const item of parsed) {
+          if (
+            item &&
+            typeof item === "object" &&
+            "buildId" in item &&
+            "missionName" in item &&
+            "userRating" in item &&
+            "timestamp" in item
+          ) {
+            rows.push(item as ComprehensiveRLFeedback);
+          }
+        }
+      }
+    } catch {
+      // Skip malformed localStorage segments.
+    }
+  }
+
+  return rows;
+}
+
+export function downloadFeedbackExport(filenamePrefix = "metaforge-feedback") {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  const data = exportFeedbackData();
+  const stamp = new Date().toISOString().split("T")[0];
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = window.URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = `${filenamePrefix}-${stamp}.json`;
+  anchor.click();
+  window.URL.revokeObjectURL(url);
 }
 
 export class RLFeedbackManager {

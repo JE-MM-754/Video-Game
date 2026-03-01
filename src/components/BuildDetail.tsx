@@ -9,6 +9,7 @@ import {
   type FeedbackEntry,
 } from "@/lib/feedback-analytics";
 import {
+  downloadFeedbackExport,
   RLFeedbackManager,
   type RLEnemyType,
   type RLFeedbackDifficulty,
@@ -518,6 +519,13 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
                 className="inline-flex min-h-10 items-center rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {feedbackSaved ? "Feedback Saved" : feedbackRating === 0 ? "Rate The Build First" : "Save Feedback"}
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadFeedbackExport("metaforge-intelligence")}
+                className="inline-flex min-h-10 items-center rounded-lg border border-slate-600 px-3 py-2 text-xs font-semibold text-slate-100 hover:border-blue-400"
+              >
+                Export Intelligence Data
               </button>
             </div>
             {feedbackSummary && (
