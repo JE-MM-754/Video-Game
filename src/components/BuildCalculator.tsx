@@ -318,12 +318,12 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     if (props.gameType === "helldivers2") {
       const next: HD2FormState = {};
 
-      const faction = searchParams.get("faction");
-      const missionName = searchParams.get("mission");
-      const difficulty = searchParams.get("difficulty");
-      const teamSize = searchParams.get("team");
-      const playstyle = searchParams.get("style");
-      const hiveLordFromQuery = searchParams.get("hiveLord");
+      const faction = searchParams?.get("faction") || null;
+      const missionName = searchParams?.get("mission") || null;
+      const difficulty = searchParams?.get("difficulty") || null;
+      const teamSize = searchParams?.get("team") || null;
+      const playstyle = searchParams?.get("style") || null;
+      const hiveLordFromQuery = searchParams?.get("hiveLord") || null;
 
       if (isAllowed(faction, hd2Keys.faction)) next.faction = faction;
       if (isAllowed(missionName, hd2Keys.missionName)) next.missionName = missionName;
@@ -336,10 +336,10 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     } else {
       const next: BL4FormState = {};
 
-      const playerClass = searchParams.get("class");
-      const buildType = searchParams.get("type");
-      const difficulty = searchParams.get("difficulty");
-      const playstyle = searchParams.get("style");
+      const playerClass = searchParams?.get("class") || null;
+      const buildType = searchParams?.get("type") || null;
+      const difficulty = searchParams?.get("difficulty") || null;
+      const playstyle = searchParams?.get("style") || null;
 
       if (isAllowed(playerClass, bl4Keys.class)) next.class = playerClass;
       if (isAllowed(buildType, bl4Keys.buildType)) next.buildType = buildType;
@@ -351,7 +351,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
   }, [props.gameType, searchParams]);
 
   useEffect(() => {
-    const queryBuild = searchParams.get("build");
+    const queryBuild = searchParams?.get("build") || null;
     setSelectedBuildId(queryBuild ?? null);
   }, [searchParams]);
 

@@ -135,11 +135,11 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const onSaveFeedback = () => {
     if (!isHD2Build(build)) return;
     if (feedbackRating === 0) return;
-    const missionName = searchParams.get("mission") ?? "unknown-mission";
-    const enemyFromQuery = searchParams.get("faction");
-    const teamFromQuery = searchParams.get("team");
-    const hiveLordFromQuery = searchParams.get("hiveLord");
-    const difficultyFromQuery = searchParams.get("difficulty");
+    const missionName = searchParams?.get("mission") ?? "unknown-mission";
+    const enemyFromQuery = searchParams?.get("faction");
+    const teamFromQuery = searchParams?.get("team");
+    const hiveLordFromQuery = searchParams?.get("hiveLord");
+    const difficultyFromQuery = searchParams?.get("difficulty");
     const teamSize =
       teamFromQuery === "squad" ? 4 : teamFromQuery === "duo" ? 2 : teamFromQuery === "solo" ? 1 : teamFromQuery === "randoms" ? 1 : 1;
     const enemyType: RLEnemyType =

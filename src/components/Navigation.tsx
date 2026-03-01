@@ -122,7 +122,7 @@ export default function Navigation() {
             </Link>
           </li>
           {gameMenus.map((menu) => {
-            const active = pathname === menu.base || pathname.startsWith(`${menu.base}/`);
+            const active = pathname === menu.base || pathname?.startsWith(`${menu.base}/`);
             return (
               <li key={menu.base} className="group relative">
                 <button

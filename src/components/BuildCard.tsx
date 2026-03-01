@@ -107,7 +107,7 @@ export default function BuildCard({ build, gameType, isCompared, onToggleCompare
   const creatorBadges = getCreatorBadges(build);
 
   useEffect(() => {
-    const queryBuild = searchParams.get("build");
+    const queryBuild = searchParams?.get("build");
     if (queryBuild === build.id) setDetailOpen(true);
   }, [build.id, searchParams]);
 
