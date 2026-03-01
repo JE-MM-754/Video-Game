@@ -18,6 +18,7 @@ export interface StrategicIntel {
   whenToUse: string[];
   whenToAvoid?: string[];
   advancedTactics?: string[];
+  optimizationTips?: string[];
   strategyPhases?: {
     phase1: string;
     phase2: string;
@@ -109,6 +110,12 @@ export interface BL4Build extends StrategicIntel {
   communityValidation: number;
   sourceUrl?: string;
   patchCompatible: boolean;
+  moxsyValidated?: boolean;
+  patchStatus?: "current" | "adapted" | "nerfed";
+  complexity?: "beginner" | "intermediate" | "advanced";
+  gearDependency?: "low" | "medium" | "high";
+  damageBenchmark?: string;
+  performanceNotes?: string[];
 }
 
 export interface HD2CalculatorInput {

@@ -104,7 +104,8 @@ export default function BuildBrowser(props: BuildBrowserProps) {
         build.name.toLowerCase().includes(query) ||
         build.creator.name.toLowerCase().includes(query) ||
         build.description.toLowerCase().includes(query) ||
-        build.strategicContext.toLowerCase().includes(query);
+        build.strategicContext.toLowerCase().includes(query) ||
+        ("damageBenchmark" in build && (build.damageBenchmark ?? "").toLowerCase().includes(query));
 
       const matchesPrimary =
         primaryValue === "all" ||

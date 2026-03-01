@@ -78,6 +78,9 @@ function getCreatorBadges(build: HD2Build | BL4Build) {
   if (creator.includes("BuzzLiteBeer")) {
     badges.push({ label: "Meta Analysis", className: "border-orange-500/40 bg-orange-500/20 text-orange-200" });
   }
+  if (creator.includes("Moxsy")) {
+    badges.push({ label: "Moxsy Intelligence", className: "border-red-500/40 bg-red-500/20 text-red-200" });
+  }
 
   if (isHD2Build(build) && build.metaRating?.february2026 && build.metaRating.february2026 >= 90) {
     badges.push({ label: "Meta S-Tier", className: "border-amber-400/40 bg-amber-500/20 text-amber-200" });
@@ -147,6 +150,11 @@ export default function BuildCard({ build, gameType, isCompared, onToggleCompare
             <span className="rounded-full border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200">
               {build.buildType}
             </span>
+            {build.damageBenchmark && (
+              <span className="rounded-full border border-red-400/40 bg-red-500/20 px-2.5 py-1 text-xs font-semibold text-red-200">
+                {build.damageBenchmark}
+              </span>
+            )}
           </>
         )}
       </div>

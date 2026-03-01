@@ -186,6 +186,16 @@ function buildBL4Reasons(build: BL4Build, input: BL4CalculatorInput): string[] {
     reasons.push(`Playstyle match on ${input.playstyle}.`);
   }
 
+  if (build.moxsyValidated) {
+    reasons.push("Moxsy-validated build intelligence with active community adoption.");
+  }
+  if (build.damageBenchmark) {
+    reasons.push(`Performance benchmark: ${build.damageBenchmark}.`);
+  }
+  if (build.patchStatus === "adapted") {
+    reasons.push("Post-nerf adapted for stronger patch resilience.");
+  }
+
   reasons.push(`${build.rating.toFixed(1)}★ rating, ${build.successRate}% success, ${build.creator.credibilityScore} creator credibility.`);
   return reasons;
 }

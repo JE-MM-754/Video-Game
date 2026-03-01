@@ -20,12 +20,20 @@
     "difficulty": "uvh6",
     "skillTree": {
       "actionSkill": "Dead Ringer",
-      "keySkills": ["Kill Skill Cascade", "Critical Reservoir", "Passive Surge"],
+      "keySkills": [
+        "Kill Skill Cascade",
+        "Critical Reservoir",
+        "Passive Surge"
+      ],
       "capstone": "Terminal Flow",
       "skillPoints": 70
     },
     "gear": {
-      "weapons": ["High-crit AR", "High-crit Pistol", "Burst SMG"],
+      "weapons": [
+        "High-crit AR",
+        "High-crit Pistol",
+        "Burst SMG"
+      ],
       "shield": "UVH Barrier Matrix",
       "grenadeMod": "Critical Flux Core",
       "classMod": "Kill Skill Engine",
@@ -37,13 +45,23 @@
       "Simple execution keeps DPS stable under pressure."
     ],
     "strategicContext": "This is the most broadly adopted Vex progression-to-endgame bridge because it minimizes execution tax while preserving top-tier scaling.",
-    "whenToUse": ["UVH6 progression", "Solo endgame farming", "Low-error consistency play"],
-    "whenToAvoid": ["Niche action-skill burst showcases"],
+    "whenToUse": [
+      "UVH6 progression",
+      "Solo endgame farming",
+      "Low-error consistency play"
+    ],
+    "whenToAvoid": [
+      "Niche action-skill burst showcases"
+    ],
     "advancedTactics": [
       "Prioritize crit windows over overextending for one extra kill chain.",
       "Refresh kill-skill stacks before arena transition waves."
     ],
-    "tags": ["damage", "endgame", "versatile"],
+    "tags": [
+      "damage",
+      "endgame",
+      "versatile"
+    ],
     "metaTier": "S",
     "teamCoordination": "low",
     "rating": 4.9,
@@ -74,12 +92,20 @@
     "difficulty": "uvh6",
     "skillTree": {
       "actionSkill": "Mantra Shift",
-      "keySkills": ["Weapon Adaptive Core", "Trigger Harmony", "Kinetic Loop"],
+      "keySkills": [
+        "Weapon Adaptive Core",
+        "Trigger Harmony",
+        "Kinetic Loop"
+      ],
       "capstone": "Meta Convergence",
       "skillPoints": 70
     },
     "gear": {
-      "weapons": ["Any Legendary AR", "Any Legendary SMG", "Any Legendary Pistol"],
+      "weapons": [
+        "Any Legendary AR",
+        "Any Legendary SMG",
+        "Any Legendary Pistol"
+      ],
       "shield": "Adaptive Bastion",
       "grenadeMod": "Multi-Trigger Node",
       "classMod": "Mantra Driver",
@@ -91,13 +117,22 @@
       "Low lock-in makes iterative optimization practical."
     ],
     "strategicContext": "The post-1.030 weapon pool rewards builds that adapt to strong rolls quickly. This setup keeps that flexibility without sacrificing endgame floor.",
-    "whenToUse": ["Loot-dependent endgame progression", "Frequent weapon swaps"],
-    "whenToAvoid": ["Dedicated speed-clear records with fixed loadout"],
+    "whenToUse": [
+      "Loot-dependent endgame progression",
+      "Frequent weapon swaps"
+    ],
+    "whenToAvoid": [
+      "Dedicated speed-clear records with fixed loadout"
+    ],
     "advancedTactics": [
       "Re-tune one passive node each time your core weapon archetype changes.",
       "Use shield uptime as your damage tempo indicator."
     ],
-    "tags": ["damage", "versatile", "endgame"],
+    "tags": [
+      "damage",
+      "versatile",
+      "endgame"
+    ],
     "metaTier": "S",
     "teamCoordination": "low",
     "rating": 4.7,
@@ -128,12 +163,20 @@
     "difficulty": "uvh6",
     "skillTree": {
       "actionSkill": "Peacebreaker Cannons",
-      "keySkills": ["Lateral Plinking", "Ricochet Engine", "Chain Stability"],
+      "keySkills": [
+        "Lateral Plinking",
+        "Ricochet Engine",
+        "Chain Stability"
+      ],
       "capstone": "Overbounce",
       "skillPoints": 70
     },
     "gear": {
-      "weapons": ["Double-Ought Autoshot", "Elemental Sidearm", "Crit Rifle"],
+      "weapons": [
+        "Double-Ought Autoshot",
+        "Elemental Sidearm",
+        "Crit Rifle"
+      ],
       "shield": "Deflection Grid",
       "grenadeMod": "Bounce Catalyst",
       "classMod": "Ricochet Circuit",
@@ -145,13 +188,22 @@
       "Patch 1.030 made ricochet interactions more reliable."
     ],
     "strategicContext": "Rafa excels when ricochet uptime is maximized and cannon cadence covers elite windows. This build is the current reference implementation.",
-    "whenToUse": ["Mob-heavy UVH content", "Arena density farming"],
-    "whenToAvoid": ["Pure single-target burst races"],
+    "whenToUse": [
+      "Mob-heavy UVH content",
+      "Arena density farming"
+    ],
+    "whenToAvoid": [
+      "Pure single-target burst races"
+    ],
     "advancedTactics": [
       "Maintain Lateral Plinking before entering new density pockets.",
       "Angle opening shots off geometry for immediate multi-hit chains."
     ],
-    "tags": ["damage", "speed", "endgame"],
+    "tags": [
+      "damage",
+      "speed",
+      "endgame"
+    ],
     "metaTier": "S",
     "teamCoordination": "medium",
     "rating": 4.8,
@@ -182,12 +234,20 @@
     "difficulty": "uvh",
     "skillTree": {
       "actionSkill": "Dash Barrage",
-      "keySkills": ["Splash Mobility", "Slide Reload", "Momentum Burn"],
+      "keySkills": [
+        "Splash Mobility",
+        "Slide Reload",
+        "Momentum Burn"
+      ],
       "capstone": "Rushed Payload",
       "skillPoints": 64
     },
     "gear": {
-      "weapons": ["Splash SMG", "Rocket Pistol", "Fast Shotgun"],
+      "weapons": [
+        "Splash SMG",
+        "Rocket Pistol",
+        "Fast Shotgun"
+      ],
       "shield": "Velocity Guard",
       "grenadeMod": "Splash Bloom",
       "classMod": "Dash Injector",
@@ -199,13 +259,22 @@
       "Flexible weapons allow quick adaptation to map-specific spawns."
     ],
     "strategicContext": "Farm efficiency is mostly movement and reset speed; this build optimizes both while preserving safe clear thresholds.",
-    "whenToUse": ["Loot farming", "Mid-UVH route loops"],
-    "whenToAvoid": ["Stationary boss phases"],
+    "whenToUse": [
+      "Loot farming",
+      "Mid-UVH route loops"
+    ],
+    "whenToAvoid": [
+      "Stationary boss phases"
+    ],
     "advancedTactics": [
       "Chain dash windows with reload cancels between combat pockets.",
       "Use splash pre-fire around corners to maintain route momentum."
     ],
-    "tags": ["speed", "damage", "farming"],
+    "tags": [
+      "speed",
+      "damage",
+      "farming"
+    ],
     "metaTier": "A",
     "teamCoordination": "low",
     "rating": 4.4,
@@ -213,7 +282,18 @@
     "views": 35810,
     "communityValidation": 670,
     "sourceUrl": "https://www.youtube.com/@Moxsy",
-    "patchCompatible": true
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "current",
+    "complexity": "intermediate",
+    "gearDependency": "medium",
+    "damageBenchmark": "13M-17M route DPS",
+    "performanceNotes": [
+      "Strong route velocity with moderate boss ceiling."
+    ],
+    "optimizationTips": [
+      "Maintain movement buff uptime between packs."
+    ]
   },
   {
     "id": "bl4-horba-heavy-ordnance-ricochet-bananza",
@@ -236,12 +316,21 @@
     "difficulty": "uvh6",
     "skillTree": {
       "actionSkill": "Scourge",
-      "keySkills": ["Tail of the Comet", "Blackout", "Primal Surge", "Scorched Kairos"],
+      "keySkills": [
+        "Tail of the Comet",
+        "Blackout",
+        "Primal Surge",
+        "Scorched Kairos"
+      ],
       "capstone": "Potential Overrun",
       "skillPoints": 70
     },
     "gear": {
-      "weapons": ["Honey Bunches", "Watts 4 Dinner", "Secondary utility launcher"],
+      "weapons": [
+        "Honey Bunches",
+        "Watts 4 Dinner",
+        "Secondary utility launcher"
+      ],
       "shield": "Super Soldier",
       "grenadeMod": "Shock Charge Matrix",
       "classMod": "Icebringer",
@@ -253,13 +342,24 @@
       "Scourge and Firewall keep survivability and multiplicative damage online."
     ],
     "strategicContext": "HORBA is the benchmark Amon package for true UVH6 because it combines sustainable ammo economy with top-end scaling interactions.",
-    "whenToUse": ["True UVH6 pushes", "Coordinated endgame arena clears"],
-    "whenToAvoid": ["Early leveling", "Low-gear accounts"],
+    "whenToUse": [
+      "True UVH6 pushes",
+      "Coordinated endgame arena clears"
+    ],
+    "whenToAvoid": [
+      "Early leveling",
+      "Low-gear accounts"
+    ],
     "advancedTactics": [
       "Trigger status stacks before ordnance burst windows for peak double-dip value.",
       "Switch to Onslaught variant for mobbing maps with long travel segments."
     ],
-    "tags": ["tank", "damage", "endgame", "boss"],
+    "tags": [
+      "tank",
+      "damage",
+      "endgame",
+      "boss"
+    ],
     "metaTier": "S+",
     "teamCoordination": "medium",
     "rating": 5,
@@ -290,12 +390,21 @@
     "difficulty": "uvh6",
     "skillTree": {
       "actionSkill": "Flux Generator",
-      "keySkills": ["Group Study", "Control Group", "Sustained Reaction", "Potential Transference"],
+      "keySkills": [
+        "Group Study",
+        "Control Group",
+        "Sustained Reaction",
+        "Potential Transference"
+      ],
       "capstone": "Potential Transference",
       "skillPoints": 70
     },
     "gear": {
-      "weapons": ["Cryo AR", "DOT SMG", "Support Pistol"],
+      "weapons": [
+        "Cryo AR",
+        "DOT SMG",
+        "Support Pistol"
+      ],
       "shield": "Overshield Conductor",
       "grenadeMod": "Cryo Pulse Emitter",
       "classMod": "Field Architect",
@@ -307,13 +416,22 @@
       "Teleport capstone allows tactical field relocation and revives."
     ],
     "strategicContext": "Harlowe's strongest identity in 1.030 is persistent battlefield advantage rather than burst. This build maximizes that identity.",
-    "whenToUse": ["Team-endgame pushes", "Sustained objective arenas"],
-    "whenToAvoid": ["Pure speedruns where setup time is costly"],
+    "whenToUse": [
+      "Team-endgame pushes",
+      "Sustained objective arenas"
+    ],
+    "whenToAvoid": [
+      "Pure speedruns where setup time is costly"
+    ],
     "advancedTactics": [
       "Maintain 4-6 Group Study stacks before elite spawn triggers.",
       "Relocate field proactively to next objective lane."
     ],
-    "tags": ["support", "endgame", "tank"],
+    "tags": [
+      "support",
+      "endgame",
+      "tank"
+    ],
     "metaTier": "S",
     "teamCoordination": "high",
     "rating": 4.8,
@@ -344,12 +462,20 @@
     "difficulty": "normal",
     "skillTree": {
       "actionSkill": "Phase Phamiliar",
-      "keySkills": ["Companion Damage", "Kinetic Crit Boost", "Sustain Node"],
+      "keySkills": [
+        "Companion Damage",
+        "Kinetic Crit Boost",
+        "Sustain Node"
+      ],
       "capstone": "Symbiotic Apex",
       "skillPoints": 45
     },
     "gear": {
-      "weapons": ["Any high-crit rifle", "SMG", "Pistol"],
+      "weapons": [
+        "Any high-crit rifle",
+        "SMG",
+        "Pistol"
+      ],
       "shield": "Progression Guard",
       "grenadeMod": "Starter Shock Pod",
       "classMod": "Companion Trainer",
@@ -361,13 +487,22 @@
       "Low gear dependency keeps pace consistent from 1-65."
     ],
     "strategicContext": "This is the safest Vex leveling route for players who want smooth pathing into competitive endgame builds.",
-    "whenToUse": ["Fresh characters", "Campaign-to-endgame transition"],
-    "whenToAvoid": ["Players specifically training action-skill execution"],
+    "whenToUse": [
+      "Fresh characters",
+      "Campaign-to-endgame transition"
+    ],
+    "whenToAvoid": [
+      "Players specifically training action-skill execution"
+    ],
     "advancedTactics": [
       "Keep companion in frontline while you angle crit farming lanes.",
       "Prioritize survivability nodes until mid-campaign gear stabilizes."
     ],
-    "tags": ["support", "leveling", "damage"],
+    "tags": [
+      "support",
+      "leveling",
+      "damage"
+    ],
     "metaTier": "S",
     "teamCoordination": "low",
     "rating": 4.6,
@@ -398,12 +533,20 @@
     "difficulty": "normal",
     "skillTree": {
       "actionSkill": "CHROMA Accelerator",
-      "keySkills": ["Cryo Expansion", "Field Uptime", "Midline Control"],
+      "keySkills": [
+        "Cryo Expansion",
+        "Field Uptime",
+        "Midline Control"
+      ],
       "capstone": "Accelerator Core",
       "skillPoints": 44
     },
     "gear": {
-      "weapons": ["Cryo AR", "Cryo SMG", "Reliable sidearm"],
+      "weapons": [
+        "Cryo AR",
+        "Cryo SMG",
+        "Reliable sidearm"
+      ],
       "shield": "Starter Flux Barrier",
       "grenadeMod": "Cryo Pocket Nuke",
       "classMod": "Accelerator Tuner",
@@ -415,13 +558,22 @@
       "Simple action loop makes campaign pacing efficient."
     ],
     "strategicContext": "For new Harlowe progression, action-skill consistency matters more than theoretical DPS peaks.",
-    "whenToUse": ["Early campaign", "Solo progression"],
-    "whenToAvoid": ["UVH6 endgame testing"],
+    "whenToUse": [
+      "Early campaign",
+      "Solo progression"
+    ],
+    "whenToAvoid": [
+      "UVH6 endgame testing"
+    ],
     "advancedTactics": [
       "Drop CHROMA at choke entries and pull groups through it.",
       "Reserve cooldown for elite waves rather than single targets."
     ],
-    "tags": ["support", "leveling", "versatile"],
+    "tags": [
+      "support",
+      "leveling",
+      "versatile"
+    ],
     "metaTier": "A",
     "teamCoordination": "low",
     "rating": 4.3,
@@ -452,12 +604,20 @@
     "difficulty": "uvh",
     "skillTree": {
       "actionSkill": "Ordnance Surge",
-      "keySkills": ["Heavy Prep", "Ammo Return", "Blast Sustain"],
+      "keySkills": [
+        "Heavy Prep",
+        "Ammo Return",
+        "Blast Sustain"
+      ],
       "capstone": "Foundry Pulse",
       "skillPoints": 52
     },
     "gear": {
-      "weapons": ["Any launcher", "Splash rifle", "Backup pistol"],
+      "weapons": [
+        "Any launcher",
+        "Splash rifle",
+        "Backup pistol"
+      ],
       "shield": "Blast Absorb Plate",
       "grenadeMod": "Cluster Burst",
       "classMod": "Ordnance Initiate",
@@ -469,13 +629,23 @@
       "High damage rewards positioning discipline early."
     ],
     "strategicContext": "Not the easiest leveling route, but best for players committed to high-end Amon ordnance play later.",
-    "whenToUse": ["Experienced players", "Amon mains targeting HORBA"],
-    "whenToAvoid": ["Brand new players", "Low-gear safety runs"],
+    "whenToUse": [
+      "Experienced players",
+      "Amon mains targeting HORBA"
+    ],
+    "whenToAvoid": [
+      "Brand new players",
+      "Low-gear safety runs"
+    ],
     "advancedTactics": [
       "Use terrain to offset self-damage risk while leveling launchers.",
       "Prioritize ammo economy nodes before pure damage nodes."
     ],
-    "tags": ["tank", "damage", "leveling"],
+    "tags": [
+      "tank",
+      "damage",
+      "leveling"
+    ],
     "metaTier": "B",
     "teamCoordination": "medium",
     "rating": 3.9,
@@ -484,5 +654,607 @@
     "communityValidation": 360,
     "sourceUrl": "https://www.reddit.com/r/Borderlands/",
     "patchCompatible": true
+  },
+  {
+    "id": "bl4-moxsy-vex-bleed-witch",
+    "name": "Bleed Witch VEX (Moxsy)",
+    "description": "Moxsy's flagship VEX bleed scaler adapted for post-nerf boss deletion and UVH6 clears.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-09-12T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "vex",
+    "buildType": "boss-killing",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Dead Ringer",
+      "keySkills": [
+        "Hemorrhage Loop",
+        "Occult Pressure",
+        "Witch's Covenant",
+        "Blood Relay"
+      ],
+      "capstone": "Cataclysmic Tether",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": [
+        "Bleed-Stack SMG",
+        "Curse Dagger",
+        "Boss Burst Shotgun"
+      ],
+      "shield": "Ritual Warding Shell",
+      "grenadeMod": "Hex Bleed Capsule",
+      "classMod": "Blood Hex Binder",
+      "artifact": "Witch's Sigil"
+    },
+    "whyThisWorks": [
+      "Bleed amplification front-loads boss health bars when stacks are pre-ramped.",
+      "Dead Ringer cycling creates repeatable burst windows instead of one risky all-in.",
+      "Post-nerf tuning keeps kill-time competitive without crit-knife dependency."
+    ],
+    "strategicContext": "Still one of the strongest VEX boss-kill templates when piloted correctly; community considers it high-ceiling but patch-resilient after adaptation.",
+    "whenToUse": [
+      "UVH6 boss farms",
+      "Raid-style single target encounters",
+      "Experienced VEX players optimizing kill-time"
+    ],
+    "whenToAvoid": [
+      "Beginner progression runs with low gear stability"
+    ],
+    "advancedTactics": [
+      "Pre-stack bleed on adds before swapping to boss burst cycle.",
+      "Time Dead Ringer exits with curse proc windows for peak burst."
+    ],
+    "optimizationTips": [
+      "Prioritize status-effect scaling rolls on artifact/class mod.",
+      "Maintain 2-weapon rotation so bleed uptime never drops."
+    ],
+    "tags": [
+      "damage",
+      "boss-killing",
+      "endgame",
+      "bleed",
+      "moxsy"
+    ],
+    "metaTier": "S+",
+    "teamCoordination": "medium",
+    "rating": 4.9,
+    "successRate": 94,
+    "views": 128400,
+    "communityValidation": 2840,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "adapted",
+    "complexity": "advanced",
+    "gearDependency": "high",
+    "damageBenchmark": "20M+ burst capable",
+    "performanceNotes": [
+      "Documented one-shot style boss sequences in optimized windows.",
+      "Top-tier single target; moderate execution tax."
+    ]
+  },
+  {
+    "id": "bl4-moxsy-vex-curse-bleed",
+    "name": "Curse Bleed VEX (Moxsy)",
+    "description": "Post-Halloween patch VEX adaptation that preserved top-tier bleed scaling with safer execution.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-10-23T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "vex",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Dead Ringer",
+      "keySkills": [
+        "Curse Engine",
+        "Sanguine Echo",
+        "Hex Relay",
+        "Occult Momentum"
+      ],
+      "capstone": "Crimson Spiral",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": [
+        "Curse SMG",
+        "Bleed Pistol",
+        "DOT Backup AR"
+      ],
+      "shield": "Hex Barrier",
+      "grenadeMod": "Curse Injector",
+      "classMod": "Sanguine Architect",
+      "artifact": "Red Spiral Totem"
+    },
+    "whyThisWorks": [
+      "Curse interactions maintain high DPS after crit-knife exploit nerfs.",
+      "Lower mechanical burden than full one-shot variants.",
+      "Scales well in UVH6 mixed packs and boss transitions."
+    ],
+    "strategicContext": "Community-standard post-nerf VEX setup: less explosive than launch Bleed Witch, but far more stable across patches and encounters.",
+    "whenToUse": [
+      "General UVH6 clears",
+      "Boss + add hybrid encounters",
+      "Patch-stable VEX progression"
+    ],
+    "whenToAvoid": [
+      "Speedrun routes requiring single-window nukes"
+    ],
+    "advancedTactics": [
+      "Refresh curse stacks before elite spawns, not after.",
+      "Use add packs to rebuild tempo before boss re-engage."
+    ],
+    "optimizationTips": [
+      "Favor cooldown and curse-duration stats over raw crit chance.",
+      "Run one flexible weapon slot for map-specific resistance checks."
+    ],
+    "tags": [
+      "damage",
+      "endgame",
+      "bleed",
+      "versatile",
+      "moxsy"
+    ],
+    "metaTier": "S",
+    "teamCoordination": "low",
+    "rating": 4.8,
+    "successRate": 93,
+    "views": 104200,
+    "communityValidation": 2310,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "adapted",
+    "complexity": "intermediate",
+    "gearDependency": "medium",
+    "damageBenchmark": "18M-22M sustained windows",
+    "performanceNotes": [
+      "High meta durability after exploit nerf wave."
+    ]
+  },
+  {
+    "id": "bl4-moxsy-vex-no-crit-knife",
+    "name": "No Crit Knife VEX (Moxsy)",
+    "description": "Intricate VEX build designed to remove crit-knife exploit reliance while retaining UVH6 output.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-10-30T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "vex",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Dead Ringer",
+      "keySkills": [
+        "Non-Crit Cascade",
+        "Knife Detach",
+        "Hex Recovery",
+        "Punishment Loop"
+      ],
+      "capstone": "Ritual Overclock",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": [
+        "Status SMG",
+        "Burst Pistol",
+        "Knife Synergy Shotgun"
+      ],
+      "shield": "Adaptive Hex Shell",
+      "grenadeMod": "Chain Rupture Orb",
+      "classMod": "Exploitless Conductor",
+      "artifact": "Ringer Catalyst"
+    },
+    "whyThisWorks": [
+      "Avoids exploit dependency that developers have targeted repeatedly.",
+      "Keeps competitive UVH6 damage through systemic scaling paths.",
+      "More future-proof for ongoing balance changes."
+    ],
+    "strategicContext": "Moxsy's long-term stability pick for VEX players who want high output without betting on exploitable mechanics surviving patches.",
+    "whenToUse": [
+      "Players prioritizing patch longevity",
+      "UVH6 progression without exploit setups"
+    ],
+    "whenToAvoid": [
+      "New players uncomfortable with intricate rotations"
+    ],
+    "advancedTactics": [
+      "Treat action-skill timing as reset logic, not raw burst button.",
+      "Practice stack maintenance on test arenas before boss runs."
+    ],
+    "optimizationTips": [
+      "Track patch notes for indirect status-scaling changes.",
+      "Use practice loops to reduce rotation drop-offs."
+    ],
+    "tags": [
+      "damage",
+      "endgame",
+      "versatile",
+      "moxsy"
+    ],
+    "metaTier": "S",
+    "teamCoordination": "low",
+    "rating": 4.7,
+    "successRate": 91,
+    "views": 96200,
+    "communityValidation": 1980,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "adapted",
+    "complexity": "advanced",
+    "gearDependency": "medium",
+    "damageBenchmark": "15M-20M consistent output",
+    "performanceNotes": [
+      "Lower patch-risk profile than exploit-centered alternatives."
+    ]
+  },
+  {
+    "id": "bl4-moxsy-rafa-peacebreaker-sniper",
+    "name": "Rafa Peacebreaker Sniper (Moxsy)",
+    "description": "UVH6 Rafa sniper build centered on Peacebreaker Cannons and precision burst sequencing.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-11-06T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "rafa",
+    "buildType": "boss-killing",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Peacebreaker Cannons",
+      "keySkills": [
+        "Longline Focus",
+        "Sniper Loop",
+        "Cannon Sustain",
+        "Kill Corridor"
+      ],
+      "capstone": "Deadeye Cascade",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": [
+        "Legendary Sniper Rifle",
+        "Rail Sidearm",
+        "Boss Burst Launcher"
+      ],
+      "shield": "Precision Deflector",
+      "grenadeMod": "Weakpoint Marker",
+      "classMod": "Peacebreaker Scope Core",
+      "artifact": "Ballistics Relay"
+    },
+    "whyThisWorks": [
+      "Extremely high weak-point burst for UVH6 bosses.",
+      "Cannons cover movement windows where sniper uptime drops.",
+      "Great fit for teams needing dedicated elite delete role."
+    ],
+    "strategicContext": "Core Moxsy Rafa endgame recommendation for players comfortable with precision aiming and target-priority discipline.",
+    "whenToUse": [
+      "UVH6 bosses and elite-heavy encounters",
+      "Co-op teams with established frontline control"
+    ],
+    "whenToAvoid": [
+      "High-chaos mobbing where sight lines are unstable"
+    ],
+    "advancedTactics": [
+      "Pre-angle cannon lanes before sniper commitment.",
+      "Rotate to sidearm during forced movement to maintain DPS continuity."
+    ],
+    "optimizationTips": [
+      "Stack weak-point and handling stats over reload speed.",
+      "Anchor around cover to reduce aim disruption."
+    ],
+    "tags": [
+      "damage",
+      "boss-killing",
+      "endgame",
+      "speed",
+      "moxsy"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "medium",
+    "rating": 4.6,
+    "successRate": 89,
+    "views": 88400,
+    "communityValidation": 1710,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "current",
+    "complexity": "advanced",
+    "gearDependency": "high",
+    "damageBenchmark": "20M+ crit burst capable",
+    "performanceNotes": [
+      "Can spike higher with perfect weak-point loops."
+    ]
+  },
+  {
+    "id": "bl4-moxsy-rafa-slash-n-dash",
+    "name": "Rafa Slash n Dash Melee (Moxsy)",
+    "description": "Arc-Knives melee Rafa build with full green-tree tempo for UVH6 close-range clears.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-11-15T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "rafa",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Arc-Knives",
+      "keySkills": [
+        "Dash Cleave",
+        "Greenline Momentum",
+        "Bleed Trail",
+        "Knife Return"
+      ],
+      "capstone": "Stormline Finisher",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": [
+        "Arc-Knife Sidearm",
+        "Melee Amp Shotgun",
+        "Mobility SMG"
+      ],
+      "shield": "Close Quarters Bulwark",
+      "grenadeMod": "Gap Closer Pulse",
+      "classMod": "Dashblade Core",
+      "artifact": "Melee Surge Charm"
+    },
+    "whyThisWorks": [
+      "Delivers top-tier tempo in dense maps with short travel distances.",
+      "Green-tree mobility keeps uptime high despite melee risk.",
+      "UVH6 viable when survivability layers are maintained."
+    ],
+    "strategicContext": "Moxsy's melee Rafa path trades range safety for map-control speed and high engagement tempo in late-game loops.",
+    "whenToUse": [
+      "Dense UVH6 arenas",
+      "Players preferring melee aggression"
+    ],
+    "whenToAvoid": [
+      "Long-range boss arenas with poor melee windows"
+    ],
+    "advancedTactics": [
+      "Use dash chains to maintain invulnerability frames between packs.",
+      "Open with ranged setup tag before full melee commit."
+    ],
+    "optimizationTips": [
+      "Prioritize shield gate and melee amp synergy.",
+      "Route pulls so you never engage isolated high-risk targets first."
+    ],
+    "tags": [
+      "damage",
+      "speed",
+      "endgame",
+      "moxsy"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "medium",
+    "rating": 4.5,
+    "successRate": 87,
+    "views": 79300,
+    "communityValidation": 1490,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "current",
+    "complexity": "advanced",
+    "gearDependency": "medium",
+    "damageBenchmark": "16M+ burst chains in melee windows",
+    "performanceNotes": [
+      "Outstanding clear speed; higher failure rate without defensive discipline."
+    ]
+  },
+  {
+    "id": "bl4-moxsy-harlowe-chroma-accelerator",
+    "name": "Harlowe CHROMA Accelerator (Moxsy)",
+    "description": "CHROMA-gravitar burst Harlowe setup tuned for elite deletes and flexible weapon usage.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-12-03T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "harlowe",
+    "buildType": "endgame",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "CHROMA Accelerator",
+      "keySkills": [
+        "Gravitar Burst",
+        "Chromatic Relay",
+        "Group Study",
+        "Potential Transfer"
+      ],
+      "capstone": "Hyperflux Gate",
+      "skillPoints": 70
+    },
+    "gear": {
+      "weapons": [
+        "Elemental Flex AR",
+        "Burst SMG",
+        "Boss Sidearm"
+      ],
+      "shield": "CHROMA Guard",
+      "grenadeMod": "Flux Collapse Orb",
+      "classMod": "Accelerator Link",
+      "artifact": "Gravitar Core"
+    },
+    "whyThisWorks": [
+      "Strong burst windows with broad weapon compatibility.",
+      "Group Study style scaling keeps damage relevant through UVH6 fights.",
+      "Flexible play pattern supports both solo and co-op progression."
+    ],
+    "strategicContext": "Moxsy highlights this as a practical Harlowe bridge between high-end burst and real-world gear flexibility.",
+    "whenToUse": [
+      "UVH6 progression",
+      "Players swapping weapons frequently"
+    ],
+    "whenToAvoid": [
+      "Pure support-focused team compositions needing utility-first play"
+    ],
+    "advancedTactics": [
+      "Prime CHROMA field before elite spawn triggers.",
+      "Use burst windows for priority targets, then reset with utility fire."
+    ],
+    "optimizationTips": [
+      "Favor elemental uptime stats to stabilize damage floor.",
+      "Don't overhold action skill; cycle for tempo."
+    ],
+    "tags": [
+      "damage",
+      "endgame",
+      "support",
+      "moxsy"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "medium",
+    "rating": 4.6,
+    "successRate": 89,
+    "views": 71200,
+    "communityValidation": 1380,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "current",
+    "complexity": "intermediate",
+    "gearDependency": "medium",
+    "damageBenchmark": "14M-18M burst cycles",
+    "performanceNotes": [
+      "Popular for “use almost any gun” flexibility without collapse in UVH6."
+    ]
+  },
+  {
+    "id": "bl4-moxsy-harlowe-radiation-farm",
+    "name": "Harlowe Radiation Farm Loop (Moxsy)",
+    "description": "Radiation-focused Harlowe setup built for repeatable boss farming and add-wave melt.",
+    "creator": {
+      "id": "creator-moxsy",
+      "name": "Moxsy",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Moxsy",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=22",
+      "credibilityScore": 94
+    },
+    "createdAt": "2025-12-19T14:00:00Z",
+    "lastUpdated": "2026-02-28T16:00:00Z",
+    "patchVersion": "1.030",
+    "class": "harlowe",
+    "buildType": "farming",
+    "difficulty": "uvh6",
+    "skillTree": {
+      "actionSkill": "Flux Generator",
+      "keySkills": [
+        "Radiant Decay",
+        "Chain Exposure",
+        "Field Sustain",
+        "Drop Control"
+      ],
+      "capstone": "Half-Life Overrun",
+      "skillPoints": 68
+    },
+    "gear": {
+      "weapons": [
+        "Radiation SMG",
+        "DOT Rifle",
+        "Farm Reset Pistol"
+      ],
+      "shield": "Decay Barrier",
+      "grenadeMod": "Radiation Bloom",
+      "classMod": "Irradiation Controller",
+      "artifact": "Half-Life Talisman"
+    },
+    "whyThisWorks": [
+      "Radiation chains improve clear speed in farm loops with dense add packs.",
+      "Flux field provides steady survivability during repetitive boss attempts.",
+      "Low execution burden supports long farming sessions."
+    ],
+    "strategicContext": "A consistency-first farming build with strong sustain and route tempo, designed around repeated runs rather than single kill showcases.",
+    "whenToUse": [
+      "Boss farming cycles",
+      "Long session loot routes",
+      "Solo farm consistency"
+    ],
+    "whenToAvoid": [
+      "Short sprint clears where setup time is too costly"
+    ],
+    "advancedTactics": [
+      "Drag add packs through radiation fields before boss commit.",
+      "Reset field position between phases to protect revival lanes."
+    ],
+    "optimizationTips": [
+      "Prioritize radiation proc chance and cooldown reduction.",
+      "Use route-specific weapon swaps to avoid resistance stalls."
+    ],
+    "tags": [
+      "farming",
+      "support",
+      "speed",
+      "moxsy"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "low",
+    "rating": 4.5,
+    "successRate": 90,
+    "views": 68900,
+    "communityValidation": 1260,
+    "sourceUrl": "https://www.youtube.com/channel/UCqUYttljh7bvi6mvHzpiMIA",
+    "patchCompatible": true,
+    "moxsyValidated": true,
+    "patchStatus": "current",
+    "complexity": "intermediate",
+    "gearDependency": "low",
+    "damageBenchmark": "12M-16M sustained farm DPS",
+    "performanceNotes": [
+      "Excellent long-session consistency and low downtime."
+    ]
   }
 ]

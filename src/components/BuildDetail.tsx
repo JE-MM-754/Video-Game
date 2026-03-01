@@ -32,6 +32,9 @@ function getCreatorBadges(build: HD2Build | BL4Build) {
   if (creator.includes("BuzzLiteBeer")) {
     badges.push({ label: "Meta Analysis", className: "border-orange-500/40 bg-orange-500/20 text-orange-200" });
   }
+  if (creator.includes("Moxsy")) {
+    badges.push({ label: "Moxsy Intelligence", className: "border-red-500/40 bg-red-500/20 text-red-200" });
+  }
 
   return badges;
 }
@@ -184,6 +187,25 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
           </section>
         )}
 
+        {!isHD2Build(build) && (
+          <section className="mt-4 rounded-xl border border-slate-700 bg-slate-950/60 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">Build Performance</p>
+            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              <p className="text-sm text-slate-200">Damage Benchmark: {build.damageBenchmark ?? "N/A"}</p>
+              <p className="text-sm text-slate-200">Patch Status: {build.patchStatus ?? "current"}</p>
+              <p className="text-sm text-slate-200">Complexity: {build.complexity ?? "intermediate"}</p>
+              <p className="text-sm text-slate-200">Gear Dependency: {build.gearDependency ?? "medium"}</p>
+            </div>
+            {!!build.performanceNotes?.length && (
+              <ul className="mt-3 space-y-1 text-sm text-slate-300">
+                {build.performanceNotes.map((note) => (
+                  <li key={`${build.id}-perf-${note}`}>• {note}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
+
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           <section className="rounded-xl border border-slate-700 bg-slate-950/60 p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">Complete Loadout</p>
@@ -233,6 +255,16 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
                 <ul className="mt-1 space-y-1 text-sm text-slate-200">
                   {build.advancedTactics.map((item) => (
                     <li key={`${build.id}-advanced-${item}`}>• {item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {!!build.optimizationTips?.length && (
+              <>
+                <p className="mt-3 text-sm font-semibold text-cyan-200">Optimization tips</p>
+                <ul className="mt-1 space-y-1 text-sm text-slate-200">
+                  {build.optimizationTips.map((item) => (
+                    <li key={`${build.id}-tips-${item}`}>• {item}</li>
                   ))}
                 </ul>
               </>

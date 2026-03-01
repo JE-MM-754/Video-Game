@@ -120,6 +120,9 @@ export function calculateBL4BuildScore(build: BL4Build, input: BL4CalculatorInpu
   score += build.rating * 10 + build.successRate * 0.5;
   score += creatorCredibilityBonus(build.creator.credibilityScore, build.creator.verified);
   score += build.metaTier.startsWith("S") ? 12 : build.metaTier === "A" ? 6 : 0;
+  if (build.moxsyValidated) score += 10;
+  if (build.damageBenchmark?.includes("20M+")) score += 6;
+  if (build.patchStatus === "adapted") score += 4;
 
   return score;
 }
