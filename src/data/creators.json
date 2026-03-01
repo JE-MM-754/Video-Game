@@ -88,5 +88,32 @@
     "verified": false,
     "avatar": "https://i.pravatar.cc/150?img=70",
     "credibilityScore": 82
+  },
+  {
+    "id": "creator-sovereign-gene",
+    "name": "Sovereign Gene",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@SovereignGene",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=71",
+    "credibilityScore": 94
+  },
+  {
+    "id": "creator-buzzlitebeer",
+    "name": "BuzzLiteBeer",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@BuzzLiteBeer",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=72",
+    "credibilityScore": 91
+  },
+  {
+    "id": "creator-claysthetics",
+    "name": "Claysthetics",
+    "platform": "youtube",
+    "channelUrl": "https://www.youtube.com/@Claysthetics",
+    "verified": true,
+    "avatar": "https://i.pravatar.cc/150?img=73",
+    "credibilityScore": 92
   }
 ]

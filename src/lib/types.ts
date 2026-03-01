@@ -18,6 +18,12 @@ export interface StrategicIntel {
   whenToUse: string[];
   whenToAvoid?: string[];
   advancedTactics?: string[];
+  strategyPhases?: {
+    phase1: string;
+    phase2: string;
+    phase3: string;
+    phase4: string;
+  };
 }
 
 export interface HD2Build extends StrategicIntel {
@@ -52,6 +58,18 @@ export interface HD2Build extends StrategicIntel {
   communityValidation: number; // number of reports/votes/test runs
   sourceUrl?: string;
   patchCompatible: boolean;
+  category?: "hive-lord-specialist" | "general";
+  effectiveness?: {
+    hivelord?: number;
+    chargers?: number;
+    swarms?: number;
+    sustainability?: number;
+  };
+  metaRating?: {
+    february2026?: number;
+    trending?: "up" | "stable" | "down";
+    lastUpdated?: string;
+  };
 }
 
 export interface BL4Build extends StrategicIntel {

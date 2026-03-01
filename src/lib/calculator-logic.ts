@@ -3,8 +3,25 @@ import { BL4Build, BL4CalculatorInput, HD2Build, HD2CalculatorInput } from "./ty
 export const CURRENT_HD2_PATCH = "6.0.3";
 export const CURRENT_BL4_PATCH = "1.030";
 
+type HD2RecommendationOptions = {
+  bossMode?: boolean;
+  selectedBoss?: "hive-lord" | "bile-titan" | null;
+};
+
+const creatorWeights: Record<string, number> = {
+  OhDough: 1.2,
+  "Sovereign Gene": 1.15,
+  Claysthetics: 1.12,
+  BuzzLiteBeer: 1.1,
+  "Community Validated": 1.05,
+};
+
 function creatorCredibilityBonus(credibilityScore: number, verified: boolean) {
   return (verified ? 12 : 0) + credibilityScore * 0.15;
+}
+
+function creatorValidationMultiplier(creatorName: string) {
+  return creatorWeights[creatorName] ?? 1;
 }
 
 function normalizeHD2Difficulty(inputDifficulty: HD2CalculatorInput["difficulty"]): HD2Build["difficulty"] {
@@ -23,7 +40,7 @@ function matchesHD2Team(buildTeamSize: HD2Build["teamSize"], inputTeamSize: HD2C
   return buildTeamSize === inputTeamSize || buildTeamSize === "any";
 }
 
-export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInput): number {
+export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInput, options?: HD2RecommendationOptions): number {
   if (!build.patchCompatible || build.patchVersion !== CURRENT_HD2_PATCH) return 0;
   if (!(build.faction === input.faction || build.faction === "universal")) return 0;
   if (!(build.missionType === input.missionType || build.missionType === "universal")) return 0;
@@ -66,6 +83,18 @@ export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInpu
   score += creatorCredibilityBonus(build.creator.credibilityScore, build.creator.verified);
   score += build.metaTier.startsWith("S") ? 12 : build.metaTier === "A" ? 6 : 0;
 
+  if (options?.bossMode && options.selectedBoss === "hive-lord") {
+    if (build.tags.some((tag) => ["boss-fight", "hive-lord", "heavy-armor"].includes(tag.toLowerCase()))) {
+      score += 70;
+    }
+    score += (build.effectiveness?.hivelord ?? 0) * 0.8;
+    score += (build.effectiveness?.sustainability ?? 0) * 0.35;
+    if (build.category === "hive-lord-specialist") score += 35;
+    if (build.strategyPhases) score += 20;
+  }
+
+  score *= creatorValidationMultiplier(build.creator.name);
+
   return score;
 }
 
@@ -95,13 +124,13 @@ export function calculateBL4BuildScore(build: BL4Build, input: BL4CalculatorInpu
   return score;
 }
 
-export function getHD2Recommendations(input: HD2CalculatorInput, builds: HD2Build[]): HD2Build[] {
+export function getHD2Recommendations(input: HD2CalculatorInput, builds: HD2Build[], options?: HD2RecommendationOptions): HD2Build[] {
   return builds
     .map((build) => ({
       build,
-      score: calculateHD2BuildScore(build, input),
+      score: calculateHD2BuildScore(build, input, options),
     }))
-    .filter((item) => item.score > 120)
+    .filter((item) => item.score > (options?.bossMode ? 110 : 120))
     .sort((a, b) => b.score - a.score)
     .slice(0, 5)
     .map((item) => item.build);

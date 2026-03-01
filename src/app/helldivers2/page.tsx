@@ -20,11 +20,17 @@ export default function Helldivers2Page() {
         <p className="mt-3 max-w-3xl text-slate-300">
           Browse live-rated loadouts by faction, mission, and difficulty. Built for quick in-session decisions and squad coordination.
         </p>
+        <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-200">
+          <span className="rounded-full border border-purple-500/40 bg-purple-500/20 px-2 py-1">OhDough Optimized</span>
+          <span className="rounded-full border border-blue-500/40 bg-blue-500/20 px-2 py-1">Sovereign Gene Validated</span>
+          <span className="rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2 py-1">🎯 Claysthetics Community Tested</span>
+          <span className="rounded-full border border-orange-500/40 bg-orange-500/20 px-2 py-1">BuzzLiteBeer Meta Analysis</span>
+        </div>
         <Link
           href="/helldivers2/calculator"
           className="mt-4 inline-flex min-h-11 items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
         >
-          Open Build Calculator
+          Open Build Calculator (Boss Fight Mode)
         </Link>
       </div>
 

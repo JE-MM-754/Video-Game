@@ -16,6 +16,26 @@ function isHD2Build(build: HD2Build | BL4Build): build is HD2Build {
   return "loadout" in build;
 }
 
+function getCreatorBadges(build: HD2Build | BL4Build) {
+  const badges: { label: string; className: string }[] = [];
+  const creator = build.creator.name;
+
+  if (creator.includes("OhDough")) {
+    badges.push({ label: "OhDough Optimized", className: "border-purple-500/40 bg-purple-500/20 text-purple-200" });
+  }
+  if (creator.includes("Sovereign Gene")) {
+    badges.push({ label: "Tier List Validated", className: "border-blue-500/40 bg-blue-500/20 text-blue-200" });
+  }
+  if (creator.includes("Claysthetics")) {
+    badges.push({ label: "🎯 Community Tested", className: "border-emerald-500/40 bg-emerald-500/20 text-emerald-200" });
+  }
+  if (creator.includes("BuzzLiteBeer")) {
+    badges.push({ label: "Meta Analysis", className: "border-orange-500/40 bg-orange-500/20 text-orange-200" });
+  }
+
+  return badges;
+}
+
 function buildCopyText(build: HD2Build | BL4Build) {
   const header = `${build.name} (${build.patchVersion})`;
 
@@ -49,6 +69,7 @@ function buildCopyText(build: HD2Build | BL4Build) {
 
 export default function BuildDetail({ build, gameType, open, onClose, fromCalculator = false }: BuildDetailProps) {
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
+  const creatorBadges = useMemo(() => getCreatorBadges(build), [build]);
 
   useEffect(() => {
     if (!open) return;
@@ -105,6 +126,15 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
               {build.creator.name}
               {build.creator.verified && <span className="ml-1 text-blue-300">✓</span>}
             </p>
+            {creatorBadges.length > 0 && (
+              <div className="mt-2 flex flex-wrap gap-1">
+                {creatorBadges.map((badge) => (
+                  <span key={`${build.id}-${badge.label}`} className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${badge.className}`}>
+                    {badge.label}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           <div className="rounded-xl border border-slate-700 bg-slate-950/60 p-3">
             <p className="text-xs uppercase text-slate-400">Patch</p>
@@ -129,6 +159,30 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
           </ul>
           <p className="mt-3 text-sm text-slate-300">{build.strategicContext}</p>
         </section>
+
+        {isHD2Build(build) && build.strategyPhases && (
+          <section className="mt-4 rounded-xl border border-blue-500/30 bg-blue-900/20 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">Boss Fight Strategy</p>
+            <div className="mt-2 space-y-2 text-sm text-slate-100">
+              <p><span className="font-semibold text-blue-200">Phase 1:</span> {build.strategyPhases.phase1}</p>
+              <p><span className="font-semibold text-blue-200">Phase 2:</span> {build.strategyPhases.phase2}</p>
+              <p><span className="font-semibold text-blue-200">Phase 3:</span> {build.strategyPhases.phase3}</p>
+              <p><span className="font-semibold text-blue-200">Phase 4:</span> {build.strategyPhases.phase4}</p>
+            </div>
+          </section>
+        )}
+
+        {isHD2Build(build) && build.effectiveness && (
+          <section className="mt-4 rounded-xl border border-slate-700 bg-slate-950/60 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">Meta Effectiveness</p>
+            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              <p className="text-sm text-slate-200">Hive Lord: {build.effectiveness.hivelord ?? "N/A"}%</p>
+              <p className="text-sm text-slate-200">Chargers: {build.effectiveness.chargers ?? "N/A"}%</p>
+              <p className="text-sm text-slate-200">Swarms: {build.effectiveness.swarms ?? "N/A"}%</p>
+              <p className="text-sm text-slate-200">Sustainability: {build.effectiveness.sustainability ?? "N/A"}%</p>
+            </div>
+          </section>
+        )}
 
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           <section className="rounded-xl border border-slate-700 bg-slate-950/60 p-4">

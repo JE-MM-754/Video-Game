@@ -50,7 +50,12 @@
       "Sequence airstrike then impact chain to collapse nest waves before closing.",
       "Drop shield just behind objective line to preserve forward movement."
     ],
-    "tags": ["versatile", "support", "objective", "area-control"],
+    "tags": [
+      "versatile",
+      "support",
+      "objective",
+      "area-control"
+    ],
     "metaTier": "S",
     "teamCoordination": "low",
     "rating": 4.8,
@@ -98,13 +103,23 @@
       "Autocannon covers sustained heavy pressure between cooldown windows."
     ],
     "strategicContext": "Terminid failures at top difficulty usually come from delayed heavy clears. This build solves that by front-loading anti-armor commitments.",
-    "whenToUse": ["Titan-dense operations", "High-communication squads"],
-    "whenToAvoid": ["Nest racing routes", "Low-accuracy players"],
+    "whenToUse": [
+      "Titan-dense operations",
+      "High-communication squads"
+    ],
+    "whenToAvoid": [
+      "Nest racing routes",
+      "Low-accuracy players"
+    ],
     "advancedTactics": [
       "Bait Chargers into railcannon lock before committing 500KG.",
       "Rotate Autocannon reload buddy every objective stop."
     ],
-    "tags": ["aggressive", "anti-armor", "boss-killing"],
+    "tags": [
+      "aggressive",
+      "anti-armor",
+      "boss-killing"
+    ],
     "metaTier": "A",
     "teamCoordination": "high",
     "rating": 4.6,
@@ -152,13 +167,22 @@
       "Airstrike cadence supports endurance-style objective pacing."
     ],
     "strategicContext": "Community trend moved toward sustained area control over one-shot cycles. This is the stable version of that philosophy.",
-    "whenToUse": ["Mixed objective rotations", "Long defense chains"],
-    "whenToAvoid": ["Pure heavy-hunt missions"],
+    "whenToUse": [
+      "Mixed objective rotations",
+      "Long defense chains"
+    ],
+    "whenToAvoid": [
+      "Pure heavy-hunt missions"
+    ],
     "advancedTactics": [
       "Set mortar slightly behind the objective ring to avoid self-pressure.",
       "Use autocannon to pre-chip Charger lanes before engagement."
     ],
-    "tags": ["versatile", "support", "defense"],
+    "tags": [
+      "versatile",
+      "support",
+      "defense"
+    ],
     "metaTier": "A",
     "teamCoordination": "medium",
     "rating": 4.5,
@@ -206,13 +230,22 @@
       "Suppressed precision pairs with 6.0.3 stealth improvements."
     ],
     "strategicContext": "Automaton missions reward reinforcement denial and precision target sequencing. This build is structured around that objective-first loop.",
-    "whenToUse": ["Any bot operation", "Solo stealth-capable clears"],
-    "whenToAvoid": ["Pure swarm rush scenarios"],
+    "whenToUse": [
+      "Any bot operation",
+      "Solo stealth-capable clears"
+    ],
+    "whenToAvoid": [
+      "Pure swarm rush scenarios"
+    ],
     "advancedTactics": [
       "Always clear nearest fabricator before fighting open patrols.",
       "Use mortar only on elevation to avoid line-of-sight clipping."
     ],
-    "tags": ["stealth", "versatile", "objective"],
+    "tags": [
+      "stealth",
+      "versatile",
+      "objective"
+    ],
     "metaTier": "S",
     "teamCoordination": "medium",
     "rating": 4.9,
@@ -260,13 +293,23 @@
       "Railcannon provides emergency heavy neutralization."
     ],
     "strategicContext": "At Super Helldive bot density, positioning is the true DPS check. This loadout manipulates enemy movement to create predictable kill lanes.",
-    "whenToUse": ["Factory-dense defenses", "Coordinated high-end squads"],
-    "whenToAvoid": ["Stealth clears", "New-player lobbies"],
+    "whenToUse": [
+      "Factory-dense defenses",
+      "Coordinated high-end squads"
+    ],
+    "whenToAvoid": [
+      "Stealth clears",
+      "New-player lobbies"
+    ],
     "advancedTactics": [
       "Call barrage diagonally across approach routes, not directly at objective.",
       "Stagger recoilless shots to maintain anti-air readiness."
     ],
-    "tags": ["support", "defense", "anti-armor"],
+    "tags": [
+      "support",
+      "defense",
+      "anti-armor"
+    ],
     "metaTier": "A",
     "teamCoordination": "high",
     "rating": 4.4,
@@ -314,13 +357,22 @@
       "Gas plus sentry controls Voteless flow during objective windows."
     ],
     "strategicContext": "Illuminate success depends on reinforcement denial and shield break efficiency, not raw burst. This setup optimizes that sequence.",
-    "whenToUse": ["Illuminate fronts", "Any mission with high spawn-ship pressure"],
-    "whenToAvoid": ["Pure bot anti-armor routes"],
+    "whenToUse": [
+      "Illuminate fronts",
+      "Any mission with high spawn-ship pressure"
+    ],
+    "whenToAvoid": [
+      "Pure bot anti-armor routes"
+    ],
     "advancedTactics": [
       "Ship priority: spawn ships first, then overseers, then cleanup.",
       "Anchor sentry near objective edge for anti-flank coverage."
     ],
-    "tags": ["support", "versatile", "energy-counter"],
+    "tags": [
+      "support",
+      "versatile",
+      "energy-counter"
+    ],
     "metaTier": "S",
     "teamCoordination": "medium",
     "rating": 4.9,
@@ -368,13 +420,22 @@
       "Supply pack offsets eruptor ammo strain in prolonged fights."
     ],
     "strategicContext": "Explosive multi-purpose pressure is especially effective against grouped Illuminate formations and objective infrastructure.",
-    "whenToUse": ["Difficulty 8-10 Illuminate missions", "Duo eliminations"],
-    "whenToAvoid": ["Ammo-starved public groups without supply support"],
+    "whenToUse": [
+      "Difficulty 8-10 Illuminate missions",
+      "Duo eliminations"
+    ],
+    "whenToAvoid": [
+      "Ammo-starved public groups without supply support"
+    ],
     "advancedTactics": [
       "Use Eruptor splash to stagger harvesters before laser follow-up.",
       "Pre-clear turrets/spires before objective channeling."
     ],
-    "tags": ["aggressive", "anti-armor", "objective"],
+    "tags": [
+      "aggressive",
+      "anti-armor",
+      "objective"
+    ],
     "metaTier": "A",
     "teamCoordination": "medium",
     "rating": 4.4,
@@ -422,13 +483,22 @@
       "Autocannon keeps anti-heavy coverage while remaining flexible."
     ],
     "strategicContext": "This is the adaptable Illuminate option for players who need consistency over strict specialization.",
-    "whenToUse": ["General Illuminate contracts", "Mixed team experience"],
-    "whenToAvoid": ["Pure heavy boss chains"],
+    "whenToUse": [
+      "General Illuminate contracts",
+      "Mixed team experience"
+    ],
+    "whenToAvoid": [
+      "Pure heavy boss chains"
+    ],
     "advancedTactics": [
       "Use jump resets to avoid long energy beam commits.",
       "Prioritize fleshmob packs with coyote splash before elite cleanup."
     ],
-    "tags": ["versatile", "speed", "support"],
+    "tags": [
+      "versatile",
+      "speed",
+      "support"
+    ],
     "metaTier": "A",
     "teamCoordination": "low",
     "rating": 4.2,
@@ -476,13 +546,23 @@
       "Orbital laser covers unavoidable heavy spikes."
     ],
     "strategicContext": "Solo Super Helldive succeeds through autonomous redundancy rather than mechanical perfection. This build creates self-supporting combat pockets.",
-    "whenToUse": ["Solo super-helldive progression", "Long holdout operations"],
-    "whenToAvoid": ["Fast stealth extraction goals"],
+    "whenToUse": [
+      "Solo super-helldive progression",
+      "Long holdout operations"
+    ],
+    "whenToAvoid": [
+      "Fast stealth extraction goals"
+    ],
     "advancedTactics": [
       "Offset sentries by 30-40m to create overlapping fire arcs.",
       "Use incendiary spread to force swarm pathing into sentry lines."
     ],
-    "tags": ["support", "solo", "defense", "versatile"],
+    "tags": [
+      "support",
+      "solo",
+      "defense",
+      "versatile"
+    ],
     "metaTier": "S",
     "teamCoordination": "low",
     "rating": 4.8,
@@ -530,13 +610,23 @@
       "Eruptor splash handles grouped targets with high ammo efficiency."
     ],
     "strategicContext": "This is a precision execution build where strong positioning multiplies damage and mistakes are heavily punished.",
-    "whenToUse": ["Experienced solo players", "Boss-dense elimination chains"],
-    "whenToAvoid": ["Low-visibility maps", "Players still learning recoil timing"],
+    "whenToUse": [
+      "Experienced solo players",
+      "Boss-dense elimination chains"
+    ],
+    "whenToAvoid": [
+      "Low-visibility maps",
+      "Players still learning recoil timing"
+    ],
     "advancedTactics": [
       "Save 500KG for guaranteed pathing windows, not panic throws.",
       "Rotate between sentry anchor points to avoid crossfire traps."
     ],
-    "tags": ["aggressive", "solo", "anti-armor"],
+    "tags": [
+      "aggressive",
+      "solo",
+      "anti-armor"
+    ],
     "metaTier": "A",
     "teamCoordination": "low",
     "rating": 4.3,
@@ -584,13 +674,24 @@
       "Supply pack sustains long route chains without pod downtime."
     ],
     "strategicContext": "Extraction speed runs reward objective tempo over kill count. The build is designed to avoid attrition fights and maintain movement.",
-    "whenToUse": ["Extraction contracts", "Time-sensitive progression runs"],
-    "whenToAvoid": ["Static holdouts", "Heavy elimination objectives"],
+    "whenToUse": [
+      "Extraction contracts",
+      "Time-sensitive progression runs"
+    ],
+    "whenToAvoid": [
+      "Static holdouts",
+      "Heavy elimination objectives"
+    ],
     "advancedTactics": [
       "Pre-plan objective order to minimize map backtracking.",
       "Use jump pack primarily for vertical exits, not straight-line travel."
     ],
-    "tags": ["speed", "stealth", "objective", "versatile"],
+    "tags": [
+      "speed",
+      "stealth",
+      "objective",
+      "versatile"
+    ],
     "metaTier": "S",
     "teamCoordination": "medium",
     "rating": 4.7,
@@ -638,13 +739,23 @@
       "Jump-based repositioning reduces prolonged fire exchanges."
     ],
     "strategicContext": "Stealth clears are about information control and tempo. This loadout minimizes noise spikes and supports silent objective progression.",
-    "whenToUse": ["Commando missions", "Low-conflict objective paths"],
-    "whenToAvoid": ["Forced holdouts", "Large wave defenses"],
+    "whenToUse": [
+      "Commando missions",
+      "Low-conflict objective paths"
+    ],
+    "whenToAvoid": [
+      "Forced holdouts",
+      "Large wave defenses"
+    ],
     "advancedTactics": [
       "Delay objective interaction until patrol sweep gaps.",
       "Use smoke to reset aggro when route timing breaks."
     ],
-    "tags": ["stealth", "support", "speed"],
+    "tags": [
+      "stealth",
+      "support",
+      "speed"
+    ],
     "metaTier": "S",
     "teamCoordination": "medium",
     "rating": 4.5,
@@ -692,13 +803,23 @@
       "Role clarity reduces coordination errors at peak difficulty."
     ],
     "strategicContext": "Combined-arms doctrine turns chaotic fights into role-driven flows. Team success comes from discipline, not individual hero plays.",
-    "whenToUse": ["Coordinated 4-player squads", "Super Helldive holds"],
-    "whenToAvoid": ["Silent public lobbies", "Sub-3 player groups"],
+    "whenToUse": [
+      "Coordinated 4-player squads",
+      "Super Helldive holds"
+    ],
+    "whenToAvoid": [
+      "Silent public lobbies",
+      "Sub-3 player groups"
+    ],
     "advancedTactics": [
       "Designate one objective caller to prevent split commits.",
       "Keep tank push synced with support cooldown cycles."
     ],
-    "tags": ["support", "defense", "teamplay"],
+    "tags": [
+      "support",
+      "defense",
+      "teamplay"
+    ],
     "metaTier": "S",
     "teamCoordination": "high",
     "rating": 4.7,
@@ -746,13 +867,22 @@
       "Predictable role responsibilities accelerate objective pacing."
     ],
     "strategicContext": "This composition is the reliable fallback when teams want structure without tank dependence.",
-    "whenToUse": ["General Super Helldive squads", "Mixed mission rotations"],
-    "whenToAvoid": ["Solo/duo content"],
+    "whenToUse": [
+      "General Super Helldive squads",
+      "Mixed mission rotations"
+    ],
+    "whenToAvoid": [
+      "Solo/duo content"
+    ],
     "advancedTactics": [
       "Rotate heavy-ordinance specialist to front based on objective terrain.",
       "Stagger supply timings to avoid synchronized depletion."
     ],
-    "tags": ["support", "versatile", "teamplay"],
+    "tags": [
+      "support",
+      "versatile",
+      "teamplay"
+    ],
     "metaTier": "A",
     "teamCoordination": "high",
     "rating": 4.4,
@@ -800,13 +930,23 @@
       "Supply and shield layers enable long-duration vehicle uptime."
     ],
     "strategicContext": "Tank compositions are strongest when team roles are fixed and communication quality is high.",
-    "whenToUse": ["Premade squads", "Defense-heavy operations"],
-    "whenToAvoid": ["No-comms groups", "Highly vertical maps"],
+    "whenToUse": [
+      "Premade squads",
+      "Defense-heavy operations"
+    ],
+    "whenToAvoid": [
+      "No-comms groups",
+      "Highly vertical maps"
+    ],
     "advancedTactics": [
       "Assign one dedicated flank caller for anti-tank threats.",
       "Never push tank without support cooldown confirmation."
     ],
-    "tags": ["support", "defense", "teamplay"],
+    "tags": [
+      "support",
+      "defense",
+      "teamplay"
+    ],
     "metaTier": "S",
     "teamCoordination": "high",
     "rating": 4.6,
@@ -854,13 +994,22 @@
       "Airstrike quickly clears infantry swarms that trap vehicle movement."
     ],
     "strategicContext": "Tank success is often decided by support quality, not raw cannon output. This build exists to keep the tank operational.",
-    "whenToUse": ["Any Bastion team strategy", "Coordinated objective pushes"],
-    "whenToAvoid": ["Non-tank compositions"],
+    "whenToUse": [
+      "Any Bastion team strategy",
+      "Coordinated objective pushes"
+    ],
+    "whenToAvoid": [
+      "Non-tank compositions"
+    ],
     "advancedTactics": [
       "Orbit 30-50m from tank to maintain anti-flank visibility.",
       "Prioritize infantry suppression over kill chasing."
     ],
-    "tags": ["support", "speed", "teamplay"],
+    "tags": [
+      "support",
+      "speed",
+      "teamplay"
+    ],
     "metaTier": "A",
     "teamCoordination": "high",
     "rating": 4.2,
@@ -869,5 +1018,346 @@
     "communityValidation": 340,
     "sourceUrl": "https://steamcommunity.com/",
     "patchCompatible": true
+  },
+  {
+    "id": "hd2-hive-breaker-2026",
+    "name": "The Hive Breaker",
+    "description": "Heavy AP specialist for Hive Lord encounters with sustained ammo economy and burst windows.",
+    "creator": {
+      "id": "creator-ohdough",
+      "name": "OhDough",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@OhDough",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=12",
+      "credibilityScore": 95
+    },
+    "createdAt": "2026-02-28",
+    "lastUpdated": "2026-02-28",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "super-helldive",
+    "missionType": "elimination",
+    "teamSize": "squad",
+    "loadout": {
+      "primary": "AR-2 Coyote",
+      "secondary": "GP-20 Ultimatum",
+      "grenade": "G-123 Thermite",
+      "stratagems": [
+        "GL-21 Grenade Launcher",
+        "Supply Pack",
+        "Orbital Laser",
+        "Eagle 500KG Bomb"
+      ],
+      "armor": "CM-09 Bonesnapper (Med-Kit Passive)"
+    },
+    "whyThisWorks": [
+      "Heavy AP + explosive synergy cracks Hive Lord armor consistently.",
+      "Supply Pack sustains long boss fights without tempo loss.",
+      "500KG + Orbital Laser create reliable burst windows and space control."
+    ],
+    "strategicContext": "OhDough-style optimization prioritizes armor break uptime and controlled burst sequencing instead of random DPS dumping.",
+    "whenToUse": [
+      "Hive Lord objectives on Helldive/Super Helldive",
+      "Coordinated squads with assigned anti-armor roles",
+      "Long missions requiring sustained AP pressure"
+    ],
+    "whenToAvoid": [
+      "Low-level lobbies without access to warbond AP tools"
+    ],
+    "advancedTactics": [
+      "Call 500KG after confirmed weak-point exposure, not at phase start.",
+      "Use GL-21 to clear support swarms before re-committing to boss DPS."
+    ],
+    "strategyPhases": {
+      "phase1": "Swarm clear first: secure movement lanes and close bug holes before committing to boss DPS.",
+      "phase2": "Armor break: focus heavy AP or explosives on carapace weak points while preserving resupply cadence.",
+      "phase3": "Burst window: stack high-damage tools during vulnerability windows for fast phase transitions.",
+      "phase4": "Reinforcement control: reset battlefield with area denial and keep extraction routes safe."
+    },
+    "tags": [
+      "boss-fight",
+      "hive-lord",
+      "heavy-armor",
+      "explosive-synergy",
+      "sustained-dps",
+      "aggressive"
+    ],
+    "metaTier": "S+",
+    "teamCoordination": "high",
+    "rating": 4.9,
+    "successRate": 94,
+    "views": 185400,
+    "communityValidation": 6420,
+    "sourceUrl": "https://www.youtube.com/@OhDough",
+    "patchCompatible": true,
+    "category": "hive-lord-specialist",
+    "effectiveness": {
+      "hivelord": 95,
+      "chargers": 90,
+      "swarms": 85,
+      "sustainability": 92
+    },
+    "metaRating": {
+      "february2026": 95,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    }
+  },
+  {
+    "id": "hd2-swarm-controller-2026",
+    "name": "The Swarm Controller",
+    "description": "Area denial Hive Lord setup focused on swarm suppression and positional control through every boss phase.",
+    "creator": {
+      "id": "creator-sovereign-gene",
+      "name": "Sovereign Gene",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@SovereignGene",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=71",
+      "credibilityScore": 94
+    },
+    "createdAt": "2026-02-28",
+    "lastUpdated": "2026-02-28",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "helldive",
+    "missionType": "defense",
+    "teamSize": "squad",
+    "loadout": {
+      "primary": "CB-9 Exploding Crossbow",
+      "secondary": "LAS-58 Talon",
+      "grenade": "G-123 Thermite",
+      "stratagems": [
+        "LAS-99 Quasar Cannon",
+        "LIFT-850 Jump Pack",
+        "Orbital Railcannon Strike",
+        "Eagle 500KG Bomb"
+      ],
+      "armor": "B-01 Tactical (Extra Padding)"
+    },
+    "whyThisWorks": [
+      "Explosive crossbow plus railcannon keeps swarm pressure manageable during boss phases.",
+      "Heat secondary and Quasar provide high-value shots without ammo collapse.",
+      "Jump pack mobility prevents wipes when Hive Lord shifts terrain control."
+    ],
+    "strategicContext": "Sovereign Gene tier-list methodology emphasizes threat-priority control and repeatable mission consistency over highlight-clip DPS.",
+    "whenToUse": [
+      "Defense/extraction maps with dense spawn pressure",
+      "Squads needing a dedicated swarm-control slot",
+      "Hive Lord runs where mobility is survival-critical"
+    ],
+    "whenToAvoid": [
+      "Ultra-fast speedrun squads that skip spawn management"
+    ],
+    "advancedTactics": [
+      "Railcannon highest-value heavy target first, then reset lane with crossbow splash.",
+      "Jump pack to high ground before each vulnerability cycle."
+    ],
+    "strategyPhases": {
+      "phase1": "Swarm clear first: secure movement lanes and close bug holes before committing to boss DPS.",
+      "phase2": "Armor break: focus heavy AP or explosives on carapace weak points while preserving resupply cadence.",
+      "phase3": "Burst window: stack high-damage tools during vulnerability windows for fast phase transitions.",
+      "phase4": "Reinforcement control: reset battlefield with area denial and keep extraction routes safe."
+    },
+    "tags": [
+      "boss-fight",
+      "hive-lord",
+      "area-denial",
+      "support",
+      "mobility",
+      "versatile"
+    ],
+    "metaTier": "S",
+    "teamCoordination": "high",
+    "rating": 4.8,
+    "successRate": 92,
+    "views": 162700,
+    "communityValidation": 5580,
+    "sourceUrl": "https://www.youtube.com/@SovereignGene",
+    "patchCompatible": true,
+    "category": "hive-lord-specialist",
+    "effectiveness": {
+      "hivelord": 90,
+      "chargers": 88,
+      "swarms": 94,
+      "sustainability": 86
+    },
+    "metaRating": {
+      "february2026": 93,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    }
+  },
+  {
+    "id": "hd2-pyromaniac-pro-2026",
+    "name": "The Pyromaniac Pro",
+    "description": "Heat-damage boss build leveraging incendiary pressure and ammo-independent tools for prolonged Terminid fights.",
+    "creator": {
+      "id": "creator-buzzlitebeer",
+      "name": "BuzzLiteBeer",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@BuzzLiteBeer",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=72",
+      "credibilityScore": 91
+    },
+    "createdAt": "2026-02-28",
+    "lastUpdated": "2026-02-28",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "helldive",
+    "missionType": "elimination",
+    "teamSize": "duo",
+    "loadout": {
+      "primary": "SG-225IE Breaker Incendiary",
+      "secondary": "GP-20 Ultimatum",
+      "grenade": "G-12 High Explosive",
+      "stratagems": [
+        "FLAM-40 Flamethrower",
+        "LIFT-860 Hover Pack",
+        "Orbital Napalm Barrage",
+        "MD-8 Gas Mines"
+      ],
+      "armor": "Inflammable Passive Armor"
+    },
+    "whyThisWorks": [
+      "Incendiary pressure deletes supporting swarms while preserving anti-boss windows.",
+      "Heat-centric kit avoids total ammo collapse in long Hive Lord engagements.",
+      "Napalm + gas creates reinforcement denial around bug-hole zones."
+    ],
+    "strategicContext": "BuzzLiteBeer meta-analysis approach tracks buff/nerf trends and exploits heat-weapon uptime in sustained boss environments.",
+    "whenToUse": [
+      "Extended Terminid missions with constant reinforcement waves",
+      "Players comfortable managing close-range flame spacing",
+      "Duo teams requiring hybrid swarm + boss coverage"
+    ],
+    "whenToAvoid": [
+      "Random squads with poor flame discipline in tight choke points"
+    ],
+    "advancedTactics": [
+      "Use hover reposition before flamethrower commitment to avoid being surrounded.",
+      "Cycle napalm early in phase 1 to reduce pressure entering armor-break phase."
+    ],
+    "strategyPhases": {
+      "phase1": "Swarm clear first: secure movement lanes and close bug holes before committing to boss DPS.",
+      "phase2": "Armor break: focus heavy AP or explosives on carapace weak points while preserving resupply cadence.",
+      "phase3": "Burst window: stack high-damage tools during vulnerability windows for fast phase transitions.",
+      "phase4": "Reinforcement control: reset battlefield with area denial and keep extraction routes safe."
+    },
+    "tags": [
+      "boss-fight",
+      "hive-lord",
+      "heat",
+      "incendiary",
+      "sustained-dps",
+      "aggressive"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "medium",
+    "rating": 4.6,
+    "successRate": 88,
+    "views": 141900,
+    "communityValidation": 4810,
+    "sourceUrl": "https://www.youtube.com/@BuzzLiteBeer",
+    "patchCompatible": true,
+    "category": "hive-lord-specialist",
+    "effectiveness": {
+      "hivelord": 86,
+      "chargers": 82,
+      "swarms": 93,
+      "sustainability": 90
+    },
+    "metaRating": {
+      "february2026": 89,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    }
+  },
+  {
+    "id": "hd2-community-validator-2026",
+    "name": "The Community Validator",
+    "description": "Claysthetics methodology build focused on mission completion, accessibility, and resource sustainability over peak DPS.",
+    "creator": {
+      "id": "creator-claysthetics",
+      "name": "Claysthetics",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@Claysthetics",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=73",
+      "credibilityScore": 92
+    },
+    "createdAt": "2026-02-28",
+    "lastUpdated": "2026-02-28",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "helldive",
+    "missionType": "extraction",
+    "teamSize": "any",
+    "loadout": {
+      "primary": "AR-23 Liberator",
+      "secondary": "P-2 Peacemaker",
+      "grenade": "G-12 High Explosive",
+      "stratagems": [
+        "M-105 Stalwart",
+        "Supply Pack",
+        "Orbital Precision Strike",
+        "Reinforce"
+      ],
+      "armor": "B-01 Tactical (Extra Padding)"
+    },
+    "whyThisWorks": [
+      "Accessible baseline weapons keep execution consistent across skill levels.",
+      "Supply Pack + Reinforce prioritizes full mission completion and team uptime.",
+      "Resource-sustainable loadout performs reliably through long, chaotic engagements."
+    ],
+    "strategicContext": "Claysthetics community-validator method optimizes for reproducible success, spawn-pressure stability, and mission completion priority rather than highlight DPS.",
+    "whenToUse": [
+      "Solo or random squads needing resilient all-phase performance",
+      "Players without niche warbond unlocks",
+      "Full mission clears where boss kill is one objective among many"
+    ],
+    "whenToAvoid": [
+      "Hyper-optimized premades chasing fastest possible boss times"
+    ],
+    "advancedTactics": [
+      "Close nearby bug holes before hard-committing to Hive Lord DPS windows.",
+      "Use Stalwart as lane-control anchor while teammates rotate anti-heavy tools."
+    ],
+    "strategyPhases": {
+      "phase1": "Swarm clear first: secure movement lanes and close bug holes before committing to boss DPS.",
+      "phase2": "Armor break: focus heavy AP or explosives on carapace weak points while preserving resupply cadence.",
+      "phase3": "Burst window: stack high-damage tools during vulnerability windows for fast phase transitions.",
+      "phase4": "Reinforcement control: reset battlefield with area denial and keep extraction routes safe."
+    },
+    "tags": [
+      "boss-fight",
+      "hive-lord",
+      "community-tested",
+      "sustainability",
+      "support",
+      "balanced",
+      "self-sufficient"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "low",
+    "rating": 4.7,
+    "successRate": 90,
+    "views": 154200,
+    "communityValidation": 7360,
+    "sourceUrl": "https://www.youtube.com/@Claysthetics",
+    "patchCompatible": true,
+    "category": "hive-lord-specialist",
+    "effectiveness": {
+      "hivelord": 84,
+      "chargers": 80,
+      "swarms": 89,
+      "sustainability": 96
+    },
+    "metaRating": {
+      "february2026": 91,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    }
   }
 ]

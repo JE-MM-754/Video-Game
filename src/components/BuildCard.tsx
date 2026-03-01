@@ -62,11 +62,36 @@ function isHD2Build(build: HD2Build | BL4Build): build is HD2Build {
   return "faction" in build;
 }
 
+function getCreatorBadges(build: HD2Build | BL4Build) {
+  const badges: { label: string; className: string }[] = [];
+  const creator = build.creator.name;
+
+  if (creator.includes("OhDough")) {
+    badges.push({ label: "OhDough Optimized", className: "border-purple-500/40 bg-purple-500/20 text-purple-200" });
+  }
+  if (creator.includes("Sovereign Gene")) {
+    badges.push({ label: "Tier List Validated", className: "border-blue-500/40 bg-blue-500/20 text-blue-200" });
+  }
+  if (creator.includes("Claysthetics")) {
+    badges.push({ label: "Community Tested", className: "border-emerald-500/40 bg-emerald-500/20 text-emerald-200" });
+  }
+  if (creator.includes("BuzzLiteBeer")) {
+    badges.push({ label: "Meta Analysis", className: "border-orange-500/40 bg-orange-500/20 text-orange-200" });
+  }
+
+  if (isHD2Build(build) && build.metaRating?.february2026 && build.metaRating.february2026 >= 90) {
+    badges.push({ label: "Meta S-Tier", className: "border-amber-400/40 bg-amber-500/20 text-amber-200" });
+  }
+
+  return badges;
+}
+
 export default function BuildCard({ build, gameType, isCompared, onToggleCompare, disableCompare }: BuildCardProps) {
   const searchParams = useSearchParams();
   const [detailOpen, setDetailOpen] = useState(false);
   const successBarColor =
     build.successRate >= 85 ? "bg-emerald-400" : build.successRate >= 75 ? "bg-blue-400" : "bg-yellow-400";
+  const creatorBadges = getCreatorBadges(build);
 
   useEffect(() => {
     const queryBuild = searchParams.get("build");
@@ -139,6 +164,13 @@ export default function BuildCard({ build, gameType, isCompared, onToggleCompare
         )}
       </div>
 
+      {isHD2Build(build) && build.strategyPhases && (
+        <div className="mt-3 rounded-xl border border-blue-500/30 bg-blue-900/20 p-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-blue-200">Boss Strategy</p>
+          <p className="mt-1 text-xs text-slate-200">Phase 1: {build.strategyPhases.phase1}</p>
+        </div>
+      )}
+
       <div className="mt-4 flex items-center justify-between">
         {renderStars(build.rating)}
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{build.views.toLocaleString()} views</p>
@@ -162,6 +194,15 @@ export default function BuildCard({ build, gameType, isCompared, onToggleCompare
         <p className="text-xs uppercase tracking-wide text-slate-400">
           {build.creator.platform} • Credibility {build.creator.credibilityScore}
         </p>
+        {creatorBadges.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {creatorBadges.map((badge) => (
+              <span key={`${build.id}-${badge.label}`} className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${badge.className}`}>
+                {badge.label === "Community Tested" ? "🎯 Community Tested" : badge.label}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="mt-4 flex gap-2">

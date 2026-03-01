@@ -38,6 +38,8 @@ type Recommendation<T> = {
   reasons: string[];
 };
 
+type BossType = "hive-lord" | "bile-titan";
+
 const hd2DifficultyLevels: { value: HD2CalculatorInput["difficulty"]; label: string; subtitle: string }[] = [
   { value: "easy", label: "Easy", subtitle: "Quickplay warm-up" },
   { value: "medium", label: "Medium", subtitle: "Steady pressure" },
@@ -129,7 +131,7 @@ function normalizeHD2Playstyle(playstyle: HD2CalculatorInput["playstyle"]) {
   return playstyle === "balanced" ? "versatile" : playstyle;
 }
 
-function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput): string[] {
+function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput, bossMode: boolean, selectedBoss: BossType | null): string[] {
   const reasons: string[] = [];
   const normalizedDifficulty = normalizeHD2Difficulty(input.difficulty);
   const normalizedPlaystyle = normalizeHD2Playstyle(input.playstyle);
@@ -149,6 +151,18 @@ function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput): string[] {
 
   if (build.tags.includes(normalizedPlaystyle)) {
     reasons.push(`Playstyle match on ${input.playstyle} priority.`);
+  }
+
+  if (bossMode && selectedBoss === "hive-lord") {
+    if (build.effectiveness?.hivelord) {
+      reasons.push(`Hive Lord effectiveness: ${build.effectiveness.hivelord}/100 with phase-ready tools.`);
+    }
+    if (build.strategyPhases) {
+      reasons.push("Includes full 4-phase boss strategy guidance for execution consistency.");
+    }
+    if (build.category === "hive-lord-specialist") {
+      reasons.push("Tagged as Hive Lord specialist for current Terminid boss meta.");
+    }
   }
 
   reasons.push(`${build.rating.toFixed(1)}★ rating, ${build.successRate}% success, ${build.creator.credibilityScore} creator credibility.`);
@@ -185,6 +199,8 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
   const [bl4Input, setBl4Input] = useState<BL4FormState>({});
   const [selectedBuildId, setSelectedBuildId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [bossMode, setBossMode] = useState(false);
+  const [selectedBoss, setSelectedBoss] = useState<BossType | null>(null);
   const initializedRef = useRef(false);
   const skipNextUrlSyncRef = useRef(false);
 
@@ -215,6 +231,8 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       const difficulty = searchParams.get("difficulty");
       const teamSize = searchParams.get("team");
       const playstyle = searchParams.get("style");
+      const bossModeFromQuery = searchParams.get("bossMode");
+      const bossFromQuery = searchParams.get("boss");
 
       if (isAllowed(faction, hd2Keys.faction)) next.faction = faction;
       if (isAllowed(missionType, hd2Keys.missionType)) next.missionType = missionType;
@@ -223,6 +241,10 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       if (isAllowed(playstyle, hd2Keys.playstyle)) next.playstyle = playstyle;
 
       setHd2Input(next);
+      setBossMode(bossModeFromQuery === "1");
+      if (bossFromQuery === "hive-lord" || bossFromQuery === "bile-titan") {
+        setSelectedBoss(bossFromQuery);
+      }
     } else {
       const next: BL4FormState = {};
 
@@ -269,6 +291,12 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
 
       if (hd2Input.playstyle) params.set("style", hd2Input.playstyle);
       else params.delete("style");
+
+      if (bossMode) params.set("bossMode", "1");
+      else params.delete("bossMode");
+
+      if (selectedBoss) params.set("boss", selectedBoss);
+      else params.delete("boss");
     } else {
       if (bl4Input.class) params.set("class", bl4Input.class);
       else params.delete("class");
@@ -298,6 +326,8 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     hd2Input.missionType,
     hd2Input.playstyle,
     hd2Input.teamSize,
+    bossMode,
+    selectedBoss,
     pathname,
     props.gameType,
     router,
@@ -317,11 +347,11 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     if (props.gameType === "helldivers2") {
       if (!isCompleteHD2(hd2Input)) return [] as Recommendation<HD2Build>[];
 
-      const topBuilds = getHD2Recommendations(hd2Input, props.builds);
+      const topBuilds = getHD2Recommendations(hd2Input, props.builds, { bossMode, selectedBoss });
       return topBuilds.map((build) => ({
         build,
-        score: calculateHD2BuildScore(build, hd2Input),
-        reasons: buildHD2Reasons(build, hd2Input),
+        score: calculateHD2BuildScore(build, hd2Input, { bossMode, selectedBoss }),
+        reasons: buildHD2Reasons(build, hd2Input, bossMode, selectedBoss),
       }));
     }
 
@@ -333,7 +363,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       score: calculateBL4BuildScore(build, bl4Input),
       reasons: buildBL4Reasons(build, bl4Input),
     }));
-  }, [props, hd2Input, bl4Input]);
+  }, [bossMode, bl4Input, hd2Input, props, selectedBoss]);
 
   const activeBuild = useMemo(
     () => (selectedBuildId ? props.builds.find((build) => build.id === selectedBuildId) ?? null : null),
@@ -477,6 +507,53 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             }
             disabled={!hd2Input.teamSize}
           />
+
+          <section className="rounded-2xl border border-red-500/30 bg-red-900/20 p-4 sm:p-5">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-200">Boss Fight Mode</p>
+            <p className="mt-1 text-base text-red-100">Enable boss-specific optimization with phase guidance and creator-validated specialist builds.</p>
+            <label className="mt-3 flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border border-red-400/30 bg-slate-950/40 px-3 py-2 text-sm text-slate-100">
+              <input
+                type="checkbox"
+                checked={bossMode}
+                onChange={(event) => {
+                  const nextMode = event.target.checked;
+                  setBossMode(nextMode);
+                  if (!nextMode) setSelectedBoss(null);
+                }}
+                className="h-4 w-4 accent-red-500"
+              />
+              Enable boss-specific recommendations
+            </label>
+
+            {bossMode && (
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedBoss("hive-lord")}
+                  className={`min-h-12 rounded-lg border px-3 py-2 text-left text-sm ${
+                    selectedBoss === "hive-lord"
+                      ? "border-red-300 bg-red-500/20 text-red-100"
+                      : "border-slate-700 bg-slate-950 text-slate-200 hover:border-slate-500"
+                  }`}
+                >
+                  <span className="block font-semibold">Hive Lord</span>
+                  <span className="text-xs text-slate-300">Heavy armor + swarm pressure, phase-based engagements</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedBoss("bile-titan")}
+                  className={`min-h-12 rounded-lg border px-3 py-2 text-left text-sm ${
+                    selectedBoss === "bile-titan"
+                      ? "border-red-300 bg-red-500/20 text-red-100"
+                      : "border-slate-700 bg-slate-950 text-slate-200 hover:border-slate-500"
+                  }`}
+                >
+                  <span className="block font-semibold">Bile Titan</span>
+                  <span className="text-xs text-slate-300">Massive target optimization and anti-heavy cycling</span>
+                </button>
+              </div>
+            )}
+          </section>
         </div>
       ) : (
         <div className="space-y-4">
