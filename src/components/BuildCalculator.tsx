@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import {
   calculateBL4BuildScore,
@@ -264,8 +264,6 @@ function scoreBL4Partial(build: BL4Build, input: BL4FormState) {
 }
 
 export default function BuildCalculator(props: BuildCalculatorProps) {
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [hd2Input, setHd2Input] = useState<HD2FormState>({});
@@ -274,7 +272,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [hiveLordMode, setHiveLordMode] = useState(false);
   const initializedRef = useRef(false);
-  const skipNextUrlSyncRef = useRef(false);
 
   const preserveScrollPosition = (update: () => void) => {
     const scrollPosition = typeof window !== "undefined" ? window.scrollY : 0;
@@ -296,19 +293,22 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     });
   };
 
+  const updateBuildQueryParam = (buildId: string | null) => {
+    if (typeof window === "undefined") return;
+    const currentUrl = new URL(window.location.href);
+    if (buildId) currentUrl.searchParams.set("build", buildId);
+    else currentUrl.searchParams.delete("build");
+    window.history.replaceState({}, "", currentUrl.toString());
+  };
+
   const openBuildDetail = (buildId: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("build", buildId);
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
     setSelectedBuildId(buildId);
+    updateBuildQueryParam(buildId);
   };
 
   const closeBuildDetail = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("build");
-    const nextQuery = params.toString();
-    router.push(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
     setSelectedBuildId(null);
+    updateBuildQueryParam(null);
   };
 
   useEffect(() => {
@@ -348,79 +348,12 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
 
       setBl4Input(next);
     }
-    skipNextUrlSyncRef.current = true;
   }, [props.gameType, searchParams]);
 
   useEffect(() => {
     const queryBuild = searchParams.get("build");
     setSelectedBuildId(queryBuild ?? null);
   }, [searchParams]);
-
-  useEffect(() => {
-    if (!initializedRef.current) return;
-    if (skipNextUrlSyncRef.current) {
-      skipNextUrlSyncRef.current = false;
-      return;
-    }
-    const params = new URLSearchParams();
-
-    if (props.gameType === "helldivers2") {
-      if (hd2Input.faction) params.set("faction", hd2Input.faction);
-      else params.delete("faction");
-
-      if (hd2Input.missionName) params.set("mission", hd2Input.missionName);
-      else params.delete("mission");
-
-      if (hd2Input.difficulty) params.set("difficulty", hd2Input.difficulty);
-      else params.delete("difficulty");
-
-      if (hd2Input.teamSize) params.set("team", hd2Input.teamSize);
-      else params.delete("team");
-
-      if (hd2Input.playstyle) params.set("style", hd2Input.playstyle);
-      else params.delete("style");
-
-      if (hiveLordMode) params.set("hiveLord", "1");
-      else params.delete("hiveLord");
-    } else {
-      if (bl4Input.class) params.set("class", bl4Input.class);
-      else params.delete("class");
-
-      if (bl4Input.buildType) params.set("type", bl4Input.buildType);
-      else params.delete("type");
-
-      if (bl4Input.difficulty) params.set("difficulty", bl4Input.difficulty);
-      else params.delete("difficulty");
-
-      if (bl4Input.playstyle) params.set("style", bl4Input.playstyle);
-      else params.delete("style");
-    }
-
-    if (selectedBuildId) params.set("build", selectedBuildId);
-    else params.delete("build");
-
-    const nextQuery = params.toString();
-    const before = typeof window !== "undefined" ? window.scrollY : 0;
-    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
-    if (typeof window !== "undefined") {
-      requestAnimationFrame(() => window.scrollTo({ top: before, behavior: "auto" }));
-    }
-  }, [
-    bl4Input.buildType,
-    bl4Input.class,
-    bl4Input.difficulty,
-    bl4Input.playstyle,
-    hd2Input.difficulty,
-    hd2Input.faction,
-    hd2Input.missionName,
-    hd2Input.playstyle,
-    hd2Input.teamSize,
-    hiveLordMode,
-    pathname,
-    props.gameType,
-    router,
-    selectedBuildId,
-  ]);
 
   const hd2Selections = [hd2Input.faction, hd2Input.missionName, hd2Input.difficulty, hd2Input.teamSize, hd2Input.playstyle].filter(Boolean)
     .length;
