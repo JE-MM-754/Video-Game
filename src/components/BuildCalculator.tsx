@@ -32,12 +32,6 @@ type Option = {
   help: string;
 };
 
-type Recommendation<T> = {
-  build: T;
-  score: number;
-  reasons: string[];
-};
-
 const hd2DifficultyLevels: { value: HD2CalculatorInput["difficulty"]; label: string; subtitle: string }[] = [
   { value: "easy", label: "Easy", subtitle: "Quickplay warm-up" },
   { value: "medium", label: "Medium", subtitle: "Steady pressure" },
@@ -50,11 +44,20 @@ const hd2Keys = {
   faction: ["terminids", "automatons", "illuminate"] as const,
   missionName: [
     "spread-democracy",
+    "destroy-hive-lords",
     "secure-area",
+    "secure-civilian-assets",
+    "extract-classified-data",
     "evacuate-high-value-assets",
     "launch-icbm",
     "retrieve-essential-personnel",
     "eliminate-chargers",
+    "disable-bot-factories",
+    "eliminate-devastators",
+    "sabotage-supply-lines",
+    "extract-strategic-assets",
+    "emergency-evacuation",
+    "geological-survey",
   ] as const,
   difficulty: ["easy", "medium", "hard", "expert", "nightmare"] as const,
   teamSize: ["solo", "duo", "squad", "randoms"] as const,
@@ -139,37 +142,50 @@ function normalizeHD2Playstyle(playstyle: HD2CalculatorInput["playstyle"]) {
 function prettyMissionName(missionName: HD2CalculatorInput["missionName"]) {
   const labels: Record<HD2CalculatorInput["missionName"], string> = {
     "spread-democracy": "Spread Democracy",
+    "destroy-hive-lords": "Destroy Hive Lords",
     "secure-area": "Secure Area",
+    "secure-civilian-assets": "Secure Civilian Assets",
+    "extract-classified-data": "Extract Classified Data",
     "evacuate-high-value-assets": "Evacuate High-Value Assets",
     "launch-icbm": "Launch ICBM",
     "retrieve-essential-personnel": "Retrieve Essential Personnel",
     "eliminate-chargers": "Eliminate Chargers",
+    "disable-bot-factories": "Disable Bot Factories",
+    "eliminate-devastators": "Eliminate Devastators",
+    "sabotage-supply-lines": "Sabotage Supply Lines",
+    "extract-strategic-assets": "Extract Strategic Assets",
+    "emergency-evacuation": "Emergency Evacuation",
+    "geological-survey": "Geological Survey",
   };
   return labels[missionName];
 }
 
-function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput, hiveLordMode: boolean): string[] {
+function buildHD2Reasons(build: HD2Build, input: HD2FormState, hiveLordMode: boolean): string[] {
   const reasons: string[] = [];
-  const normalizedDifficulty = normalizeHD2Difficulty(input.difficulty);
-  const normalizedPlaystyle = normalizeHD2Playstyle(input.playstyle);
+  const normalizedDifficulty = input.difficulty ? normalizeHD2Difficulty(input.difficulty) : null;
+  const normalizedPlaystyle = input.playstyle ? normalizeHD2Playstyle(input.playstyle) : null;
 
-  reasons.push(`Faction fit: ${build.faction === input.faction ? "exact" : "universal fallback"}.`);
-  reasons.push(`Mission fit: optimized for ${prettyMissionName(input.missionName)} objectives.`);
-  if (build.missionFocus?.includes(input.missionName)) {
+  if (input.faction) {
+    reasons.push(`Faction fit: ${build.faction === input.faction ? "exact" : "universal fallback"}.`);
+  }
+  if (input.missionName) {
+    reasons.push(`Mission fit: optimized for ${prettyMissionName(input.missionName)} objectives.`);
+  }
+  if (input.missionName && build.missionFocus?.includes(input.missionName)) {
     reasons.push(`Exact mission profile match for ${prettyMissionName(input.missionName)}.`);
   }
 
   if (input.teamSize === "randoms") {
     reasons.push("YOLO mode compatibility: self-sufficient without strict premade coordination.");
-  } else {
+  } else if (input.teamSize) {
     reasons.push(`Team fit: tuned for ${input.teamSize} or flexible any-size usage.`);
   }
 
-  if (build.difficulty === normalizedDifficulty || build.difficulty === "all") {
+  if (normalizedDifficulty && (build.difficulty === normalizedDifficulty || build.difficulty === "all")) {
     reasons.push(`Difficulty compatibility confirmed for ${input.difficulty}.`);
   }
 
-  if (build.tags.includes(normalizedPlaystyle)) {
+  if (normalizedPlaystyle && build.tags.includes(normalizedPlaystyle)) {
     reasons.push(`Playstyle match on ${input.playstyle} priority.`);
   }
 
@@ -189,20 +205,22 @@ function buildHD2Reasons(build: HD2Build, input: HD2CalculatorInput, hiveLordMod
   return reasons;
 }
 
-function buildBL4Reasons(build: BL4Build, input: BL4CalculatorInput): string[] {
+function buildBL4Reasons(build: BL4Build, input: BL4FormState): string[] {
   const reasons: string[] = [];
 
-  reasons.push(`${build.class.toUpperCase()} class match confirmed.`);
+  if (input.class) {
+    reasons.push(`${build.class.toUpperCase()} class match confirmed.`);
+  }
 
-  if (build.buildType === input.buildType) {
+  if (input.buildType && build.buildType === input.buildType) {
     reasons.push(`Direct objective match for ${input.buildType}.`);
   }
 
-  if (build.difficulty === input.difficulty || build.difficulty === "normal") {
+  if (input.difficulty && (build.difficulty === input.difficulty || build.difficulty === "normal")) {
     reasons.push(`Difficulty compatibility confirmed for ${input.difficulty.toUpperCase()}.`);
   }
 
-  if (build.tags.includes(input.playstyle)) {
+  if (input.playstyle && build.tags.includes(input.playstyle)) {
     reasons.push(`Playstyle match on ${input.playstyle}.`);
   }
 
@@ -218,6 +236,28 @@ function buildBL4Reasons(build: BL4Build, input: BL4CalculatorInput): string[] {
 
   reasons.push(`${build.rating.toFixed(1)}★ rating, ${build.successRate}% success, ${build.creator.credibilityScore} creator credibility.`);
   return reasons;
+}
+
+function scoreHD2Partial(build: HD2Build, input: HD2FormState, hiveLordMode: boolean) {
+  let score = build.rating * 8 + build.successRate * 0.35;
+  if (input.faction && (build.faction === input.faction || build.faction === "universal")) score += 70;
+  if (input.missionName && build.missionFocus?.includes(input.missionName)) score += 55;
+  if (input.difficulty && (build.difficulty === normalizeHD2Difficulty(input.difficulty) || build.difficulty === "all")) score += 30;
+  if (input.teamSize && (build.teamSize === input.teamSize || build.teamSize === "any")) score += 25;
+  if (input.playstyle && build.tags.includes(normalizeHD2Playstyle(input.playstyle))) score += 20;
+  if (hiveLordMode && build.tags.some((tag) => ["boss-fight", "hive-lord"].includes(tag.toLowerCase()))) score += 50;
+  if (hiveLordMode) score += (build.effectiveness?.hivelord ?? 0) * 0.6;
+  return score;
+}
+
+function scoreBL4Partial(build: BL4Build, input: BL4FormState) {
+  let score = build.rating * 8 + build.successRate * 0.35;
+  if (input.class && build.class === input.class) score += 70;
+  if (input.buildType && build.buildType === input.buildType) score += 50;
+  if (input.difficulty && (build.difficulty === input.difficulty || build.difficulty === "normal")) score += 30;
+  if (input.playstyle && build.tags.includes(input.playstyle)) score += 20;
+  if (build.moxsyValidated) score += 8;
+  return score;
 }
 
 export default function BuildCalculator(props: BuildCalculatorProps) {
@@ -366,24 +406,44 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
 
   const recommendations = useMemo(() => {
     if (props.gameType === "helldivers2") {
-      if (!isCompleteHD2(hd2Input)) return [] as Recommendation<HD2Build>[];
+      if (isCompleteHD2(hd2Input)) {
+        const topBuilds = getHD2Recommendations(hd2Input, props.builds, { hiveLordMode });
+        return topBuilds.map((build) => ({
+          build,
+          score: calculateHD2BuildScore(build, hd2Input, { hiveLordMode }),
+          reasons: buildHD2Reasons(build, hd2Input, hiveLordMode),
+        }));
+      }
 
-      const topBuilds = getHD2Recommendations(hd2Input, props.builds, { hiveLordMode });
+      return props.builds
+        .map((build) => ({
+          build,
+          score: scoreHD2Partial(build, hd2Input, hiveLordMode),
+          reasons: buildHD2Reasons(build, hd2Input, hiveLordMode),
+        }))
+        .filter((item) => item.score > 60)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5);
+    }
+
+    if (isCompleteBL4(bl4Input)) {
+      const topBuilds = getBL4Recommendations(bl4Input, props.builds);
       return topBuilds.map((build) => ({
         build,
-        score: calculateHD2BuildScore(build, hd2Input, { hiveLordMode }),
-        reasons: buildHD2Reasons(build, hd2Input, hiveLordMode),
+        score: calculateBL4BuildScore(build, bl4Input),
+        reasons: buildBL4Reasons(build, bl4Input),
       }));
     }
 
-    if (!isCompleteBL4(bl4Input)) return [] as Recommendation<BL4Build>[];
-
-    const topBuilds = getBL4Recommendations(bl4Input, props.builds);
-    return topBuilds.map((build) => ({
-      build,
-      score: calculateBL4BuildScore(build, bl4Input),
-      reasons: buildBL4Reasons(build, bl4Input),
-    }));
+    return props.builds
+      .map((build) => ({
+        build,
+        score: scoreBL4Partial(build, bl4Input),
+        reasons: buildBL4Reasons(build, bl4Input),
+      }))
+      .filter((item) => item.score > 55)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
   }, [bl4Input, hd2Input, hiveLordMode, props]);
 
   const activeBuild = useMemo(
@@ -444,11 +504,20 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             description="Choose the exact mission objective you are running."
             options={[
               { value: "spread-democracy", label: "Spread Democracy", help: "Flag/objective pressure with rolling waves." },
+              { value: "destroy-hive-lords", label: "Destroy Hive Lords", help: "Direct boss removal with heavy anti-armor focus." },
               { value: "secure-area", label: "Secure Area", help: "Hold zone and stabilize reinforcement lanes." },
+              { value: "secure-civilian-assets", label: "Secure Civilian Assets", help: "Defensive objective with layered crowd control needs." },
+              { value: "extract-classified-data", label: "Extract Classified Data", help: "Objective carry and safe extraction tempo." },
               { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets", help: "Escort and protect priority evac targets." },
               { value: "launch-icbm", label: "Launch ICBM", help: "Multi-step objective with heavy defense windows." },
               { value: "retrieve-essential-personnel", label: "Retrieve Essential Personnel", help: "Fast extractions under sustained pressure." },
               { value: "eliminate-chargers", label: "Eliminate Chargers", help: "Heavy-target deletion and anti-armor uptime." },
+              { value: "disable-bot-factories", label: "Disable Bot Factories", help: "Automaton structure suppression and demolition routing." },
+              { value: "eliminate-devastators", label: "Eliminate Devastators", help: "Priority armored target hunting and lane denial." },
+              { value: "sabotage-supply-lines", label: "Sabotage Supply Lines", help: "High-mobility objective chaining with disruption." },
+              { value: "extract-strategic-assets", label: "Extract Strategic Assets", help: "High-value extraction with defensive fallback." },
+              { value: "emergency-evacuation", label: "Emergency Evacuation", help: "Survival-first evac routing under pressure." },
+              { value: "geological-survey", label: "Geological Survey", help: "Objective scan pacing with wave containment." },
             ]}
             value={hd2Input.missionName}
             onChange={(missionName) =>
@@ -569,7 +638,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             onChange={(buildType) =>
               setBl4Input((prev) => ({ ...prev, buildType: buildType as BL4CalculatorInput["buildType"] }))
             }
-            disabled={!bl4Input.class}
           />
 
           <OptionChips
@@ -582,7 +650,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             ]}
             value={bl4Input.difficulty}
             onChange={(difficulty) => setBl4Input((prev) => ({ ...prev, difficulty: difficulty as BL4CalculatorInput["difficulty"] }))}
-            disabled={!bl4Input.buildType}
           />
 
           <OptionChips
@@ -598,7 +665,6 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
             onChange={(playstyle) =>
               setBl4Input((prev) => ({ ...prev, playstyle: playstyle as BL4CalculatorInput["playstyle"] }))
             }
-            disabled={!bl4Input.difficulty}
           />
         </div>
       )}

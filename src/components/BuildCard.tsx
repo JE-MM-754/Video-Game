@@ -92,6 +92,9 @@ function getCreatorBadges(build: HD2Build | BL4Build) {
   if (isHD2Build(build) && build.metaRating?.february2026 && build.metaRating.february2026 >= 90) {
     badges.push({ label: "Meta S-Tier", className: "border-amber-400/40 bg-amber-500/20 text-amber-200" });
   }
+  if (isHD2Build(build) && Array.isArray(build.missionFocus) && build.missionFocus.length > 0) {
+    badges.push({ label: "Mission Optimized", className: "border-orange-500/40 bg-orange-500/20 text-orange-200" });
+  }
 
   return badges;
 }

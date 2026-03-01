@@ -76,11 +76,20 @@ export interface HD2Build extends StrategicIntel {
 
 export type HD2MissionName =
   | "spread-democracy"
+  | "destroy-hive-lords"
   | "secure-area"
+  | "secure-civilian-assets"
+  | "extract-classified-data"
   | "evacuate-high-value-assets"
   | "launch-icbm"
   | "retrieve-essential-personnel"
-  | "eliminate-chargers";
+  | "eliminate-chargers"
+  | "disable-bot-factories"
+  | "eliminate-devastators"
+  | "sabotage-supply-lines"
+  | "extract-strategic-assets"
+  | "emergency-evacuation"
+  | "geological-survey";
 
 export interface BL4Build extends StrategicIntel {
   id: string;

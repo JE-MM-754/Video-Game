@@ -22,6 +22,9 @@ type SpeechRecognitionLike = {
   start: () => void;
 };
 
+type FeedbackDifficulty = "trivial" | "easy" | "medium" | "challenging" | "hard" | "extreme" | "suicidal" | "helldive" | "super-helldive";
+type FeedbackMissionResult = "success" | "partial" | "failed" | "extracted";
+
 function isHD2Build(build: HD2Build | BL4Build): build is HD2Build {
   return "loadout" in build;
 }
@@ -44,6 +47,9 @@ function getCreatorBadges(build: HD2Build | BL4Build) {
   }
   if (creator.includes("Moxsy")) {
     badges.push({ label: "Moxsy Intelligence", className: "border-red-500/40 bg-red-500/20 text-red-200" });
+  }
+  if (isHD2Build(build) && Array.isArray(build.missionFocus) && build.missionFocus.length > 0) {
+    badges.push({ label: "🎖️ Mission Optimized", className: "border-orange-500/40 bg-orange-500/20 text-orange-200" });
   }
 
   return badges;
@@ -86,6 +92,8 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const creatorBadges = useMemo(() => getCreatorBadges(build), [build]);
   const [feedbackRating, setFeedbackRating] = useState<1 | 2 | 3 | 4 | 5>(4);
   const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackDifficulty, setFeedbackDifficulty] = useState<FeedbackDifficulty>("helldive");
+  const [feedbackResult, setFeedbackResult] = useState<FeedbackMissionResult>("success");
   const [feedbackSaved, setFeedbackSaved] = useState(false);
   const [voiceState, setVoiceState] = useState<"idle" | "listening" | "unsupported">("idle");
 
@@ -119,14 +127,18 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
     if (!isHD2Build(build)) return;
     const missionName = searchParams.get("mission") ?? "unknown-mission";
     const payload = {
+      id: `${build.id}-${Date.now()}`,
       buildId: build.id,
       missionName,
       enemyType: build.faction,
+      difficulty: feedbackDifficulty,
+      missionResult: feedbackResult,
       performance: feedbackRating,
       textFeedback: feedbackText.trim(),
+      userId: "anonymous",
       timestamp: new Date().toISOString(),
     };
-    const key = "metaforge-mission-feedback";
+    const key = "metaforge-feedback";
     const existing = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
     const rows = existing ? (JSON.parse(existing) as typeof payload[]) : [];
     rows.push(payload);
@@ -379,6 +391,39 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
                   {rating}
                 </button>
               ))}
+            </div>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <label className="text-xs text-slate-300">
+                Difficulty
+                <select
+                  value={feedbackDifficulty}
+                  onChange={(event) => setFeedbackDifficulty(event.target.value as FeedbackDifficulty)}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                >
+                  <option value="trivial">Trivial</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="challenging">Challenging</option>
+                  <option value="hard">Hard</option>
+                  <option value="extreme">Extreme</option>
+                  <option value="suicidal">Suicidal</option>
+                  <option value="helldive">Helldive</option>
+                  <option value="super-helldive">Super Helldive</option>
+                </select>
+              </label>
+              <label className="text-xs text-slate-300">
+                Mission Result
+                <select
+                  value={feedbackResult}
+                  onChange={(event) => setFeedbackResult(event.target.value as FeedbackMissionResult)}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                >
+                  <option value="success">Complete Success</option>
+                  <option value="partial">Partial Success</option>
+                  <option value="failed">Failed Mission</option>
+                  <option value="extracted">Early Extraction</option>
+                </select>
+              </label>
             </div>
             <textarea
               value={feedbackText}

@@ -18,7 +18,7 @@ export default function Helldivers2CalculatorPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">MetaForge / Helldivers 2 / Calculator</p>
         <h1 className="mt-2 text-3xl font-black text-slate-100 sm:text-4xl">Helldivers 2 Build Calculator</h1>
         <p className="mt-3 max-w-3xl text-slate-300">
-          Answer five quick prompts and MetaForge will rank the best loadouts for your mission profile in real time, including Hive Lord boss fight optimization.
+          Select exact mission, enemy faction, and playstyle in any order. MetaForge ranks mission-specific loadouts in real time, including Hive Lord optimization.
         </p>
         <Link
           href="/helldivers2"

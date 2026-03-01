@@ -1448,5 +1448,184 @@
       "spread-democracy",
       "secure-area"
     ]
+  },
+  {
+    "id": "hive-breaker-spread-democracy",
+    "name": "The Hive Breaker - Democracy Spreader",
+    "description": "Mission-tuned Hive Breaker variant optimized for Spread Democracy objective pressure and flag-hold waves.",
+    "creator": {
+      "id": "creator-ohdough",
+      "name": "OhDough",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@OhDough",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=12",
+      "credibilityScore": 95
+    },
+    "createdAt": "2026-02-28",
+    "lastUpdated": "2026-02-28",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "super-helldive",
+    "missionType": "elimination",
+    "teamSize": "squad",
+    "loadout": {
+      "primary": "AR-2 Coyote",
+      "secondary": "GP-20 Ultimatum",
+      "grenade": "G-123 Thermite",
+      "stratagems": [
+        "GL-21 Grenade Launcher",
+        "Supply Pack",
+        "Orbital Laser",
+        "Eagle 500KG Bomb"
+      ],
+      "armor": "CM-09 Bonesnapper (Med-Kit Passive)"
+    },
+    "whyThisWorks": [
+      "Orbital Laser timing stabilizes flag capture windows under swarm pressure.",
+      "Thermite and GL-21 maintain heavy-target deletion on objective approach routes.",
+      "Supply economy keeps objective cycles consistent through long engagements."
+    ],
+    "strategicContext": "Mission variant prioritizes area denial uptime during democracy objective captures while retaining anti-armor burst.",
+    "whenToUse": [
+      "Hive Lord objectives on Helldive/Super Helldive",
+      "Coordinated squads with assigned anti-armor roles",
+      "Long missions requiring sustained AP pressure"
+    ],
+    "whenToAvoid": [
+      "Low-level lobbies without access to warbond AP tools"
+    ],
+    "advancedTactics": [
+      "Call 500KG after confirmed weak-point exposure, not at phase start.",
+      "Use GL-21 to clear support swarms before re-committing to boss DPS."
+    ],
+    "strategyPhases": {
+      "phase1": "Swarm clear first: secure movement lanes and close bug holes before committing to boss DPS.",
+      "phase2": "Armor break: focus heavy AP or explosives on carapace weak points while preserving resupply cadence.",
+      "phase3": "Burst window: stack high-damage tools during vulnerability windows for fast phase transitions.",
+      "phase4": "Reinforcement control: reset battlefield with area denial and keep extraction routes safe."
+    },
+    "tags": [
+      "boss-fight",
+      "hive-lord",
+      "heavy-armor",
+      "explosive-synergy",
+      "sustained-dps",
+      "aggressive",
+      "mission-optimized"
+    ],
+    "metaTier": "S+",
+    "teamCoordination": "high",
+    "rating": 4.9,
+    "successRate": 95,
+    "views": 185400,
+    "communityValidation": 6420,
+    "sourceUrl": "https://www.youtube.com/@OhDough",
+    "patchCompatible": true,
+    "category": "hive-lord-specialist",
+    "effectiveness": {
+      "hivelord": 96,
+      "chargers": 90,
+      "swarms": 90,
+      "sustainability": 93
+    },
+    "metaRating": {
+      "february2026": 95,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    },
+    "missionFocus": [
+      "spread-democracy"
+    ]
+  },
+  {
+    "id": "hive-breaker-secure-area",
+    "name": "The Hive Breaker - Secure Area Variant",
+    "description": "Secure Area-focused adaptation with stronger perimeter control and wave suppression for hold objectives.",
+    "creator": {
+      "id": "creator-ohdough",
+      "name": "OhDough",
+      "platform": "youtube",
+      "channelUrl": "https://www.youtube.com/@OhDough",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=12",
+      "credibilityScore": 95
+    },
+    "createdAt": "2026-02-28",
+    "lastUpdated": "2026-02-28",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "super-helldive",
+    "missionType": "elimination",
+    "teamSize": "squad",
+    "loadout": {
+      "primary": "AR-2 Coyote",
+      "secondary": "GP-20 Ultimatum",
+      "grenade": "G-123 Thermite",
+      "stratagems": [
+        "GL-21 Grenade Launcher",
+        "Supply Pack",
+        "Orbital Laser",
+        "Eagle 500KG Bomb"
+      ],
+      "armor": "CM-09 Bonesnapper (Med-Kit Passive)"
+    },
+    "whyThisWorks": [
+      "Perimeter denial stratagem cadence improves objective hold consistency.",
+      "Armor break tools remain intact for Hive Lord interruption windows.",
+      "Higher swarm control reduces failed hold phases in random squads."
+    ],
+    "strategicContext": "Trades some burst sequencing for stronger sustained area control during zone-hold phases.",
+    "whenToUse": [
+      "Hive Lord objectives on Helldive/Super Helldive",
+      "Coordinated squads with assigned anti-armor roles",
+      "Long missions requiring sustained AP pressure"
+    ],
+    "whenToAvoid": [
+      "Low-level lobbies without access to warbond AP tools"
+    ],
+    "advancedTactics": [
+      "Call 500KG after confirmed weak-point exposure, not at phase start.",
+      "Use GL-21 to clear support swarms before re-committing to boss DPS."
+    ],
+    "strategyPhases": {
+      "phase1": "Swarm clear first: secure movement lanes and close bug holes before committing to boss DPS.",
+      "phase2": "Armor break: focus heavy AP or explosives on carapace weak points while preserving resupply cadence.",
+      "phase3": "Burst window: stack high-damage tools during vulnerability windows for fast phase transitions.",
+      "phase4": "Reinforcement control: reset battlefield with area denial and keep extraction routes safe."
+    },
+    "tags": [
+      "boss-fight",
+      "hive-lord",
+      "heavy-armor",
+      "explosive-synergy",
+      "sustained-dps",
+      "aggressive",
+      "mission-optimized"
+    ],
+    "metaTier": "S",
+    "teamCoordination": "high",
+    "rating": 4.8,
+    "successRate": 94,
+    "views": 185400,
+    "communityValidation": 6420,
+    "sourceUrl": "https://www.youtube.com/@OhDough",
+    "patchCompatible": true,
+    "category": "hive-lord-specialist",
+    "effectiveness": {
+      "hivelord": 94,
+      "chargers": 90,
+      "swarms": 92,
+      "sustainability": 94
+    },
+    "metaRating": {
+      "february2026": 95,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    },
+    "missionFocus": [
+      "secure-area",
+      "secure-civilian-assets"
+    ]
   }
 ]

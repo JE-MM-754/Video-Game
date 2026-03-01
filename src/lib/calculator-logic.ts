@@ -32,8 +32,26 @@ function normalizeHD2Playstyle(inputPlaystyle: HD2CalculatorInput["playstyle"]):
 }
 
 function missionTypeFromMissionName(missionName: HD2MissionName): HD2Build["missionType"] {
-  if (missionName === "spread-democracy" || missionName === "eliminate-chargers") return "elimination";
-  if (missionName === "secure-area" || missionName === "evacuate-high-value-assets") return "defense";
+  if (
+    missionName === "spread-democracy" ||
+    missionName === "destroy-hive-lords" ||
+    missionName === "eliminate-chargers" ||
+    missionName === "eliminate-devastators"
+  ) {
+    return "elimination";
+  }
+
+  if (
+    missionName === "secure-area" ||
+    missionName === "secure-civilian-assets" ||
+    missionName === "evacuate-high-value-assets" ||
+    missionName === "disable-bot-factories" ||
+    missionName === "sabotage-supply-lines" ||
+    missionName === "geological-survey"
+  ) {
+    return "defense";
+  }
+
   return "extraction";
 }
 
