@@ -1,0 +1,78 @@
+{
+  "patch_version": "6.0.3",
+  "last_updated": "2026-02-28",
+  "builds": {
+    "bug_nest_eradicator": {
+      "tier": "S",
+      "category": "universal",
+      "success_rate": 0.89,
+      "reports_count": 1200,
+      "loadout": {
+        "primary": ["Breaker Shotgun", "Scorcher"],
+        "secondary": "Senator",
+        "grenades": "Impact Grenades",
+        "stratagems": [
+          "Grenade Launcher",
+          "Shield Generator Pack"
+        ]
+      },
+      "mission_types": ["terminid_extermination", "nest_clearing", "general"],
+      "difficulty": ["all"],
+      "creator_source": "Community consensus + OhDough influence",
+      "strengths": [
+        "Excellent swarm control",
+        "Safe nest elimination",
+        "High survivability"
+      ],
+      "weaknesses": [
+        "Limited range options",
+        "Ammo management required"
+      ]
+    },
+    "heavy_armor_breaker": {
+      "tier": "A",
+      "category": "specialist",
+      "success_rate": 0.85,
+      "reports_count": 890,
+      "loadout": {
+        "primary": "Anti-Materiel Rifle",
+        "secondary": "Redeemer",
+        "grenades": "Thermite Grenades",
+        "stratagems": [
+          "Railgun Strike",
+          "Supply Pack"
+        ]
+      },
+      "mission_types": ["automaton_missions", "heavy_unit_focus"],
+      "difficulty": ["suicide", "helldive"],
+      "creator_source": "Moxsy optimization",
+      "strengths": [
+        "Devastating anti-armor",
+        "Long-range capability",
+        "High damage per shot"
+      ],
+      "weaknesses": [
+        "Vulnerable to swarms",
+        "Slow reload times",
+        "Requires precision"
+      ]
+    }
+  },
+  "meta_analysis": {
+    "dominant_strategies": [
+      "Shield-based survivability",
+      "Grenade launcher supremacy",
+      "Impact grenade efficiency"
+    ],
+    "emerging_trends": [
+      "Heavy weapon specialization",
+      "Team coordination builds",
+      "Speed run optimizations"
+    ],
+    "patch_impacts": [
+      "Breaker shotgun maintains dominance",
+      "Scorcher rise in popularity",
+      "Senator reliability confirmed"
+    ]
+  }
+}
