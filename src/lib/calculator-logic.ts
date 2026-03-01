@@ -1,4 +1,5 @@
 import { BL4Build, BL4CalculatorInput, HD2Build, HD2CalculatorInput, HD2MissionName } from "./types";
+import { getBL4HybridInsight, getHD2HybridInsight } from "./hybrid-engine";
 
 export const CURRENT_HD2_PATCH = "6.0.3";
 export const CURRENT_BL4_PATCH = "1.030";
@@ -127,6 +128,15 @@ export function calculateHD2BuildScore(build: HD2Build, input: HD2CalculatorInpu
   return score;
 }
 
+export function calculateHD2HybridScore(build: HD2Build, input: Partial<HD2CalculatorInput>, builds: HD2Build[], options?: HD2RecommendationOptions): number {
+  const base = input.missionName && input.faction && input.difficulty && input.teamSize && input.playstyle
+    ? calculateHD2BuildScore(build, input as HD2CalculatorInput, options)
+    : build.rating * 8 + build.successRate * 0.35;
+
+  const insight = getHD2HybridInsight(build, input, builds, Boolean(options?.hiveLordMode));
+  return base + insight.confidence * 20 + insight.consensus * 3 + insight.credibility * 12;
+}
+
 export function calculateBL4BuildScore(build: BL4Build, input: BL4CalculatorInput): number {
   if (!build.patchCompatible || build.patchVersion !== CURRENT_BL4_PATCH) return 0;
 
@@ -154,6 +164,15 @@ export function calculateBL4BuildScore(build: BL4Build, input: BL4CalculatorInpu
   if (build.patchStatus === "adapted") score += 4;
 
   return score;
+}
+
+export function calculateBL4HybridScore(build: BL4Build, input: Partial<BL4CalculatorInput>, builds: BL4Build[]): number {
+  const base = input.class && input.buildType && input.difficulty && input.playstyle
+    ? calculateBL4BuildScore(build, input as BL4CalculatorInput)
+    : build.rating * 8 + build.successRate * 0.35;
+
+  const insight = getBL4HybridInsight(build, input, builds);
+  return base + insight.confidence * 20 + insight.consensus * 3 + insight.credibility * 12;
 }
 
 export function getHD2Recommendations(input: HD2CalculatorInput, builds: HD2Build[], options?: HD2RecommendationOptions): HD2Build[] {

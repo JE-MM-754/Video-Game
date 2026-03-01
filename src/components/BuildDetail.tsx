@@ -4,6 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import type { BL4Build, HD2Build } from "@/lib/types";
+import {
+  calculateFeedbackConfidence,
+  computeEffectivenessMetrics,
+  type FeedbackDifficulty,
+  type FeedbackEntry,
+  type FeedbackMissionResult,
+  normalizeFeedbackScore,
+} from "@/lib/feedback-analytics";
 
 type BuildDetailProps = {
   build: HD2Build | BL4Build;
@@ -21,9 +29,6 @@ type SpeechRecognitionLike = {
   onend: (() => void) | null;
   start: () => void;
 };
-
-type FeedbackDifficulty = "trivial" | "easy" | "medium" | "challenging" | "hard" | "extreme" | "suicidal" | "helldive" | "super-helldive";
-type FeedbackMissionResult = "success" | "partial" | "failed" | "extracted";
 
 function isHD2Build(build: HD2Build | BL4Build): build is HD2Build {
   return "loadout" in build;
@@ -96,6 +101,11 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const [feedbackResult, setFeedbackResult] = useState<FeedbackMissionResult>("success");
   const [feedbackSaved, setFeedbackSaved] = useState(false);
   const [voiceState, setVoiceState] = useState<"idle" | "listening" | "unsupported">("idle");
+  const [feedbackSummary, setFeedbackSummary] = useState<{
+    sampleSize: number;
+    meanEffectiveness: number;
+    reliabilityScore: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -126,7 +136,7 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const onSaveFeedback = () => {
     if (!isHD2Build(build)) return;
     const missionName = searchParams.get("mission") ?? "unknown-mission";
-    const payload = {
+    const payloadBase = {
       id: `${build.id}-${Date.now()}`,
       buildId: build.id,
       missionName,
@@ -138,14 +148,44 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
       userId: "anonymous",
       timestamp: new Date().toISOString(),
     };
+    const payload: FeedbackEntry = {
+      ...payloadBase,
+      confidenceWeight: calculateFeedbackConfidence(payloadBase),
+      normalizedScore: normalizeFeedbackScore(payloadBase.performance),
+    };
     const key = "metaforge-feedback";
     const existing = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
-    const rows = existing ? (JSON.parse(existing) as typeof payload[]) : [];
+    const rows = existing ? (JSON.parse(existing) as FeedbackEntry[]) : [];
     rows.push(payload);
     window.localStorage.setItem(key, JSON.stringify(rows));
+    const buildRows = rows.filter((entry) => entry.buildId === build.id);
+    const metrics = computeEffectivenessMetrics(buildRows);
+    setFeedbackSummary({
+      sampleSize: metrics.sampleSize,
+      meanEffectiveness: metrics.meanEffectiveness,
+      reliabilityScore: metrics.reliabilityScore,
+    });
     setFeedbackSaved(true);
     setTimeout(() => setFeedbackSaved(false), 1600);
   };
+
+  useEffect(() => {
+    if (!isHD2Build(build)) return;
+    const key = "metaforge-feedback";
+    const existing = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
+    const rows = existing ? (JSON.parse(existing) as FeedbackEntry[]) : [];
+    const buildRows = rows.filter((entry) => entry.buildId === build.id);
+    if (buildRows.length === 0) {
+      setFeedbackSummary(null);
+      return;
+    }
+    const metrics = computeEffectivenessMetrics(buildRows);
+    setFeedbackSummary({
+      sampleSize: metrics.sampleSize,
+      meanEffectiveness: metrics.meanEffectiveness,
+      reliabilityScore: metrics.reliabilityScore,
+    });
+  }, [build]);
 
   const onVoiceInput = () => {
     if (typeof window === "undefined") return;
@@ -449,6 +489,13 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
               </button>
               {voiceState === "unsupported" && <span className="text-xs text-rose-300">Voice input not supported on this browser.</span>}
             </div>
+            {feedbackSummary && (
+              <div className="mt-3 rounded-lg border border-cyan-500/30 bg-cyan-900/20 p-3 text-xs text-cyan-100">
+                <p>Community sample: {feedbackSummary.sampleSize} reports</p>
+                <p>Weighted effectiveness: {Math.round(feedbackSummary.meanEffectiveness * 100)}%</p>
+                <p>Feedback reliability: {Math.round(feedbackSummary.reliabilityScore * 100)}%</p>
+              </div>
+            )}
           </section>
         )}
       </div>

@@ -9,6 +9,7 @@ import {
   getBL4Recommendations,
   getHD2Recommendations,
 } from "@/lib/calculator-logic";
+import { getBL4HybridInsight, getHD2HybridInsight } from "@/lib/hybrid-engine";
 import type { BL4Build, BL4CalculatorInput, HD2Build, HD2CalculatorInput } from "@/lib/types";
 
 import BuildDetail from "@/components/BuildDetail";
@@ -409,18 +410,28 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
       if (isCompleteHD2(hd2Input)) {
         const topBuilds = getHD2Recommendations(hd2Input, props.builds, { hiveLordMode });
         return topBuilds.map((build) => ({
-          build,
-          score: calculateHD2BuildScore(build, hd2Input, { hiveLordMode }),
-          reasons: buildHD2Reasons(build, hd2Input, hiveLordMode),
+          ...(() => {
+            const insight = getHD2HybridInsight(build, hd2Input, props.builds, hiveLordMode);
+            return {
+              build,
+              score: calculateHD2BuildScore(build, hd2Input, { hiveLordMode }) + insight.confidence * 20,
+              confidence: insight.confidence,
+              reasons: [...buildHD2Reasons(build, hd2Input, hiveLordMode), ...insight.reasons],
+            };
+          })(),
         }));
       }
 
       return props.builds
-        .map((build) => ({
-          build,
-          score: scoreHD2Partial(build, hd2Input, hiveLordMode),
-          reasons: buildHD2Reasons(build, hd2Input, hiveLordMode),
-        }))
+        .map((build) => {
+          const insight = getHD2HybridInsight(build, hd2Input, props.builds, hiveLordMode);
+          return {
+            build,
+            score: scoreHD2Partial(build, hd2Input, hiveLordMode) + insight.confidence * 18,
+            confidence: insight.confidence,
+            reasons: [...buildHD2Reasons(build, hd2Input, hiveLordMode), ...insight.reasons],
+          };
+        })
         .filter((item) => item.score > 60)
         .sort((a, b) => b.score - a.score)
         .slice(0, 5);
@@ -429,18 +440,28 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     if (isCompleteBL4(bl4Input)) {
       const topBuilds = getBL4Recommendations(bl4Input, props.builds);
       return topBuilds.map((build) => ({
-        build,
-        score: calculateBL4BuildScore(build, bl4Input),
-        reasons: buildBL4Reasons(build, bl4Input),
+        ...(() => {
+          const insight = getBL4HybridInsight(build, bl4Input, props.builds);
+          return {
+            build,
+            score: calculateBL4BuildScore(build, bl4Input) + insight.confidence * 20,
+            confidence: insight.confidence,
+            reasons: [...buildBL4Reasons(build, bl4Input), ...insight.reasons],
+          };
+        })(),
       }));
     }
 
     return props.builds
-      .map((build) => ({
-        build,
-        score: scoreBL4Partial(build, bl4Input),
-        reasons: buildBL4Reasons(build, bl4Input),
-      }))
+      .map((build) => {
+        const insight = getBL4HybridInsight(build, bl4Input, props.builds);
+        return {
+          build,
+          score: scoreBL4Partial(build, bl4Input) + insight.confidence * 18,
+          confidence: insight.confidence,
+          reasons: [...buildBL4Reasons(build, bl4Input), ...insight.reasons],
+        };
+      })
       .filter((item) => item.score > 55)
       .sort((a, b) => b.score - a.score)
       .slice(0, 5);
@@ -692,9 +713,14 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               <article key={item.build.id} className="rounded-2xl border border-slate-700 bg-slate-950/70 p-4">
                 <div className="flex items-start justify-between gap-3">
                   <h4 className="text-xl font-bold text-slate-100">{item.build.name}</h4>
-                  <span className="rounded-full bg-blue-500/20 px-2 py-1 text-xs font-semibold text-blue-200">
-                    Score {Math.round(item.score)}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="rounded-full bg-blue-500/20 px-2 py-1 text-xs font-semibold text-blue-200">
+                      Score {Math.round(item.score)}
+                    </span>
+                    <span className="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-2 py-1 text-xs font-semibold text-cyan-200">
+                      Confidence {Math.round((item.confidence ?? 0.5) * 100)}%
+                    </span>
+                  </div>
                 </div>
                 <p className="mt-2 text-base text-slate-200">{item.build.description}</p>
                 <p className="mt-2 text-sm font-semibold text-blue-200">Why this was recommended:</p>
