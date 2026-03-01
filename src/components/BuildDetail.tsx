@@ -5,13 +5,16 @@ import { useSearchParams } from "next/navigation";
 
 import type { BL4Build, HD2Build } from "@/lib/types";
 import {
-  calculateFeedbackConfidence,
   computeEffectivenessMetrics,
-  type FeedbackDifficulty,
   type FeedbackEntry,
-  type FeedbackMissionResult,
-  normalizeFeedbackScore,
 } from "@/lib/feedback-analytics";
+import {
+  RLFeedbackManager,
+  type RLEnemyType,
+  type RLFeedbackDifficulty,
+  type RLFeedbackMissionResult,
+  type UserSkillLevel,
+} from "@/lib/rl-feedback";
 
 type BuildDetailProps = {
   build: HD2Build | BL4Build;
@@ -97,15 +100,32 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const creatorBadges = useMemo(() => getCreatorBadges(build), [build]);
   const [feedbackRating, setFeedbackRating] = useState<1 | 2 | 3 | 4 | 5>(4);
   const [feedbackText, setFeedbackText] = useState("");
-  const [feedbackDifficulty, setFeedbackDifficulty] = useState<FeedbackDifficulty>("helldive");
-  const [feedbackResult, setFeedbackResult] = useState<FeedbackMissionResult>("success");
+  const [feedbackDifficulty, setFeedbackDifficulty] = useState<RLFeedbackDifficulty>("helldive");
+  const [feedbackResult, setFeedbackResult] = useState<RLFeedbackMissionResult>("complete_success");
   const [feedbackSaved, setFeedbackSaved] = useState(false);
   const [voiceState, setVoiceState] = useState<"idle" | "listening" | "unsupported">("idle");
+  const [objectivesCompleted, setObjectivesCompleted] = useState(1);
+  const [totalObjectives, setTotalObjectives] = useState(1);
+  const [timeToComplete, setTimeToComplete] = useState("");
+  const [casualties, setCasualties] = useState("");
+  const [userSkillLevel, setUserSkillLevel] = useState<UserSkillLevel | "">("");
+  const [missionsPlayed, setMissionsPlayed] = useState("");
+  const [mapType, setMapType] = useState("");
+  const [weatherConditions, setWeatherConditions] = useState("");
+  const [issuesEncountered, setIssuesEncountered] = useState<string[]>([]);
+  const [highlightsNoted, setHighlightsNoted] = useState<string[]>([]);
   const [feedbackSummary, setFeedbackSummary] = useState<{
     sampleSize: number;
     meanEffectiveness: number;
     reliabilityScore: number;
   } | null>(null);
+
+  const issueOptions = ["Low DPS", "Survivability", "Ammo Issues", "Mobility", "Objective Pressure", "Team Sync"];
+  const highlightOptions = ["Fast Clear", "Boss Damage", "Great Sustain", "Strong Utility", "Team Support", "Easy Execution"];
+
+  const toggleArrayValue = (value: string, setter: (updater: (prev: string[]) => string[]) => void) => {
+    setter((prev) => (prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]));
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -136,28 +156,49 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
   const onSaveFeedback = () => {
     if (!isHD2Build(build)) return;
     const missionName = searchParams.get("mission") ?? "unknown-mission";
-    const payloadBase = {
-      id: `${build.id}-${Date.now()}`,
-      buildId: build.id,
+    const enemyFromQuery = searchParams.get("faction");
+    const teamFromQuery = searchParams.get("team");
+    const hiveLordFromQuery = searchParams.get("hiveLord");
+    const teamSize =
+      teamFromQuery === "squad" ? 4 : teamFromQuery === "duo" ? 2 : teamFromQuery === "solo" ? 1 : teamFromQuery === "randoms" ? 1 : 1;
+    const enemyType: RLEnemyType =
+      enemyFromQuery === "automatons" || enemyFromQuery === "illuminate" || enemyFromQuery === "terminids"
+        ? enemyFromQuery
+        : build.faction === "universal"
+          ? "terminids"
+          : build.faction;
+
+    const manager = RLFeedbackManager.getInstance();
+    const stored = manager.saveFeedback({
+      build,
       missionName,
-      enemyType: build.faction,
+      enemyType,
       difficulty: feedbackDifficulty,
+      teamSize,
+      hiveLordPresent: hiveLordFromQuery === "1",
+      userRating: feedbackRating,
       missionResult: feedbackResult,
-      performance: feedbackRating,
+      objectivesCompleted,
+      totalObjectives: Math.max(totalObjectives, 1),
       textFeedback: feedbackText.trim(),
-      userId: "anonymous",
-      timestamp: new Date().toISOString(),
-    };
-    const payload: FeedbackEntry = {
-      ...payloadBase,
-      confidenceWeight: calculateFeedbackConfidence(payloadBase),
-      normalizedScore: normalizeFeedbackScore(payloadBase.performance),
-    };
+      timeToComplete: timeToComplete ? Number(timeToComplete) : undefined,
+      casualties: casualties ? Number(casualties) : undefined,
+      userSkillLevel: userSkillLevel || undefined,
+      totalMissionsPlayed: missionsPlayed ? Number(missionsPlayed) : undefined,
+      issuesEncountered,
+      highlightsNoted,
+      mapType: mapType || undefined,
+      weatherConditions: weatherConditions || undefined,
+      specialModifiers: [],
+    });
+
+    console.info(
+      `RL feedback stored: ${stored.buildName} on ${stored.missionName} (${stored.enemyType}) rating ${stored.userRating}/5 confidence ${stored.confidenceScore.toFixed(2)}`,
+    );
+
     const key = "metaforge-feedback";
     const existing = typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
     const rows = existing ? (JSON.parse(existing) as FeedbackEntry[]) : [];
-    rows.push(payload);
-    window.localStorage.setItem(key, JSON.stringify(rows));
     const buildRows = rows.filter((entry) => entry.buildId === build.id);
     const metrics = computeEffectivenessMetrics(buildRows);
     setFeedbackSummary({
@@ -437,7 +478,7 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
                 Difficulty
                 <select
                   value={feedbackDifficulty}
-                  onChange={(event) => setFeedbackDifficulty(event.target.value as FeedbackDifficulty)}
+                  onChange={(event) => setFeedbackDifficulty(event.target.value as RLFeedbackDifficulty)}
                   className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
                 >
                   <option value="trivial">Trivial</option>
@@ -455,21 +496,151 @@ export default function BuildDetail({ build, gameType, open, onClose, fromCalcul
                 Mission Result
                 <select
                   value={feedbackResult}
-                  onChange={(event) => setFeedbackResult(event.target.value as FeedbackMissionResult)}
+                  onChange={(event) => setFeedbackResult(event.target.value as RLFeedbackMissionResult)}
                   className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
                 >
-                  <option value="success">Complete Success</option>
-                  <option value="partial">Partial Success</option>
-                  <option value="failed">Failed Mission</option>
-                  <option value="extracted">Early Extraction</option>
+                  <option value="complete_success">Complete Success</option>
+                  <option value="partial_success">Partial Success</option>
+                  <option value="mission_failed">Failed Mission</option>
+                  <option value="early_extraction">Early Extraction</option>
                 </select>
               </label>
+            </div>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <label className="text-xs text-slate-300">
+                Objectives Completed
+                <input
+                  type="number"
+                  min={0}
+                  value={objectivesCompleted}
+                  onChange={(event) => setObjectivesCompleted(Math.max(0, Number(event.target.value)))}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+              <label className="text-xs text-slate-300">
+                Total Objectives
+                <input
+                  type="number"
+                  min={1}
+                  value={totalObjectives}
+                  onChange={(event) => setTotalObjectives(Math.max(1, Number(event.target.value)))}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+            </div>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <label className="text-xs text-slate-300">
+                Time to Complete (min)
+                <input
+                  type="number"
+                  min={0}
+                  value={timeToComplete}
+                  onChange={(event) => setTimeToComplete(event.target.value)}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+              <label className="text-xs text-slate-300">
+                Casualties
+                <input
+                  type="number"
+                  min={0}
+                  value={casualties}
+                  onChange={(event) => setCasualties(event.target.value)}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+            </div>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <label className="text-xs text-slate-300">
+                Skill Level
+                <select
+                  value={userSkillLevel}
+                  onChange={(event) => setUserSkillLevel(event.target.value as UserSkillLevel | "")}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                >
+                  <option value="">Not Specified</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                  <option value="expert">Expert</option>
+                </select>
+              </label>
+              <label className="text-xs text-slate-300">
+                Missions Played
+                <input
+                  type="number"
+                  min={0}
+                  value={missionsPlayed}
+                  onChange={(event) => setMissionsPlayed(event.target.value)}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+            </div>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <label className="text-xs text-slate-300">
+                Map Type
+                <input
+                  type="text"
+                  value={mapType}
+                  onChange={(event) => setMapType(event.target.value)}
+                  placeholder="Optional"
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+              <label className="text-xs text-slate-300">
+                Weather Conditions
+                <input
+                  type="text"
+                  value={weatherConditions}
+                  onChange={(event) => setWeatherConditions(event.target.value)}
+                  placeholder="Optional"
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
+                />
+              </label>
+            </div>
+            <div className="mt-3">
+              <p className="text-xs text-slate-300">Issues Encountered</p>
+              <div className="mt-1 flex flex-wrap gap-2">
+                {issueOptions.map((option) => (
+                  <button
+                    key={`${build.id}-issue-${option}`}
+                    type="button"
+                    onClick={() => toggleArrayValue(option, setIssuesEncountered)}
+                    className={`rounded-full border px-3 py-1 text-xs ${
+                      issuesEncountered.includes(option)
+                        ? "border-rose-400 bg-rose-500/20 text-rose-100"
+                        : "border-slate-700 bg-slate-900 text-slate-200"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-3">
+              <p className="text-xs text-slate-300">Highlights</p>
+              <div className="mt-1 flex flex-wrap gap-2">
+                {highlightOptions.map((option) => (
+                  <button
+                    key={`${build.id}-highlight-${option}`}
+                    type="button"
+                    onClick={() => toggleArrayValue(option, setHighlightsNoted)}
+                    className={`rounded-full border px-3 py-1 text-xs ${
+                      highlightsNoted.includes(option)
+                        ? "border-emerald-400 bg-emerald-500/20 text-emerald-100"
+                        : "border-slate-700 bg-slate-900 text-slate-200"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </div>
             <textarea
               value={feedbackText}
               onChange={(event) => setFeedbackText(event.target.value)}
               rows={3}
-              placeholder="How did this build perform on your mission?"
+              placeholder="Detailed notes for RL training: what worked, what failed, and mission-specific factors."
               className="mt-3 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100"
             />
             <div className="mt-2 flex flex-wrap gap-2">

@@ -49,6 +49,7 @@ const hd2Keys = {
     "secure-area",
     "secure-civilian-assets",
     "extract-classified-data",
+    "retrieve-valuable-data",
     "evacuate-high-value-assets",
     "launch-icbm",
     "retrieve-essential-personnel",
@@ -147,6 +148,7 @@ function prettyMissionName(missionName: HD2CalculatorInput["missionName"]) {
     "secure-area": "Secure Area",
     "secure-civilian-assets": "Secure Civilian Assets",
     "extract-classified-data": "Extract Classified Data",
+    "retrieve-valuable-data": "Retrieve Valuable Data",
     "evacuate-high-value-assets": "Evacuate High-Value Assets",
     "launch-icbm": "Launch ICBM",
     "retrieve-essential-personnel": "Retrieve Essential Personnel",
@@ -274,6 +276,26 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
   const initializedRef = useRef(false);
   const skipNextUrlSyncRef = useRef(false);
 
+  const preserveScrollPosition = (update: () => void) => {
+    const scrollPosition = typeof window !== "undefined" ? window.scrollY : 0;
+    update();
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => window.scrollTo({ top: scrollPosition, behavior: "auto" }));
+    }
+  };
+
+  const setHD2Field = <K extends keyof HD2FormState>(field: K, value: HD2FormState[K]) => {
+    preserveScrollPosition(() => {
+      setHd2Input((prev) => ({ ...prev, [field]: value }));
+    });
+  };
+
+  const setBL4Field = <K extends keyof BL4FormState>(field: K, value: BL4FormState[K]) => {
+    preserveScrollPosition(() => {
+      setBl4Input((prev) => ({ ...prev, [field]: value }));
+    });
+  };
+
   const openBuildDetail = (buildId: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("build", buildId);
@@ -378,7 +400,11 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
     else params.delete("build");
 
     const nextQuery = params.toString();
+    const before = typeof window !== "undefined" ? window.scrollY : 0;
     router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => window.scrollTo({ top: before, behavior: "auto" }));
+    }
   }, [
     bl4Input.buildType,
     bl4Input.class,
@@ -517,7 +543,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "illuminate", label: "Illuminate", help: "Shield-break and disruption resistance." },
             ]}
             value={hd2Input.faction}
-            onChange={(faction) => setHd2Input((prev) => ({ ...prev, faction: faction as HD2CalculatorInput["faction"] }))}
+            onChange={(faction) => setHD2Field("faction", faction as HD2CalculatorInput["faction"])}
           />
 
           <OptionChips
@@ -529,6 +555,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "secure-area", label: "Secure Area", help: "Hold zone and stabilize reinforcement lanes." },
               { value: "secure-civilian-assets", label: "Secure Civilian Assets", help: "Defensive objective with layered crowd control needs." },
               { value: "extract-classified-data", label: "Extract Classified Data", help: "Objective carry and safe extraction tempo." },
+              { value: "retrieve-valuable-data", label: "Retrieve Valuable Data", help: "High-mobility data retrieval under pressure." },
               { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets", help: "Escort and protect priority evac targets." },
               { value: "launch-icbm", label: "Launch ICBM", help: "Multi-step objective with heavy defense windows." },
               { value: "retrieve-essential-personnel", label: "Retrieve Essential Personnel", help: "Fast extractions under sustained pressure." },
@@ -541,9 +568,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "geological-survey", label: "Geological Survey", help: "Objective scan pacing with wave containment." },
             ]}
             value={hd2Input.missionName}
-            onChange={(missionName) =>
-              setHd2Input((prev) => ({ ...prev, missionName: missionName as HD2CalculatorInput["missionName"] }))
-            }
+            onChange={(missionName) => setHD2Field("missionName", missionName as HD2CalculatorInput["missionName"])}
           />
 
           <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
@@ -558,7 +583,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               onChange={(event) => {
                 const idx = Number(event.target.value);
                 const next = hd2DifficultyLevels[idx]?.value ?? "easy";
-                setHd2Input((prev) => ({ ...prev, difficulty: next }));
+                setHD2Field("difficulty", next);
               }}
               className="mt-4 w-full accent-blue-500"
               aria-label="Difficulty slider"
@@ -570,7 +595,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
                   <button
                     key={level.value}
                     type="button"
-                    onClick={() => setHd2Input((prev) => ({ ...prev, difficulty: level.value }))}
+                    onClick={() => setHD2Field("difficulty", level.value)}
                     className={`min-h-14 rounded-lg border px-2 py-2 text-left ${
                       active
                         ? "border-blue-400 bg-blue-500/20 text-blue-100"
@@ -599,7 +624,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               },
             ]}
             value={hd2Input.teamSize}
-            onChange={(teamSize) => setHd2Input((prev) => ({ ...prev, teamSize: teamSize as HD2CalculatorInput["teamSize"] }))}
+            onChange={(teamSize) => setHD2Field("teamSize", teamSize as HD2CalculatorInput["teamSize"])}
           />
 
           <OptionChips
@@ -612,9 +637,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "stealth", label: "Stealth", help: "Lower detection and tactical positioning." },
             ]}
             value={hd2Input.playstyle}
-            onChange={(playstyle) =>
-              setHd2Input((prev) => ({ ...prev, playstyle: playstyle as HD2CalculatorInput["playstyle"] }))
-            }
+            onChange={(playstyle) => setHD2Field("playstyle", playstyle as HD2CalculatorInput["playstyle"])}
           />
 
           <section className="rounded-2xl border border-red-500/30 bg-red-900/20 p-4 sm:p-5">
@@ -624,7 +647,11 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               <input
                 type="checkbox"
                 checked={hiveLordMode}
-                onChange={(event) => setHiveLordMode(event.target.checked)}
+                onChange={(event) =>
+                  preserveScrollPosition(() => {
+                    setHiveLordMode(event.target.checked);
+                  })
+                }
                 className="h-4 w-4 accent-red-500"
               />
               Fighting Hive Lord?
@@ -643,7 +670,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "harlowe", label: "Harlowe", help: "Utility control and team support." },
             ]}
             value={bl4Input.class}
-            onChange={(playerClass) => setBl4Input((prev) => ({ ...prev, class: playerClass as BL4CalculatorInput["class"] }))}
+            onChange={(playerClass) => setBL4Field("class", playerClass as BL4CalculatorInput["class"])}
           />
 
           <OptionChips
@@ -656,9 +683,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "farming", label: "Farming", help: "Repeatable speed for loot loops." },
             ]}
             value={bl4Input.buildType}
-            onChange={(buildType) =>
-              setBl4Input((prev) => ({ ...prev, buildType: buildType as BL4CalculatorInput["buildType"] }))
-            }
+            onChange={(buildType) => setBL4Field("buildType", buildType as BL4CalculatorInput["buildType"])}
           />
 
           <OptionChips
@@ -670,7 +695,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "uvh6", label: "UVH6", help: "Peak challenge and gear stress." },
             ]}
             value={bl4Input.difficulty}
-            onChange={(difficulty) => setBl4Input((prev) => ({ ...prev, difficulty: difficulty as BL4CalculatorInput["difficulty"] }))}
+            onChange={(difficulty) => setBL4Field("difficulty", difficulty as BL4CalculatorInput["difficulty"])}
           />
 
           <OptionChips
@@ -683,9 +708,7 @@ export default function BuildCalculator(props: BuildCalculatorProps) {
               { value: "speed", label: "Speed", help: "Fast clears and movement tempo." },
             ]}
             value={bl4Input.playstyle}
-            onChange={(playstyle) =>
-              setBl4Input((prev) => ({ ...prev, playstyle: playstyle as BL4CalculatorInput["playstyle"] }))
-            }
+            onChange={(playstyle) => setBL4Field("playstyle", playstyle as BL4CalculatorInput["playstyle"])}
           />
         </div>
       )}

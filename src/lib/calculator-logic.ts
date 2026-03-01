@@ -53,6 +53,10 @@ function missionTypeFromMissionName(missionName: HD2MissionName): HD2Build["miss
     return "defense";
   }
 
+  if (missionName === "retrieve-valuable-data") {
+    return "extraction";
+  }
+
   return "extraction";
 }
 

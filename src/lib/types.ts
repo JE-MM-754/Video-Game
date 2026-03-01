@@ -80,6 +80,7 @@ export type HD2MissionName =
   | "secure-area"
   | "secure-civilian-assets"
   | "extract-classified-data"
+  | "retrieve-valuable-data"
   | "evacuate-high-value-assets"
   | "launch-icbm"
   | "retrieve-essential-personnel"

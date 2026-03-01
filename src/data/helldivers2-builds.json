@@ -1627,5 +1627,93 @@
       "secure-area",
       "secure-civilian-assets"
     ]
+  },
+  {
+    "id": "mobile-extractor-terminids",
+    "name": "Mobile Data Extractor",
+    "description": "High-mobility Terminid build tuned for Retrieve Valuable Data operations with objective-first tempo.",
+    "creator": {
+      "id": "creator-community-validated",
+      "name": "Community Validated",
+      "platform": "community",
+      "channelUrl": "https://metaforge-gaming-tools.vercel.app/helldivers2",
+      "verified": true,
+      "avatar": "https://i.pravatar.cc/150?img=38",
+      "credibilityScore": 82
+    },
+    "createdAt": "2026-02-28T20:00:00Z",
+    "lastUpdated": "2026-02-28T20:00:00Z",
+    "patchVersion": "6.0.3",
+    "faction": "terminids",
+    "difficulty": "all",
+    "missionType": "extraction",
+    "teamSize": "any",
+    "loadout": {
+      "primary": "AR-23 Liberator",
+      "secondary": "P-2 Peacemaker",
+      "grenade": "G-12 High Explosive",
+      "stratagems": [
+        "LIFT-850 Jump Pack",
+        "Supply Pack",
+        "Orbital Precision Strike",
+        "Reinforce"
+      ],
+      "armor": "SC-30 Trailblazer Scout",
+      "cape": "Swift Liberty"
+    },
+    "whyThisWorks": [
+      "Jump Pack + light armor keeps extraction pace high while carrying objective data.",
+      "Supply Pack sustains prolonged movement phases without frequent resupply stalls.",
+      "Precision Strike removes blockers fast without overcommitting area-control cooldowns."
+    ],
+    "strategicContext": "Retrieve Valuable Data missions reward speed, repositioning, and clean exits over static defense. This loadout prioritizes mobility and survivability while retaining enough burst to clear blockers.",
+    "whenToUse": [
+      "Retrieve Valuable Data mission routes",
+      "Small teams and random groups",
+      "Objective-first runs where speed matters more than farm kills"
+    ],
+    "whenToAvoid": [
+      "Fixed-point defense missions requiring heavy area denial",
+      "Low-mobility team compositions that cannot rotate quickly"
+    ],
+    "advancedTactics": [
+      "Use Jump Pack only to skip threat funnels or break line-of-sight during data carries.",
+      "Save Precision Strike for Charger interruptions on extraction lanes."
+    ],
+    "optimizationTips": [
+      "Call Supply Pack before final pickup to avoid reloading downtime during extraction.",
+      "Coordinate Reinforce throw angle toward the next objective route, not behind the team."
+    ],
+    "tags": [
+      "versatile",
+      "objective",
+      "mobility-focused",
+      "team-coordination",
+      "self-sufficient"
+    ],
+    "metaTier": "A",
+    "teamCoordination": "medium",
+    "rating": 4.4,
+    "successRate": 85,
+    "views": 12950,
+    "communityValidation": 540,
+    "sourceUrl": "https://metaforge-gaming-tools.vercel.app/helldivers2",
+    "patchCompatible": true,
+    "missionFocus": [
+      "retrieve-valuable-data",
+      "extract-classified-data",
+      "extract-strategic-assets"
+    ],
+    "effectiveness": {
+      "hivelord": 60,
+      "chargers": 75,
+      "swarms": 78,
+      "sustainability": 88
+    },
+    "metaRating": {
+      "february2026": 86,
+      "trending": "up",
+      "lastUpdated": "2026-02-28"
+    }
   }
 ]

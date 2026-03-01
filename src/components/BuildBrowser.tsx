@@ -61,6 +61,7 @@ export default function BuildBrowser(props: BuildBrowserProps) {
           { value: "secure-area", label: "Secure Area" },
           { value: "secure-civilian-assets", label: "Secure Civilian Assets" },
           { value: "extract-classified-data", label: "Extract Classified Data" },
+          { value: "retrieve-valuable-data", label: "Retrieve Valuable Data" },
           { value: "evacuate-high-value-assets", label: "Evacuate High-Value Assets" },
           { value: "launch-icbm", label: "Launch ICBM" },
           { value: "retrieve-essential-personnel", label: "Retrieve Essential Personnel" },
