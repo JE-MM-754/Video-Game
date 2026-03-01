@@ -1,19 +1,36 @@
 {
-  "name": "metaforge",
-  "version": "0.1.0",
+  "name": "metaforge-gaming-platform",
+  "version": "1.0.0",
   "private": true,
+  "description": "Advanced gaming analytics and build optimization platform",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "vercel-build": "next build"
+    "vercel-build": "next build",
+    "tools:start": "cd metaforge-tools && npm start",
+    "tools:dev": "cd metaforge-tools && npm run dev",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "jest",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "^15.5.12",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "@heroicons/react": "^2.0.18",
+    "lucide-react": "^0.263.1",
+    "recharts": "^2.7.2",
+    "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
+    "react-query": "^3.39.3",
+    "react-hot-toast": "^2.4.1",
+    "framer-motion": "^10.16.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
@@ -21,9 +38,32 @@
     "@types/node": "^20",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
+    "@types/jest": "^29.5.3",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.5.12",
+    "jest": "^29.6.2",
+    "jest-environment-jsdom": "^29.6.2",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "keywords": [
+    "gaming",
+    "analytics",
+    "build-optimization",
+    "helldivers-2",
+    "borderlands-4",
+    "competitive-gaming",
+    "metaforge",
+    "gaming-tools",
+    "performance-tracking"
+  ],
+  "author": {
+    "name": "Jamie Erickson",
+    "email": "jamie.erickson@unsupervised.com",
+    "url": "https://linkedin.com/in/ericksonjamesd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JE-MM-754/Video-Game.git"
   }
 }
